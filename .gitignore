@@ -1,0 +1,32 @@
+# Plugin state + downloads — never commit
+.rune/
+
+# Build artifacts (regenerated every build)
+build/
+target/
+java/src/generated/
+dist/
+
+# Maven wrapper internals
+.mvn/wrapper/maven-wrapper.jar
+
+# Java compiled output
+*.class
+
+# Logs
+*.log
+
+# Python tooling (defensive)
+__pycache__/
+*.pyc
+.venv/
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~
+.idea/
+.vscode/launch.json
+.vscode/tasks.json

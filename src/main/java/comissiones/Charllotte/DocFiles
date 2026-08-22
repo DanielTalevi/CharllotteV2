@@ -1,0 +1,23 @@
+src/main/java/com/seuprojeto/
+├── CharllotteApplication.java     ← classe principal (com @SpringBootApplication)
+│
+├── controller/                    ← recebe requisições HTTP (GET, POST...)
+│   └── UsuarioController.java
+│
+├── service/                       ← regras de negócio, lógica do sistema
+│   └── UsuarioService.java
+│
+├── repository/                    ← interfaces que falam com o banco
+│   └── UsuarioRepository.java
+│
+├── model/ (ou entity/)            ← classes @Entity (tabelas do banco)
+│   └── Usuario.java
+│
+├── dto/                           ← objetos usados só pra trafegar dados na API
+│   └── UsuarioDTO.java            (opcional no começo, adiciona depois)
+│
+├── config/                        ← configurações (CORS, segurança, etc)
+│   └── CorsConfig.java
+│
+└── exception/                     ← tratamento de erros customizados
+    └── ResourceNotFoundException.java

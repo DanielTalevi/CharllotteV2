@@ -1,0 +1,18 @@
+Galera tem um documento faltando por questão de segurança só criar ele com a definição do seu banco de dados na maquina de vocês
+e quando forem fazer o commit lembrem de não enviar esse arquivo isso é auto-eliminatorio gente falta de profissionalismo sabe
+
+Arquivo:
+name: application.properties
+
+conteudo{
+
+spring.application.name=Charllotte
+
+spring.datasource.url=jdbc:postgresql://localhost:5432/"nome do seu banco"
+spring.datasource.username="nome do usuario no seu banco"
+spring.datasource.password="senha do seu usuario no banco"
+
+spring.datasource.driver-class-name=org.postgresql.Driver
+}
+
+(OBS: sem esse arquivo a Applicação não vai rodar nunca mesmo sem usar o banco ainda) 
