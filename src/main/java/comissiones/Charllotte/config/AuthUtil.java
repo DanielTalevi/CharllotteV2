@@ -1,4 +1,4 @@
-package comissiones.Charllotte.service;
+package comissiones.Charllotte.config;
 
 import jakarta.servlet.http.HttpSession;
 

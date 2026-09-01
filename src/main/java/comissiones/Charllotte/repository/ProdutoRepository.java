@@ -1,14 +1,16 @@
 package comissiones.Charllotte.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
+import comissiones.Charllotte.model.Produto;
 
-@Repository
-public interface ProdutoRepository extends JpaRepository<comissiones.Charllotte.Model.Produto, Integer> {
-    Optional<comissiones.Charllotte.Model.Produto> findByCodigodoproduto(String codigodoproduto);
+public interface ProdutoRepository
+        extends JpaRepository<Produto, Integer> {
 
-    boolean existsByCodigodoproduto(String codigodoproduto);
+    List<Produto> findByStatusTrue();
+
+    List<Produto> findByNomeContainingIgnoreCase(
+            String nome);
 }
-

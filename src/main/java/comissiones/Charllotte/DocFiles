@@ -21,3 +21,65 @@ src/main/java/com/seuprojeto/
 │
 └── exception/                     ← tratamento de erros customizados
     └── ResourceNotFoundException.java
+
+
+
+23/08/2026
+
+comissoes.Charlotte
+│
+├── config
+│   ├── AuthInterceptor.java
+│   └── WebConfig.java
+│
+├── controller
+│   ├── AuthLoginController.java
+│   ├── HomeController.java
+│   └── RedirectInterceptorController.java
+│
+├── exception
+│
+├── model
+│   ├── Usuario.java
+│   ├── Produto.java
+│   ├── Venda.java
+│   ├── StatusVenda.java
+│   ├── ItemVenda.java
+│   ├── Comissao.java
+│   ├── Estoque.java
+│   ├── MovimentacaoEstoque.java
+│   ├── TipoMovimentacao.java
+│   ├── Aviso.java
+│   ├── AvisoFuncionario.java
+│   ├── AvisoFuncionarioId.java
+│   ├── Mensagem.java
+│   ├── Fraude.java
+│   └── StatusFraude.java
+│
+├── repository
+│   ├── UsuarioRepository.java
+│   ├── ProdutoRepository.java
+│   ├── VendaRepository.java
+│   ├── ItemVendaRepository.java
+│   ├── ComissaoRepository.java
+│   ├── EstoqueRepository.java
+│   ├── MovimentacaoEstoqueRepository.java
+│   ├── AvisoRepository.java
+│   ├── AvisoFuncionarioRepository.java
+│   ├── MensagemRepository.java
+│   └── FraudeRepository.java
+│
+└── service
+    ├── AuthLoginService.java
+    ├── AuthUtil.java
+    ├── CalculoDeProdutos.java
+    ├── UsuarioService.java
+    ├── ProdutoService.java
+    ├── VendaService.java
+    ├── EstoqueService.java
+    ├── ComissaoService.java
+    ├── AvisoService.java
+    ├── MensagemService.java
+    └── FraudeService.java
+
+    

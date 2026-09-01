@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f6f8;
+            color: #222;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+
+        .sidebar {
+            width: 230px;
+            background: #151a21;
+            color: white;
+            padding: 25px 15px;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 35px;
+            padding-left: 10px;
+        }
+
+        .menu {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: #b8bec7;
+            padding: 12px;
+            border-radius: 8px;
+            transition: 0.2s;
+        }
+
+        .menu a:hover,
+        .menu a.active {
+            background: #2563eb;
+            color: white;
+        }
+
+        /* Main */
+
+        .main {
+            flex: 1;
+            padding: 30px;
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .topbar h1 {
+            font-size: 26px;
+        }
+
+        .user {
+            background: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+        }
+
+        /* Dashboard */
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 22px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.05);
+        }
+
+        .card span {
+            color: #777;
+            font-size: 14px;
+        }
+
+        .card h2 {
+            margin-top: 10px;
+            font-size: 28px;
+        }
+
+        /* Tabs */
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            background: white;
+            border: none;
+            padding: 11px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .tab.active {
+            background: #2563eb;
+            color: white;
+        }
+
+        .content {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            min-height: 250px;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Responsivo */
+
+        @media (max-width: 900px) {
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .sidebar {
+                width: 190px;
+            }
+        }
+
+        @media (max-width: 650px) {
+            body {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+            }
+
+            .menu {
+                flex-direction: row;
+                overflow-x: auto;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<aside class="sidebar">
+
+    <div class="logo">
+        Charllotte
+    </div>
+
+    <nav class="menu">
+        <a href="#" class="active">Dashboard</a>
+        <a href="#">Usuários</a>
+        <a href="#">Livros</a>
+        <a href="#">Empréstimos</a>
+        <a href="#">Relatórios</a>
+        <a href="#">Configurações</a>
+        <a href="#">Sair</a>
+    </nav>
+
+</aside>
+
+
+<main class="main">
+
+    <header class="topbar">
+
+        <h1>Dashboard</h1>
+
+        <div class="user">
+            Daniel2
+        </div>
+
+    </header>
+
+
+    <!-- Cards -->
+
+    <section class="cards">
+
+        <div class="card">
+            <span>Usuários</span>
+            <h2></h2>
+        </div>
+
+        <div class="card">
+            <span>Livros</span>
+            <h2>342</h2>
+        </div>
+
+        <div class="card">
+            <span>Empréstimos</span>
+            <h2>56</h2>
+        </div>
+
+        <div class="card">
+            <span>Atrasados</span>
+            <h2>7</h2>
+        </div>
+
+    </section>
+
+
+    <!-- Tabs -->
+
+    <div class="tabs">
+
+        <button class="tab active" onclick="openTab('overview', this)">
+            Visão geral
+        </button>
+
+        <button class="tab" onclick="openTab('activity', this)">
+            Atividade
+        </button>
+
+        <button class="tab" onclick="openTab('reports', this)">
+            Relatórios
+        </button>
+
+    </div>
+
+
+    <!-- Conteúdo -->
+
+    <section class="content">
+
+        <div id="overview" class="tab-content active">
+            <h3>Visão geral</h3>
+        </div>
+
+        <div id="activity" class="tab-content">
+            <h3>Atividade</h3>
+        </div>
+
+        <div id="reports" class="tab-content">
+            <h3>Relatórios</h3>
+        </div>
+
+    </section>
+
+</main>
+
+
+<script>
+
+    function openTab(tabName, button) {
+
+        const contents = document.querySelectorAll(".tab-content");
+        const buttons = document.querySelectorAll(".tab");
+
+        contents.forEach(content => {
+            content.classList.remove("active");
+        });
+
+        buttons.forEach(btn => {
+            btn.classList.remove("active");
+        });
+
+        document.getElementById(tabName).classList.add("active");
+
+        button.classList.add("active");
+    }
+
+</script>
+
+</body>
+</html>

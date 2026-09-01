@@ -1,0 +1,896 @@
+DOCUMENTAÇÃO DA ESTRUTURA DO PROJETO
+
+O projeto é desenvolvido utilizando Spring Boot e está organizado em camadas. Como o sistema não utiliza uma API REST, os Controllers são responsáveis por receber as requisições das páginas, chamar os Services e retornar as páginas correspondentes.
+
+A estrutura principal segue o fluxo:
+
+Tela
+  ↓
+Controller
+  ↓
+Service
+  ↓
+Repository
+  ↓
+Banco de Dados
+
+Os Models representam as tabelas do banco de dados. Os Repositories fazem o acesso aos dados utilizando Spring Data JPA. Os Services concentram as regras de negócio e os Controllers fazem a ligação entre as páginas e os Services.
+
+
+========================================
+MODEL
+========================================
+
+Os Models ficam na pasta:
+
+comissiones.Charllotte.model
+
+Eles representam as tabelas do banco e seus relacionamentos utilizando JPA.
+
+
+Usuario
+
+A classe Usuario representa a tabela funcionario do banco.
+
+A tabela continua sendo chamada funcionario no banco, mas no Java a classe é chamada Usuario.
+
+Possui os campos:
+
+- id
+- nome
+- cpf
+- email
+- senha
+- status
+
+O CPF possui tamanho de até 14 caracteres para aceitar o formato 123.456.789-10.
+
+O campo status indica se o usuário está ativo ou não.
+
+O Usuario possui relacionamento com Venda, Comissao, MovimentacaoEstoque, AvisoFuncionario e Mensagem.
+
+
+Produto
+
+A classe Produto representa a tabela produto.
+
+Possui:
+
+- id
+- nome
+- preco
+- unidade
+- percentualComissao
+- status
+
+O preço representa o valor atual do produto.
+
+O percentualComissao é utilizado para calcular a comissão gerada pela venda do produto.
+
+O status permite ativar ou desativar um produto sem precisar excluir o registro do banco.
+
+Um Produto pode aparecer em vários ItemVenda e possui um registro de Estoque.
+
+
+Venda
+
+A classe Venda representa a tabela venda.
+
+Possui:
+
+- id
+- funcionario
+- dataVenda
+- valorTotal
+- status
+- itens
+
+A venda está relacionada ao Usuario que realizou a operação.
+
+Uma venda pode possuir vários ItemVenda.
+
+O valorTotal representa o valor total da venda.
+
+O status da venda utiliza o enum StatusVenda e pode ser:
+
+- REALIZADA
+- EM_ANDAMENTO
+- CANCELADA
+
+Relacionamentos:
+
+Usuario 1 ---- N Venda
+
+Venda 1 ---- N ItemVenda
+
+
+StatusVenda
+
+É o enum utilizado pela Venda.
+
+Possui:
+
+- REALIZADA
+- EM_ANDAMENTO
+- CANCELADA
+
+Esses valores correspondem aos valores permitidos pela tabela venda no banco.
+
+
+ItemVenda
+
+A classe ItemVenda representa a tabela item_venda.
+
+Ela representa cada produto que faz parte de uma venda.
+
+Possui:
+
+- id
+- venda
+- produto
+- quantidade
+- precoUnitario
+- subtotal
+
+O subtotal é calculado utilizando a quantidade e o preço unitário.
+
+Exemplo:
+
+quantidade: 2
+preço unitário: R$ 10,00
+subtotal: R$ 20,00
+
+O ItemVenda possui relacionamento com Venda e Produto.
+
+Uma Venda possui vários ItemVenda e cada ItemVenda está relacionado a um Produto.
+
+
+Comissao
+
+A classe Comissao representa a tabela comissao.
+
+Possui:
+
+- id
+- venda
+- funcionario
+- percentual
+- valor
+- data
+
+A comissão é gerada a partir de uma venda e está relacionada ao usuário que realizou a venda.
+
+Exemplo:
+
+Venda: R$ 1.000,00
+Percentual: 5%
+Comissão: R$ 50,00
+
+
+Estoque
+
+A classe Estoque representa a tabela estoque.
+
+Possui:
+
+- id
+- produto
+- quantidade
+- estoqueMinimo
+- dataAtualizacao
+
+O Estoque representa a quantidade atual de determinado produto.
+
+Cada produto possui um único registro de estoque.
+
+Relacionamento:
+
+Produto 1 ---- 1 Estoque
+
+
+MovimentacaoEstoque
+
+A classe MovimentacaoEstoque representa a tabela movimentacao_estoque.
+
+Ela registra as alterações realizadas no estoque.
+
+Possui:
+
+- id
+- produto
+- funcionario
+- tipo
+- quantidade
+- data
+- motivo
+
+O tipo de movimentação utiliza o enum TipoMovimentacao.
+
+Os tipos são:
+
+- ENTRADA
+- SAIDA
+- AJUSTE
+
+A diferença entre Estoque e MovimentacaoEstoque é que o Estoque mostra a quantidade atual, enquanto a MovimentacaoEstoque guarda o histórico das alterações.
+
+Exemplo:
+
+Estoque:
+Arroz = 50 unidades
+
+Movimentações:
+ENTRADA de 20
+SAIDA de 10
+AJUSTE de 5
+
+
+TipoMovimentacao
+
+É o enum utilizado pela MovimentacaoEstoque.
+
+Possui:
+
+- ENTRADA
+- SAIDA
+- AJUSTE
+
+
+Aviso
+
+A classe Aviso representa a tabela aviso.
+
+Possui:
+
+- id
+- titulo
+- mensagem
+- dataCriacao
+
+É utilizada para armazenar avisos que podem ser enviados para os usuários.
+
+Exemplo:
+
+Título: Estoque baixo
+
+Mensagem: O produto Arroz está abaixo do estoque mínimo.
+
+
+AvisoFuncionario
+
+A classe AvisoFuncionario representa a tabela aviso_funcionario.
+
+Ela relaciona um Aviso com um Usuario.
+
+Possui:
+
+- aviso
+- funcionario
+- lido
+- dataLeitura
+
+O campo lido indica se o usuário já visualizou o aviso.
+
+A tabela possui uma chave primária composta por id_aviso e id_funcionario.
+
+
+AvisoFuncionarioId
+
+É uma classe auxiliar utilizada para representar a chave composta da tabela aviso_funcionario.
+
+Ela não representa uma tabela separada.
+
+Sua função é permitir que o JPA trabalhe corretamente com a chave formada por:
+
+- id_aviso
+- id_funcionario
+
+
+Mensagem
+
+A classe Mensagem representa a tabela mensagem.
+
+Possui:
+
+- id
+- funcionario
+- mensagem
+- dataEnvio
+
+A mensagem fica relacionada a um Usuario.
+
+
+Fraude
+
+A classe Fraude representa a tabela fraude.
+
+Possui:
+
+- id
+- venda
+- tipo
+- descricao
+- dataIdentificacao
+- status
+
+A fraude está relacionada a uma Venda.
+
+O status utiliza o enum StatusFraude.
+
+
+StatusFraude
+
+É o enum utilizado pela Fraude.
+
+Possui:
+
+- PENDENTE
+- EM_ANALISE
+- CONFIRMADA
+- DESCARTADA
+
+Esses são os estados possíveis de uma fraude durante o processo de análise.
+
+
+========================================
+REPOSITORY
+========================================
+
+Os Repositories ficam na pasta:
+
+comissiones.Charllotte.repository
+
+Eles são responsáveis pelo acesso ao banco de dados através do Spring Data JPA.
+
+Os Repositories normalmente estendem JpaRepository, que já fornece métodos como:
+
+- save()
+- findById()
+- findAll()
+- delete()
+- existsById()
+
+Também podem possuir métodos personalizados para consultas específicas.
+
+
+UsuarioRepository
+
+Trabalha com a entidade Usuario e com a tabela funcionario.
+
+Pode realizar buscas por:
+
+- email
+- cpf
+- email e usuário ativo
+
+O método de busca por email e status ativo é utilizado principalmente no login.
+
+
+ProdutoRepository
+
+Trabalha com Produto.
+
+Pode realizar buscas por:
+
+- produtos ativos
+- nome do produto
+
+É utilizado pelo ProdutoService e também pode ser utilizado pela VendaService para localizar os produtos de uma venda.
+
+
+VendaRepository
+
+Trabalha com Venda.
+
+Pode realizar buscas por:
+
+- funcionário
+- status da venda
+
+Permite buscar, por exemplo, todas as vendas de determinado usuário ou todas as vendas realizadas.
+
+
+ItemVendaRepository
+
+Trabalha com ItemVenda.
+
+Pode realizar buscas por:
+
+- venda
+- produto
+
+É utilizado para consultar os itens de determinada venda ou os registros relacionados a determinado produto.
+
+
+ComissaoRepository
+
+Trabalha com Comissao.
+
+Pode realizar buscas por:
+
+- funcionário
+- venda
+
+É utilizado para consultar as comissões de um usuário ou a comissão de uma venda específica.
+
+
+EstoqueRepository
+
+Trabalha com Estoque.
+
+Permite buscar o estoque de determinado produto.
+
+Como existe uma restrição de produto único na tabela estoque, cada produto possui apenas um registro de estoque.
+
+
+MovimentacaoEstoqueRepository
+
+Trabalha com MovimentacaoEstoque.
+
+Pode realizar buscas por:
+
+- produto
+- funcionário
+
+É utilizado para consultar o histórico de movimentações do estoque.
+
+
+AvisoRepository
+
+Trabalha com Aviso.
+
+Utiliza principalmente os métodos padrão do JpaRepository para salvar, buscar, listar e excluir avisos.
+
+
+AvisoFuncionarioRepository
+
+Trabalha com AvisoFuncionario.
+
+Permite buscar os avisos relacionados a determinado usuário.
+
+Também pode buscar somente os avisos que ainda não foram lidos.
+
+
+MensagemRepository
+
+Trabalha com Mensagem.
+
+Permite buscar as mensagens relacionadas a determinado usuário.
+
+
+FraudeRepository
+
+Trabalha com Fraude.
+
+Pode realizar buscas por:
+
+- status
+- venda
+
+É utilizado para consultar, por exemplo, todas as fraudes pendentes ou todas as fraudes de determinada venda.
+
+
+========================================
+SERVICE
+========================================
+
+Os Services ficam na pasta:
+
+comissiones.Charllotte.service
+
+Os Services são responsáveis pelas regras de negócio do sistema.
+
+O Controller não deve ficar responsável por fazer cálculos ou tomar decisões importantes do sistema. Ele chama o Service e o Service executa a operação.
+
+O fluxo normalmente é:
+
+Controller
+  ↓
+Service
+  ↓
+Repository
+  ↓
+Banco
+
+
+UsuarioService
+
+É responsável pelas operações relacionadas aos usuários.
+
+Principais responsabilidades:
+
+- cadastrar usuário
+- buscar usuário
+- buscar usuário por email
+- listar usuários
+- listar usuários ativos
+- ativar usuário
+- desativar usuário
+
+Também pode garantir que o status seja definido como true quando um novo usuário for cadastrado sem status informado.
+
+
+ProdutoService
+
+É responsável pelas operações relacionadas aos produtos.
+
+Principais responsabilidades:
+
+- cadastrar produto
+- buscar produto
+- listar produtos
+- listar produtos ativos
+- pesquisar produto
+- ativar produto
+- desativar produto
+
+O status pode ser utilizado para deixar um produto indisponível sem precisar removê-lo do banco.
+
+
+VendaService
+
+É um dos principais Services do sistema.
+
+É responsável por coordenar o processo de venda.
+
+Durante uma venda, pode ser necessário:
+
+- verificar o usuário
+- verificar os produtos
+- verificar se os produtos estão ativos
+- verificar o estoque
+- calcular os valores
+- criar os ItemVenda
+- calcular o valor total
+- retirar os produtos do estoque
+- salvar a venda
+- gerar a comissão
+
+O fluxo de uma venda pode ser:
+
+VendaService
+  ↓
+verifica produtos
+  ↓
+verifica estoque
+  ↓
+calcula valores
+  ↓
+salva venda
+  ↓
+atualiza estoque
+  ↓
+gera comissão
+
+O VendaService pode utilizar outros Services e Repositories para realizar essas operações.
+
+
+EstoqueService
+
+É responsável pelo controle do estoque atual.
+
+Principais responsabilidades:
+
+- buscar estoque
+- cadastrar estoque
+- adicionar quantidade
+- retirar quantidade
+- verificar quantidade disponível
+
+Antes de retirar produtos do estoque, deve ser verificado se existe quantidade suficiente.
+
+Exemplo:
+
+Estoque atual: 5
+Quantidade solicitada: 8
+
+Resultado:
+
+Estoque insuficiente.
+
+
+ComissaoService
+
+É responsável pelo cálculo e registro das comissões.
+
+O cálculo utiliza o percentual de comissão definido no Produto.
+
+Exemplo:
+
+Produto: R$ 100,00
+Comissão: 5%
+
+Valor da comissão: R$ 5,00
+
+Em uma venda com vários produtos, os valores das comissões dos itens podem ser calculados e somados para gerar a comissão da venda.
+
+
+AvisoService
+
+É responsável pelas operações relacionadas aos avisos.
+
+Principais responsabilidades:
+
+- criar aviso
+- buscar aviso
+- listar avisos
+
+Também trabalha junto ao AvisoFuncionario para controlar quais usuários receberam ou leram determinado aviso.
+
+
+MensagemService
+
+É responsável pelas operações relacionadas às mensagens.
+
+Principais responsabilidades:
+
+- enviar mensagem
+- salvar mensagem
+- listar mensagens de determinado usuário
+
+
+FraudeService
+
+É responsável pelas operações relacionadas às fraudes.
+
+Principais responsabilidades:
+
+- registrar fraude
+- buscar fraude
+- listar fraudes
+- buscar fraudes pendentes
+- alterar status da fraude
+
+O fluxo de uma fraude pode ser:
+
+PENDENTE
+  ↓
+EM_ANALISE
+  ↓
+CONFIRMADA
+
+ou:
+
+PENDENTE
+  ↓
+EM_ANALISE
+  ↓
+DESCARTADA
+
+
+========================================
+AUTENTICAÇÃO
+========================================
+
+O projeto possui uma parte específica para controlar o login e o acesso às páginas.
+
+
+AuthLoginService
+
+O AuthLoginService é responsável pela lógica de autenticação.
+
+O processo de login funciona basicamente assim:
+
+Usuário informa email e senha
+  ↓
+AuthLoginController
+  ↓
+AuthLoginService
+  ↓
+UsuarioRepository
+  ↓
+busca usuário
+  ↓
+verifica status
+  ↓
+verifica senha
+  ↓
+login aprovado ou recusado
+
+O usuário precisa existir, estar ativo e informar a senha correta.
+
+
+AuthUtil
+
+O AuthUtil é uma classe auxiliar utilizada no controle da autenticação e da sessão do usuário.
+
+Ela ajuda a verificar se existe um usuário autenticado antes de permitir o acesso às páginas protegidas.
+
+O fluxo é:
+
+Usuário acessa uma página
+  ↓
+verificação de autenticação
+  ↓
+usuário está logado?
+  ↓
+SIM → continua a navegação
+NÃO → redireciona para /login
+
+
+AuthInterceptor
+
+O AuthInterceptor é responsável por interceptar o acesso às páginas protegidas.
+
+Antes de permitir que o usuário continue a navegação, ele verifica se existe uma sessão válida.
+
+Caso o usuário não esteja logado, ele é enviado para a tela de login.
+
+Depois que o login é realizado corretamente, o usuário pode continuar acessando as páginas permitidas.
+
+
+========================================
+CALCULOS
+========================================
+
+CalculoDeProdutos
+
+A classe CalculoDeProdutos é utilizada para concentrar cálculos relacionados aos produtos e às vendas.
+
+A ideia é evitar que os mesmos cálculos sejam repetidos em vários lugares do sistema.
+
+Entre os cálculos que podem ficar nessa classe estão:
+
+- quantidade x preço unitário
+- subtotal
+- valor total
+- cálculos relacionados à comissão
+
+Ela pode ser utilizada principalmente pelo VendaService e pelo ComissaoService.
+
+
+========================================
+RELACIONAMENTO GERAL DO SISTEMA
+========================================
+
+O principal relacionamento entre as entidades é:
+
+Usuario
+  ↓
+Venda
+  ↓
+ItemVenda
+  ↓
+Produto
+  ↓
+Estoque
+  ↓
+MovimentacaoEstoque
+
+A Venda também possui relação com:
+
+Venda
+  ├── Comissao
+  └── Fraude
+
+Os avisos funcionam através de:
+
+Aviso
+  ↓
+AvisoFuncionario
+  ↓
+Usuario
+
+As mensagens funcionam através de:
+
+Mensagem
+  ↓
+Usuario
+
+
+========================================
+FLUXO DE UMA VENDA
+========================================
+
+Quando o usuário realiza uma venda, o sistema deve seguir aproximadamente este fluxo:
+
+1. O usuário acessa a tela de vendas.
+
+2. O Controller recebe a requisição.
+
+3. O Controller chama o VendaService.
+
+4. O VendaService verifica o usuário responsável pela venda.
+
+5. O VendaService verifica os produtos.
+
+6. O estoque é consultado para verificar se existe quantidade suficiente.
+
+7. Os valores dos itens são calculados.
+
+8. Os ItemVenda são criados.
+
+9. O valor total da venda é calculado.
+
+10. A venda é salva.
+
+11. O estoque é atualizado.
+
+12. Uma MovimentacaoEstoque é registrada para representar a saída dos produtos.
+
+13. A comissão é calculada.
+
+14. A Comissao é salva no banco.
+
+Dessa forma, uma única venda pode gerar registros em várias tabelas:
+
+venda
+item_venda
+estoque
+movimentacao_estoque
+comissao
+
+
+========================================
+FLUXO DO LOGIN
+========================================
+
+O login funciona separado das regras de venda e estoque.
+
+O usuário acessa a tela de login e informa:
+
+- email
+- senha
+
+O Controller chama o AuthLoginService.
+
+O AuthLoginService utiliza o UsuarioRepository para encontrar o usuário.
+
+Depois verifica:
+
+- se o usuário existe
+- se está ativo
+- se a senha está correta
+
+Se estiver tudo correto, o usuário é colocado na sessão.
+
+Depois disso, o AuthInterceptor verifica a sessão quando o usuário tenta acessar uma página protegida.
+
+Se estiver autenticado, continua a navegação.
+
+Se não estiver autenticado, é redirecionado para a tela de login.
+
+
+========================================
+REGRA DE ORGANIZAÇÃO DO PROJETO
+========================================
+
+A principal regra para manter o projeto organizado é separar as responsabilidades.
+
+Model:
+Representa os dados e os relacionamentos do banco.
+
+Repository:
+Faz o acesso ao banco e executa as consultas.
+
+Service:
+Contém as regras de negócio e coordena as operações.
+
+Controller:
+Recebe as requisições das páginas, chama os Services e retorna as páginas.
+
+AuthLoginService:
+Cuida da lógica de login.
+
+AuthUtil:
+Auxilia no controle da autenticação e sessão.
+
+AuthInterceptor:
+Impede o acesso às páginas protegidas quando o usuário não está autenticado.
+
+CalculoDeProdutos:
+Centraliza os cálculos relacionados aos produtos e vendas.
+
+De forma geral, o Controller não deve fazer cálculos ou acessar o banco diretamente. O Repository não deve possuir regras de negócio. O Service é responsável por executar essas regras e utilizar os Repositories necessários.
+
+A estrutura final pode ser resumida como:
+
+Controller
+  ↓
+Service
+  ↓
+Repository
+  ↓
+Database
+
+E os Models são utilizados para representar os dados que passam por essas camadas.
