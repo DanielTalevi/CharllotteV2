@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" th:href="@{/css/all.css}">
+
+    <title>Dashboard</title>
+</head>
+
+<body>
+
+<aside class="sidebar">
+
+    <div class="logo">
+        Charllotte
+    </div>
+
+    <nav class="menu">
+        <a th:href="@{/home}" class="active">Dashboard</a>
+        <a th:href="@{/vendas}">Vendas</a>
+        <a href="#">Livros</a>
+        <a href="#">Empréstimos</a>
+        <a href="#">Relatórios</a>
+        <a href="#">Configurações</a>
+        <a href="#">Sair</a>
+    </nav>
+
+</aside>
+
+
+<main class="main">
+
+    <header class="topbar">
+
+        <h1>Dashboard</h1>
+
+        <div class="user">
+            Daniel2
+        </div>
+
+    </header>
+
+
+    <!-- Cards -->
+
+    <section class="cards">
+
+        <div class="card">
+            <span>Usuários</span>
+            <h2></h2>
+        </div>
+
+        <div class="card">
+            <span>Livros</span>
+            <h2>342</h2>
+        </div>
+
+        <div class="card">
+            <span>Empréstimos</span>
+            <h2>56</h2>
+        </div>
+
+        <div class="card">
+            <span>Atrasados</span>
+            <h2>7</h2>
+        </div>
+
+    </section>
+
+
+    <!-- Tabs -->
+
+    <div class="tabs">
+
+        <button class="tab active" onclick="openTab('overview', this)">
+            Visão geral
+        </button>
+
+        <button class="tab" onclick="openTab('activity', this)">
+            Atividade
+        </button>
+
+        <button class="tab" onclick="openTab('reports', this)">
+            Relatórios
+        </button>
+
+    </div>
+
+
+    <!-- Conteúdo -->
+
+    <section class="content">
+
+        <div id="overview" class="tab-content active">
+            <h3>Visão geral</h3>
+        </div>
+
+        <div id="activity" class="tab-content">
+            <h3>Atividade</h3>
+        </div>
+
+        <div id="reports" class="tab-content">
+            <h3>Relatórios</h3>
+        </div>
+
+    </section>
+
+</main>
+
+
+<script>
+
+    function openTab(tabName, button) {
+
+        const contents = document.querySelectorAll(".tab-content");
+        const buttons = document.querySelectorAll(".tab");
+
+        contents.forEach(content => {
+            content.classList.remove("active");
+        });
+
+        buttons.forEach(btn => {
+            btn.classList.remove("active");
+        });
+
+        document.getElementById(tabName).classList.add("active");
+
+        button.classList.add("active");
+    }
+
+</script>
+
+</body>
+</html>

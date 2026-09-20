@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" th:href="@{/css/all.css}">
+    <title>Vendas</title>
+
+</head>
+
+<body>
+
+
+<!-- =========================
+     SIDEBAR
+========================= -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+        Charllotte
+    </div>
+
+    <nav class="menu">
+
+        <a th:href="@{/home}">
+            Dashboard
+        </a>
+
+        <a th:href="@{/vendas}" class="active">
+            Vendas
+        </a>
+
+        <a href="#">
+            Livros
+        </a>
+
+        <a href="#">
+            Empréstimos
+        </a>
+
+        <a href="#">
+            Relatórios
+        </a>
+
+        <a href="#">
+            Configurações
+        </a>
+
+        <a href="#">
+            Sair
+        </a>
+
+    </nav>
+
+</aside>
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main class="main">
+
+
+    <!-- TOPBAR -->
+
+    <header class="topbar">
+
+        <h1>Vendas</h1>
+
+        <div class="user">
+            Administrador
+        </div>
+
+    </header>
+
+
+    <!-- CONTEÚDO -->
+
+    <section class="content">
+
+        <h2>Pesquisa de Vendas</h2>
+
+
+        <!-- FILTRO POR FUNCIONÁRIO -->
+
+        <form
+                th:action="@{/vendas/funcionario}"
+                method="get"
+                class="filtro">
+
+            <div class="campo">
+
+                <label for="idFuncionario">
+                    Funcionário
+                </label>
+
+                <select
+                        id="idFuncionario"
+                        name="idFuncionario"
+                        required>
+
+                    <option value="">
+                        Selecione um funcionário
+                    </option>
+
+                    <option
+                            th:each="usuario : ${usuarios}"
+                            th:value="${usuario.id}"
+                            th:text="${usuario.nome}"
+                            th:selected="${usuario.id == idFuncionario}">
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <button
+                    type="submit"
+                    class="btn-pesquisar">
+
+                Pesquisar
+
+            </button>
+
+        </form>
+
+
+        <!-- TABELA -->
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                <tr>
+
+                    <th>Data</th>
+                    <th>Funcionário</th>
+                    <th>Valor</th>
+                    <th>Status</th>
+
+                </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                <tr th:each="venda : ${vendas}">
+
+                    <td th:text="${venda.dataVenda}">
+                        Data
+                    </td>
+
+                    <td th:text="${venda.funcionario.nome}">
+                        Funcionário
+                    </td>
+
+                    <td th:text="${venda.valorTotal}">
+                        Valor
+                    </td>
+
+                    <td>
+
+                        <span
+                                th:if="${venda.status.name() == 'REALIZADA'}"
+                                class="status status-realizada">
+
+                            Realizada
+
+                        </span>
+
+                        <span
+                                th:if="${venda.status.name() == 'CANCELADA'}"
+                                class="status status-cancelada">
+
+                            Cancelada
+
+                        </span>
+
+                    </td>
+
+                </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <!-- SEM RESULTADO -->
+
+        <p
+                th:if="${vendas != null and #lists.isEmpty(vendas)}"
+                class="sem-vendas">
+
+            Nenhuma venda encontrada para este funcionário.
+
+        </p>
+
+    </section>
+
+
+</main>
+
+</body>
+
+</html>

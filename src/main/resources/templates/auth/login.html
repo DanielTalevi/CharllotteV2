@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <main class="login-box">
+        <header class="logo-container">
+            <div class="logo-icon">
+                <span>⌁</span>
+            </div>
+            <div class="logo-text">
+                <span class="logo-title">Charlotte</span>
+                <span class="logo-subtitle">RECURSOS HUMANOS</span>
+            </div>
+        </header>
+
+        <section class="profile-selection">
+            <p class="section-title">Selecione seu perfil</p>
+
+            <div class="profiles">
+                <button type="button" class="profile-card selected" data-profile="frentista">
+                    <i class="fa-regular fa-user profile-icon"></i>
+                    <span>Frentista</span>
+                </button>
+                <button type="button" class="profile-card" data-profile="admin">
+                    <i class="fa-solid fa-briefcase profile-icon"></i>
+                    <span>RH / Admin</span>
+                </button>
+            </div>
+        </section>
+
+        <form th:action="@{/login}" method="post">
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="seu@email.com"
+                required>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Senha</label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="senha"
+                    placeholder="••••••••"
+                    required>
+            </div>
+
+            <button
+                    type="submit"
+                    class="login-button">
+                Entrar
+            </button>
+        </form>
+    </main>
+
+    <script>const profileCards = document.querySelectorAll(".profile-card");
+
+let selectProfile = "frentista";
+
+profileCards.forEach(card => {
+    card.addEventListener("click", () => {
+
+        profileCards.forEach(item => {
+            item.classList.remove("selected");
+        });
+
+        card.classList.add("selected");
+
+        selectProfile = card.dataset.profile;
+
+        console.log("Perfil selecionado:", selectProfile);
+    });
+});
+</script>
+</body>
+</html>
