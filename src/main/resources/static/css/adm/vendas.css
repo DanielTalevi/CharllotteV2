@@ -1,0 +1,743 @@
+/* =====================================================
+   PÁGINA DE VENDAS
+===================================================== */
+
+
+/* =====================================================
+   FILTRO
+===================================================== */
+
+.filtro {
+
+    display: flex;
+
+    align-items: flex-end;
+
+    gap: 14px;
+
+    width: 100%;
+
+}
+
+
+/* =====================================================
+   RESUMO DO FILTRO
+===================================================== */
+
+.filtro-resumo {
+
+    margin-left: auto;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 24px;
+
+    padding-right: 10px;
+
+    height: 50px;
+
+}
+
+
+/* =====================================================
+   INFORMAÇÃO DO FILTRO
+===================================================== */
+
+.filtro-info {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-end;
+
+    min-width: 95px;
+
+}
+
+
+.filtro-info span {
+
+    font-size: 11px;
+
+    color: #7a8782;
+
+    margin-bottom: 3px;
+
+}
+
+
+.filtro-info strong {
+
+    font-size: 18px;
+
+    color: #063f30;
+
+}
+
+
+.filtro-info .canceladas-numero {
+
+    color: #c74444;
+
+}
+
+
+/* =====================================================
+   DIVISOR
+===================================================== */
+
+.filtro-divisor {
+
+    width: 1px;
+
+    height: 35px;
+
+    background: #e1e7e4;
+
+}
+
+
+/* =====================================================
+   RESUMO DOS CARDS
+===================================================== */
+
+.resumo-vendas {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 18px;
+
+    margin-bottom: 18px;
+
+    flex-shrink: 0;
+
+}
+
+
+/* =====================================================
+   CARD TOTAL VENDIDO
+===================================================== */
+
+.card-total {
+
+    height: 145px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+}
+
+
+/* =====================================================
+   TOPO DO CARD
+===================================================== */
+
+.card-topo {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+}
+
+
+/* =====================================================
+   LABEL
+===================================================== */
+
+.card-label {
+
+    display: block;
+
+    font-size: 13px;
+
+    color: #65716d;
+
+    margin-bottom: 5px;
+
+}
+
+
+/* =====================================================
+   VALOR TOTAL
+===================================================== */
+
+.card-total strong {
+
+    display: block;
+
+    font-size: 27px;
+
+    color: #063f30;
+
+}
+
+
+/* =====================================================
+   DESCRIÇÃO
+===================================================== */
+
+.card-descricao {
+
+    display: block;
+
+    margin-top: 7px;
+
+    font-size: 12px;
+
+    color: #8a9691;
+
+}
+
+
+/* =====================================================
+   ÍCONE DO CARD
+===================================================== */
+
+.card-icone {
+
+    width: 40px;
+
+    height: 40px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 8px;
+
+    background: #e6f3ee;
+
+}
+
+
+.card-icone svg {
+
+    width: 20px;
+
+    height: 20px;
+
+    color: #063f30;
+
+    stroke: #063f30;
+
+}
+
+
+/* =====================================================
+   CARD DESEMPENHO
+===================================================== */
+
+.card-desempenho {
+
+    height: 145px;
+
+    background: #ffffff;
+
+    border: 1px solid #e1e7e4;
+
+    border-radius: 8px;
+
+    padding: 16px 20px;
+
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+
+    overflow: hidden;
+
+}
+
+
+/* =====================================================
+   CABEÇALHO DO GRÁFICO
+===================================================== */
+
+.desempenho-header {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+}
+
+
+.desempenho-header strong {
+
+    display: block;
+
+    color: #063f30;
+
+    font-size: 18px;
+
+    margin-top: 2px;
+
+}
+
+
+/* =====================================================
+   ÍCONE DO GRÁFICO
+===================================================== */
+
+.desempenho-icone {
+
+    width: 36px;
+
+    height: 36px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 8px;
+
+    background: #e6f3ee;
+
+}
+
+
+.desempenho-icone svg {
+
+    width: 19px;
+
+    height: 19px;
+
+    color: #063f30;
+
+    stroke: #063f30;
+
+}
+
+
+/* =====================================================
+   GRÁFICO
+===================================================== */
+
+.grafico-container {
+
+    height: 67px;
+
+    margin-top: 5px;
+
+    overflow: hidden;
+
+}
+
+
+.grafico-vendas {
+
+    height: 100%;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-around;
+
+    gap: 20px;
+
+    padding: 0 10px;
+
+    border-bottom: 1px solid #e4e9e7;
+
+}
+
+
+/* =====================================================
+   COLUNA DO GRÁFICO
+===================================================== */
+
+.grafico-coluna {
+
+    height: 100%;
+
+    flex: 1;
+
+    max-width: 100px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+}
+
+
+/* =====================================================
+   ÁREA DA BARRA
+===================================================== */
+
+.grafico-barra-area {
+
+    width: 100%;
+
+    height: 37px;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: center;
+
+}
+
+
+/* =====================================================
+   BARRA
+===================================================== */
+
+.grafico-barra {
+
+    width: 45px;
+
+    min-height: 3px;
+
+    background: #155b47;
+
+    border-radius: 4px 4px 0 0;
+
+    transition:
+            height 0.4s ease,
+            opacity 0.2s ease;
+
+}
+
+
+.grafico-barra:hover {
+
+    opacity: 0.75;
+
+}
+
+
+/* =====================================================
+   MÊS
+===================================================== */
+
+.grafico-mes {
+
+    margin-top: 3px;
+
+    font-size: 9px;
+
+    color: #65716d;
+
+    text-transform: uppercase;
+
+    font-weight: 600;
+
+}
+
+
+/* =====================================================
+   VALOR DO MÊS
+===================================================== */
+
+.grafico-valor {
+
+    font-size: 8px;
+
+    color: #8a9691;
+
+    margin-bottom: 1px;
+
+    white-space: nowrap;
+
+}
+
+
+/* =====================================================
+   GRÁFICO VAZIO
+===================================================== */
+
+.grafico-vazio {
+
+    width: 100%;
+
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 12px;
+
+    color: #8a9691;
+
+}
+
+
+/* =====================================================
+   TABELA
+===================================================== */
+
+.table-container {
+
+    flex: 1;
+
+    min-height: 0;
+
+    overflow-y: auto;
+
+    overflow-x: hidden;
+
+    background: #ffffff;
+
+    border: 1px solid #e1e7e4;
+
+    border-radius: 8px;
+
+}
+
+
+/* =====================================================
+   SCROLLBAR
+===================================================== */
+
+.table-container::-webkit-scrollbar {
+
+    width: 8px;
+
+}
+
+
+.table-container::-webkit-scrollbar-track {
+
+    background: #f1f4f2;
+
+}
+
+
+.table-container::-webkit-scrollbar-thumb {
+
+    background: #9aaba4;
+
+    border-radius: 10px;
+
+}
+
+
+.table-container::-webkit-scrollbar-thumb:hover {
+
+    background: #71847b;
+
+}
+
+
+/* =====================================================
+   CABEÇALHO FIXO
+===================================================== */
+
+.table-container thead {
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 10;
+
+}
+
+
+.table-container thead th {
+
+    background: #063f30;
+
+    color: #ffffff;
+
+}
+
+
+/* =====================================================
+   COLUNAS
+===================================================== */
+
+.table-container th:nth-child(1),
+.table-container td:nth-child(1) {
+
+    width: 20%;
+
+}
+
+
+.table-container th:nth-child(2),
+.table-container td:nth-child(2) {
+
+    width: 25%;
+
+}
+
+
+.table-container th:nth-child(3),
+.table-container td:nth-child(3) {
+
+    width: 17%;
+
+}
+
+
+.table-container th:nth-child(4),
+.table-container td:nth-child(4) {
+
+    width: 18%;
+
+}
+
+
+.table-container th:nth-child(5),
+.table-container td:nth-child(5) {
+
+    width: 20%;
+
+}
+
+
+/* =====================================================
+   DATA
+===================================================== */
+
+.table-container td:first-child {
+
+    white-space: nowrap;
+
+}
+
+
+/* =====================================================
+   VALORES
+===================================================== */
+
+.table-container td:nth-child(3),
+.table-container td:nth-child(4) {
+
+    white-space: nowrap;
+
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.table-container td:last-child {
+
+    white-space: nowrap;
+
+}
+
+
+/* =====================================================
+   HOVER
+===================================================== */
+
+.table-container tbody tr:hover td {
+
+    background: #f7faf8;
+
+}
+
+
+/* =====================================================
+   SEM RESULTADOS
+===================================================== */
+
+.sem-vendas {
+
+    text-align: center;
+
+    padding: 40px !important;
+
+    color: #65716d;
+
+}
+
+
+/* =====================================================
+   RESPONSIVO
+===================================================== */
+
+@media (max-width: 1100px) {
+
+    .filtro-resumo {
+
+        gap: 14px;
+
+    }
+
+
+    .filtro-info {
+
+        min-width: 75px;
+
+    }
+
+}
+
+
+@media (max-width: 900px) {
+
+    .resumo-vendas {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .filtro-resumo {
+
+        display: none;
+
+    }
+
+}
+
+
+@media (max-width: 750px) {
+
+    .table-container {
+
+        overflow-x: auto;
+
+    }
+
+
+    .table-container table {
+
+        min-width: 800px;
+
+    }
+
+
+    .grafico-vendas {
+
+        gap: 10px;
+
+    }
+
+
+    .grafico-barra {
+
+        width: 40px;
+
+    }
+
+}

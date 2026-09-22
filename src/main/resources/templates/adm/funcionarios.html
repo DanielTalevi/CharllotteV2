@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Funcionários - Charllotte</title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/all.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/adm/funcionarios.css}">
+
+</head>
+
+<body>
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar">
+
+    <div class="sidebar-logo">
+        <h2>Charllotte</h2>
+    </div>
+
+
+    <nav class="menu">
+
+        <a th:href="@{/home}">
+
+            <i data-lucide="layout-dashboard"
+               class="icon-dashboard"></i>
+
+            <span>Dashboard</span>
+
+        </a>
+
+
+        <a th:href="@{/funcionario}"
+           class="active">
+
+            <i data-lucide="users-round"
+               class="icon-funcionarios"></i>
+
+            <span>Funcionários</span>
+
+        </a>
+
+
+        <a th:href="@{/vendas}">
+
+            <i data-lucide="dollar-sign"
+               class="icon-comissoes"></i>
+
+            <span>Comissões</span>
+
+        </a>
+
+
+        <a th:href="@{/fraudes}">
+
+            <i data-lucide="shield"
+               class="icon-fraudes"></i>
+
+            <span>Fraudes</span>
+
+        </a>
+
+
+        <a th:href="@{/armazen}">
+
+            <i data-lucide="package"
+               class="icon-armazem"></i>
+
+            <span>Armazém</span>
+
+        </a>
+
+
+        <a th:href="@{/relatorios}">
+
+            <i data-lucide="file-text"
+               class="icon-relatorios"></i>
+
+            <span>Relatórios</span>
+
+        </a>
+
+
+        <a th:href="@{/estatisticas}">
+
+            <i data-lucide="bar-chart-3"
+               class="icon-estatisticas"></i>
+
+            <span>Estatísticas</span>
+
+        </a>
+
+
+        <a th:href="@{/logs}">
+
+            <i data-lucide="history"
+               class="icon-logs"></i>
+
+            <span>Logs</span>
+
+        </a>
+
+
+        <a th:href="@{/config}">
+
+            <i data-lucide="settings"
+               class="icon-config"></i>
+
+            <span>Configurações</span>
+
+        </a>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <a href="/logout"
+           class="sidebar-item">
+
+            <i data-lucide="log-out"></i>
+
+            <span>Sair</span>
+
+        </a>
+
+    </div>
+
+</aside>
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="main">
+
+
+    <!-- =================================================
+         TOPBAR
+    ================================================== -->
+
+    <header class="topbar">
+
+        <div>
+
+            <h1>Funcionários</h1>
+
+            <p class="usuario-logado">
+                Gestão dos funcionários
+            </p>
+
+        </div>
+
+
+        <div class="usuario-logado">
+
+            <i data-lucide="user"></i>
+
+            <span th:text="${usuarioLogado.nome}">
+                Usuário
+            </span>
+
+        </div>
+
+    </header>
+
+
+    <!-- =================================================
+         CONTEÚDO
+    ================================================== -->
+
+    <section class="content">
+
+
+        <!-- =============================================
+             TÍTULO DA PÁGINA
+        ============================================== -->
+
+        <div class="pagina-header">
+
+            <div>
+
+                <span class="pagina-label">
+                    Funcionários
+                </span>
+
+                <h2>
+                    Lista de Funcionários
+                </h2>
+
+            </div>
+
+
+            <button class="btn-adicionar">
+
+                <i data-lucide="plus"></i>
+
+                Adicionar
+
+            </button>
+
+        </div>
+
+
+        <!-- =============================================
+             CARDS
+        ============================================== -->
+
+        <div class="cards-funcionarios">
+
+
+            <!-- TOTAL -->
+
+            <div class="card-funcionario">
+
+                <div class="card-funcionario-info">
+
+                    <span class="card-label">
+                        Total
+                    </span>
+
+                    <strong
+                            th:text="${totalFuncionarios}">
+                        0
+                    </strong>
+
+                    <small>
+                        funcionários
+                    </small>
+
+                </div>
+
+
+                <div class="card-funcionario-icone">
+
+                    <i data-lucide="users"></i>
+
+                </div>
+
+            </div>
+
+
+            <!-- ATIVOS -->
+
+            <div class="card-funcionario">
+
+                <div class="card-funcionario-info">
+
+                    <span class="card-label">
+                        Ativos
+                    </span>
+
+                    <strong
+                            th:text="${funcionariosAtivos}">
+                        0
+                    </strong>
+
+                    <small>
+                        trabalhando
+                    </small>
+
+                </div>
+
+
+                <div class="card-funcionario-icone">
+
+                    <i data-lucide="user-check"></i>
+
+                </div>
+
+            </div>
+
+
+            <!-- INATIVOS -->
+
+            <div class="card-funcionario">
+
+                <div class="card-funcionario-info">
+
+                    <span class="card-label">
+                        Inativos
+                    </span>
+
+                    <strong
+                            th:text="${funcionariosInativos}">
+                        0
+                    </strong>
+
+                    <small>
+                        desligados
+                    </small>
+
+                </div>
+
+
+                <div class="card-funcionario-icone">
+
+                    <i data-lucide="user-x"></i>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =============================================
+             TABELA
+        ============================================== -->
+
+        <div class="card-lista">
+
+
+            <div class="lista-header">
+
+                <div>
+
+                    <span class="card-label">
+                        Funcionários
+                    </span>
+
+                    <strong>
+                        Lista de Funcionários
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Cargo</th>
+                        <th>Vendas</th>
+                        <th>Comissão</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    <tr th:each="funcionario : ${funcionarios}">
+
+                        <!-- NOME -->
+                        <td th:text="${funcionario.nome}">
+                            Nome
+                        </td>
+
+                        <!-- EMAIL -->
+                        <td th:text="${funcionario.email}">
+                            email@exemplo.com
+                        </td>
+
+                        <!-- CARGO -->
+                        <td>
+                            Frentista
+                        </td>
+
+                        <!-- VENDAS -->
+                        <td>
+                            <strong>R$ 0,00</strong>
+                        </td>
+
+                        <!-- COMISSÃO -->
+                        <td>
+                            <strong>R$ 0,00</strong>
+                        </td>
+
+                        <!-- STATUS -->
+                        <td>
+
+                <span
+                        th:if="${funcionario.status}"
+                        class="status ativo">
+                    Ativo
+                </span>
+
+                            <span
+                                    th:unless="${funcionario.status}"
+                                    class="status inativo">
+                    Inativo
+                </span>
+
+                        </td>
+
+                        <!-- AÇÕES -->
+                        <td class="acoes">
+
+                            <!-- ATIVO → botão INATIVAR -->
+                            <form
+                                    th:if="${funcionario.status}"
+                                    th:action="@{/funcionario/{id}/inativar(id=${funcionario.id})}"
+                                    method="post">
+
+                                <button type="submit" class="btn-inativar">
+                                    Inativar
+                                </button>
+
+                            </form>
+
+                            <!-- INATIVO → botão ATIVAR -->
+                            <form
+                                    th:unless="${funcionario.status}"
+                                    th:action="@{/funcionario/{id}/ativar(id=${funcionario.id})}"
+                                    method="post">
+
+                                <button type="submit" class="btn-ativar">
+                                    Ativar
+                                </button>
+
+                            </form>
+
+                        </td>
+
+                    </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- =====================================================
+     SCRIPTS
+===================================================== -->
+
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<script th:src="@{/js/all.js}"></script>
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+        if (typeof lucide !== "undefined") {
+            lucide.createIcons();
+        }
+
+    });
+
+</script>
+
+</body>
+
+</html>

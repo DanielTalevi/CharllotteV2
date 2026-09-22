@@ -5,19 +5,24 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" th:href="@{/css/all.css}">
+    <link rel="stylesheet" th:href="@{/css/adm/vendas.css}">
+
     <title>Vendas</title>
 
 </head>
 
+
 <body>
 
 
-<!-- =========================
+<!-- =====================================================
      SIDEBAR
-========================= -->
+===================================================== -->
 
 <aside class="sidebar">
 
@@ -25,74 +30,172 @@
         Charllotte
     </div>
 
+
     <nav class="menu">
 
+
         <a th:href="@{/home}">
-            Dashboard
+
+            <i data-lucide="layout-dashboard"
+               class="icon-dashboard"></i>
+
+            <span>Dashboard</span>
+
         </a>
 
-        <a th:href="@{/vendas}" class="active">
-            Vendas
+
+        <a th:href="@{/funcionario}">
+
+            <i data-lucide="users-round"
+               class="icon-funcionarios"></i>
+
+            <span>Funcionários</span>
+
         </a>
 
-        <a href="#">
-            Livros
+
+        <a th:href="@{/vendas}"
+           class="active">
+
+            <i data-lucide="dollar-sign"
+               class="icon-comissoes"></i>
+
+            <span>Comissões</span>
+
         </a>
 
-        <a href="#">
-            Empréstimos
+
+        <a th:href="@{/fraudes}">
+
+            <i data-lucide="shield"
+               class="icon-fraudes"></i>
+
+            <span>Fraudes</span>
+
         </a>
 
-        <a href="#">
-            Relatórios
+
+        <a th:href="@{/armazen}">
+
+            <i data-lucide="package"
+               class="icon-armazem"></i>
+
+            <span>Armazém</span>
+
         </a>
 
-        <a href="#">
-            Configurações
+
+        <a th:href="@{/relatorios}">
+
+            <i data-lucide="file-text"
+               class="icon-relatorios"></i>
+
+            <span>Relatórios</span>
+
         </a>
 
-        <a href="#">
-            Sair
+
+        <a th:href="@{/estatisticas}">
+
+            <i data-lucide="bar-chart-3"
+               class="icon-estatisticas"></i>
+
+            <span>Estatísticas</span>
+
         </a>
+
+
+        <a th:href="@{/logs}">
+
+            <i data-lucide="history"
+               class="icon-logs"></i>
+
+            <span>Logs</span>
+
+        </a>
+
+
+        <a th:href="@{/config}">
+
+            <i data-lucide="settings"
+               class="icon-config"></i>
+
+            <span>Configurações</span>
+
+        </a>
+
 
     </nav>
 
 </aside>
 
 
-<!-- =========================
+
+<!-- =====================================================
      MAIN
-========================= -->
+===================================================== -->
 
 <main class="main">
 
 
-    <!-- TOPBAR -->
+    <!-- =================================================
+         TOPBAR
+    ================================================= -->
 
     <header class="topbar">
 
-        <h1>Vendas</h1>
+        <div>
 
-        <div class="user">
-            Administrador
+            <h1>
+                Comissões
+            </h1>
+
+            <p class="usuario-logado">
+                Comssiões e Vendas
+            </p>
+
+        </div>
+
+
+        <div class="usuario-logado">
+
+            <i data-lucide="user"></i>
+
+            <span
+                    th:text="${usuarioLogado.nome}">
+                Usuário
+            </span>
+
         </div>
 
     </header>
 
 
-    <!-- CONTEÚDO -->
+
+    <!-- =================================================
+         CONTEÚDO
+    ================================================= -->
 
     <section class="content">
 
-        <h2>Pesquisa de Vendas</h2>
+
+        <h2>
+            Pesquisa de Vendas
+        </h2>
 
 
-        <!-- FILTRO POR FUNCIONÁRIO -->
+
+        <!-- =================================================
+             FILTRO
+        ================================================= -->
 
         <form
                 th:action="@{/vendas/funcionario}"
                 method="get"
                 class="filtro">
+
+
+            <!-- FUNCIONÁRIO -->
 
             <div class="campo">
 
@@ -100,117 +203,427 @@
                     Funcionário
                 </label>
 
+
                 <select
                         id="idFuncionario"
-                        name="idFuncionario"
-                        required>
+                        name="idFuncionario">
 
-                    <option value="">
-                        Selecione um funcionário
+
+                    <option
+                            value=""
+                            th:selected="${idFuncionario == null}">
+
+                        Todas as Vendas
+
                     </option>
+
 
                     <option
                             th:each="usuario : ${usuarios}"
                             th:value="${usuario.id}"
                             th:text="${usuario.nome}"
                             th:selected="${usuario.id == idFuncionario}">
+
                     </option>
+
 
                 </select>
 
             </div>
 
 
+
+            <!-- BOTÃO -->
+
             <button
                     type="submit"
-                    class="btn-pesquisar">
+                    class="btn">
 
                 Pesquisar
 
             </button>
 
+
+
+            <!-- =================================================
+                 RESUMO DO FILTRO
+            ================================================= -->
+
+            <div class="filtro-resumo">
+
+
+                <!-- REALIZADAS -->
+
+                <div class="filtro-info">
+
+                    <span>
+                        Vendas realizadas
+                    </span>
+
+
+                    <strong id="vendasRealizadas">
+                        0
+                    </strong>
+
+                </div>
+
+
+
+                <!-- DIVISOR -->
+
+                <div class="filtro-divisor"></div>
+
+
+
+                <!-- CANCELADAS -->
+
+                <div class="filtro-info">
+
+                    <span>
+                        Canceladas
+                    </span>
+
+
+                    <strong
+                            id="vendasCanceladas"
+                            class="canceladas-numero">
+
+                        0
+
+                    </strong>
+
+                </div>
+
+
+
+                <!-- DIVISOR -->
+
+                <div class="filtro-divisor"></div>
+
+
+
+                <!-- PERÍODO -->
+
+                <div class="filtro-info">
+
+                    <span>
+                        Período
+                    </span>
+
+
+                    <strong id="periodoVendas">
+                        —
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
         </form>
 
 
-        <!-- TABELA -->
+
+        <!-- =================================================
+             RESUMO DOS VALORES
+        ================================================= -->
+
+        <div class="resumo-vendas">
+
+
+            <!-- =================================================
+                 TOTAL VENDIDO
+            ================================================= -->
+
+            <div class="card-resumo card-total">
+
+
+                <div class="card-topo">
+
+
+                    <div>
+
+                        <span class="card-label">
+                            Total vendido
+                        </span>
+
+
+                        <strong
+                                th:text="${'R$ ' + #numbers.formatDecimal(totalVendido, 1, 2, 'COMMA')}">
+
+                            R$ 0,00
+
+                        </strong>
+
+                    </div>
+
+
+                    <div class="card-icone">
+
+                        <i data-lucide="trending-up"></i>
+
+                    </div>
+
+
+                </div>
+
+
+                <span class="card-descricao">
+
+                    Valor total das vendas realizadas
+
+                </span>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 GRÁFICO
+            ================================================= -->
+
+            <div class="card-desempenho">
+
+
+                <div class="desempenho-header">
+
+
+                    <div>
+
+                        <span class="card-label">
+                            Desempenho das vendas
+                        </span>
+
+
+                        <strong>
+                            Vendas por mês
+                        </strong>
+
+                    </div>
+
+
+                    <div class="desempenho-icone">
+
+                        <i data-lucide="bar-chart-3"></i>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="grafico-container">
+
+                    <div
+                            id="graficoVendas"
+                            class="grafico-vendas">
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             TABELA
+        ================================================= -->
 
         <div class="table-container">
 
+
             <table>
+
+
+                <!-- CABEÇALHO -->
 
                 <thead>
 
                 <tr>
 
-                    <th>Data</th>
-                    <th>Funcionário</th>
-                    <th>Valor</th>
-                    <th>Status</th>
+                    <th>
+                        Data
+                    </th>
+
+
+                    <th>
+                        Funcionário
+                    </th>
+
+
+                    <th>
+                        Valor
+                    </th>
+
+
+                    <th>
+                        Comissão
+                    </th>
+
+
+                    <th>
+                        Status
+                    </th>
 
                 </tr>
 
                 </thead>
 
 
+
+                <!-- CORPO -->
+
                 <tbody>
 
-                <tr th:each="venda : ${vendas}">
 
-                    <td th:text="${venda.dataVenda}">
+                <!-- =================================================
+                     VENDA
+                ================================================= -->
+
+                <tr
+                        th:each="venda : ${vendas}"
+
+                        th:attr="
+                            data-data=${venda.dataVenda},
+                            data-valor=${venda.valorTotal},
+                            data-status=${venda.status}
+                        ">
+
+
+                    <!-- DATA -->
+
+                    <td
+                            th:text="${venda.dataVenda}">
+
                         Data
+
                     </td>
 
-                    <td th:text="${venda.funcionario.nome}">
+
+
+                    <!-- FUNCIONÁRIO -->
+
+                    <td
+                            th:text="${venda.funcionario.nome}">
+
                         Funcionário
+
                     </td>
 
-                    <td th:text="${venda.valorTotal}">
-                        Valor
+
+
+                    <!-- VALOR -->
+
+                    <td
+                            th:text="${'R$ ' + #numbers.formatDecimal(venda.valorTotal, 1, 2, 'COMMA')}">
+
+                        R$ 0,00
+
                     </td>
+
+
+
+                    <!-- COMISSÃO -->
+
+                    <td
+                            th:text="${'R$ ' + #numbers.formatDecimal(comissoesPorVenda[venda.id], 1, 2, 'COMMA')}">
+
+                        R$ 0,00
+
+                    </td>
+
+
+
+                    <!-- STATUS -->
 
                     <td>
 
+
                         <span
-                                th:if="${venda.status.name() == 'REALIZADA'}"
-                                class="status status-realizada">
+                                th:if="${venda.status != null and venda.status.name() == 'REALIZADA'}"
+                                class="status realizada">
 
                             Realizada
 
                         </span>
 
+
                         <span
-                                th:if="${venda.status.name() == 'CANCELADA'}"
-                                class="status status-cancelada">
+                                th:if="${venda.status != null and venda.status.name() == 'CANCELADA'}"
+                                class="status cancelada">
 
                             Cancelada
 
                         </span>
 
+
+                        <span
+                                th:if="${venda.status != null and venda.status.name() == 'EM_ANDAMENTO'}"
+                                class="status andamento">
+
+                            Em andamento
+
+                        </span>
+
+
                     </td>
+
 
                 </tr>
 
+
+
+                <!-- =================================================
+                     SEM RESULTADOS
+                ================================================= -->
+
+                <tr
+                        th:if="${vendas != null and #lists.isEmpty(vendas)}">
+
+
+                    <td
+                            colspan="5"
+                            class="sem-vendas">
+
+                        Nenhuma venda encontrada.
+
+                    </td>
+
+
+                </tr>
+
+
                 </tbody>
+
 
             </table>
 
+
         </div>
 
-
-        <!-- SEM RESULTADO -->
-
-        <p
-                th:if="${vendas != null and #lists.isEmpty(vendas)}"
-                class="sem-vendas">
-
-            Nenhuma venda encontrada para este funcionário.
-
-        </p>
 
     </section>
 
 
 </main>
+
+
+
+<!-- =====================================================
+     SCRIPTS
+===================================================== -->
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script th:src="@{/js/all.js}"></script>
+<script th:src="@{/js/adm/vendas.js}"></script>
 
 </body>
 

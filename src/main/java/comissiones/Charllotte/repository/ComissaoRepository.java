@@ -14,4 +14,7 @@ public interface ComissaoRepository
 
     List<Comissao> findByVendaId(
             Integer idVenda);
+
+    void deleteByVendaId(
+            Integer idVenda);
 }

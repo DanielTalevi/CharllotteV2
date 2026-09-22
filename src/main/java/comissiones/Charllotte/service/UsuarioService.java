@@ -53,24 +53,6 @@ public class UsuarioService {
                 .toList();
     }
 
-    public void desativar(Integer id) {
-
-        Usuario usuario = buscarPorId(id);
-
-        usuario.setStatus(false);
-
-        usuarioRepository.save(usuario);
-    }
-
-    public void ativar(Integer id) {
-
-        Usuario usuario = buscarPorId(id);
-
-        usuario.setStatus(true);
-
-        usuarioRepository.save(usuario);
-    }
-
 //    public List<Usuario> listarAtivos() {
 //        return usuarioRepository.findAll()
 //                .stream()
@@ -82,5 +64,34 @@ public class UsuarioService {
         return usuarioRepository.findByStatusTrueAndAdminFalse();
     }
 
+    public void inativar(Integer id) {
 
+        Usuario usuario =
+                usuarioRepository.findById(id)
+                        .orElseThrow(() ->
+                                new RuntimeException(
+                                        "Funcionário não encontrado."
+                                )
+                        );
+
+        usuario.setStatus(false);
+        usuario.setOnline(false);
+
+        usuarioRepository.save(usuario);
+    }
+
+    public void ativar(Integer id) {
+
+        Usuario usuario =
+                usuarioRepository.findById(id)
+                        .orElseThrow(() ->
+                                new RuntimeException(
+                                        "Funcionário não encontrado."
+                                )
+                        );
+
+        usuario.setStatus(true);
+
+        usuarioRepository.save(usuario);
+    }
 }
