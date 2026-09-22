@@ -1,0 +1,573 @@
+/* =====================================================
+   CHARLLOTTE - RELATÓRIOS
+===================================================== */
+
+
+/* =====================================================
+   CONTEÚDO PRINCIPAL
+===================================================== */
+
+.relatorios-content {
+    gap: 20px;
+}
+
+
+/* =====================================================
+   CABEÇALHO DA PÁGINA
+===================================================== */
+
+.pagina-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+
+    padding-bottom: 4px;
+}
+
+.pagina-header > div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+
+/* =====================================================
+   LABEL DA PÁGINA
+===================================================== */
+
+.pagina-label {
+    display: block;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 1.2px;
+
+    color: var(--primary-light);
+}
+
+.pagina-header h2 {
+    margin: 0;
+
+    font-size: 23px;
+    font-weight: 700;
+
+    color: var(--text-primary);
+}
+
+
+/* =====================================================
+   BOTÃO EXPORTAR
+===================================================== */
+
+.btn-exportar {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    min-width: 125px;
+    height: 38px;
+
+    padding: 0 15px;
+
+    background: var(--primary-color);
+    color: #ffffff;
+
+    border: 1px solid var(--primary-color);
+    border-radius: 6px;
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+            background 0.2s ease,
+            border-color 0.2s ease,
+            color 0.2s ease,
+            box-shadow 0.2s ease,
+            transform 0.2s ease;
+}
+
+.btn-exportar svg {
+    width: 16px;
+    height: 16px;
+
+    flex-shrink: 0;
+
+    stroke-width: 2;
+}
+
+.btn-exportar:hover {
+    background: var(--primary-light);
+    border-color: var(--primary-light);
+
+    color: #ffffff;
+
+    box-shadow:
+            0 4px 10px rgba(6, 63, 48, 0.16);
+
+    transform: translateY(-1px);
+}
+
+.btn-exportar:active {
+    background: var(--primary-dark);
+    border-color: var(--primary-dark);
+
+    transform: translateY(0);
+
+    box-shadow: none;
+}
+
+
+/* =====================================================
+   CARDS DE RESUMO
+===================================================== */
+
+.relatorio-cards {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 16px;
+
+    width: 100%;
+}
+
+
+/* =====================================================
+   CARD INDIVIDUAL
+===================================================== */
+
+.relatorio-card {
+    min-height: 120px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding: 20px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: 9px;
+
+    box-shadow: var(--shadow);
+
+    transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease,
+            border-color 0.2s ease;
+}
+
+.relatorio-card:hover {
+    transform: translateY(-2px);
+
+    border-color: #d2ddd7;
+
+    box-shadow: var(--shadow-hover);
+}
+
+
+/* =====================================================
+   CONTEÚDO DOS CARDS
+===================================================== */
+
+.relatorio-card > div:first-child {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+    min-width: 0;
+}
+
+.relatorio-label {
+    font-size: 11px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.7px;
+
+    color: var(--text-secondary);
+}
+
+.relatorio-card strong {
+    display: block;
+
+    font-size: 23px;
+
+    line-height: 1.2;
+
+    font-weight: 700;
+
+    color: var(--text-primary);
+}
+
+.relatorio-card small {
+    display: block;
+
+    font-size: 12px;
+
+    color: var(--text-light);
+}
+
+
+/* =====================================================
+   ÍCONES DOS CARDS
+===================================================== */
+
+.relatorio-icon {
+    width: 44px;
+    height: 44px;
+
+    min-width: 44px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+}
+
+.relatorio-icon svg {
+    width: 21px;
+    height: 21px;
+
+    stroke-width: 1.9;
+}
+
+
+/* =====================================================
+   CORES DOS ÍCONES
+===================================================== */
+
+.relatorio-icon.verde {
+    background: #e4f4ec;
+    color: #198754;
+}
+
+.relatorio-icon.amarelo {
+    background: #fff4cf;
+    color: #a47b00;
+}
+
+.relatorio-icon.cinza {
+    background: #edf1ef;
+    color: #61706a;
+}
+
+
+/* =====================================================
+   ÁREA DE RELATÓRIOS DISPONÍVEIS
+===================================================== */
+
+.relatorios-disponiveis {
+    width: 100%;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: 9px;
+
+    box-shadow: var(--shadow);
+
+    overflow: hidden;
+}
+
+
+/* =====================================================
+   CABEÇALHO DOS DOCUMENTOS
+===================================================== */
+
+.relatorios-titulo {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 18px 20px;
+
+    border-bottom: 1px solid var(--border-light);
+}
+
+.relatorios-titulo > div {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+.card-label {
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    color: var(--primary-light);
+}
+
+.relatorios-titulo h3 {
+    margin: 0;
+
+    font-size: 17px;
+
+    font-weight: 700;
+
+    color: var(--text-primary);
+}
+
+
+/* =====================================================
+   LISTA
+===================================================== */
+
+.lista-relatorios {
+    display: flex;
+
+    flex-direction: column;
+
+    width: 100%;
+}
+
+
+/* =====================================================
+   ITEM DO RELATÓRIO
+===================================================== */
+
+.relatorio-item {
+    min-height: 78px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 15px 20px;
+
+    border-bottom: 1px solid var(--border-light);
+
+    transition:
+            background 0.2s ease;
+}
+
+.relatorio-item:last-child {
+    border-bottom: none;
+}
+
+.relatorio-item:hover {
+    background: var(--surface-soft);
+}
+
+
+/* =====================================================
+   INFORMAÇÕES DO RELATÓRIO
+===================================================== */
+
+.relatorio-item-info {
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    min-width: 0;
+}
+
+
+/* =====================================================
+   ÍCONE DO ITEM
+===================================================== */
+
+.relatorio-item-icon {
+    width: 42px;
+    height: 42px;
+
+    min-width: 42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 8px;
+}
+
+.relatorio-item-icon svg {
+    width: 19px;
+    height: 19px;
+
+    stroke-width: 1.9;
+}
+
+
+/* =====================================================
+   CORES DOS ÍCONES DOS RELATÓRIOS
+===================================================== */
+
+.relatorio-item-icon.verde {
+    background: #e4f4ec;
+    color: #198754;
+}
+
+.relatorio-item-icon.amarelo {
+    background: #fff4cf;
+    color: #a47b00;
+}
+
+.relatorio-item-icon.azul {
+    background: #e4f1f4;
+    color: #23879a;
+}
+
+.relatorio-item-icon.cinza {
+    background: #edf1ef;
+    color: #61706a;
+}
+
+
+/* =====================================================
+   TEXTO DOS RELATÓRIOS
+===================================================== */
+
+.relatorio-item-info > div:last-child {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+
+    min-width: 0;
+}
+
+.relatorio-item-info strong {
+    display: block;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    color: var(--text-primary);
+}
+
+.relatorio-item-info span {
+    display: block;
+
+    font-size: 12px;
+
+    color: var(--text-secondary);
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+/* =====================================================
+   BOTÃO DOS RELATÓRIOS
+===================================================== */
+
+.relatorio-item .btn-exportar {
+    min-width: 125px;
+
+    height: 36px;
+
+    flex-shrink: 0;
+}
+
+
+/* =====================================================
+   RESPONSIVIDADE
+===================================================== */
+
+@media (max-width: 1000px) {
+
+    .relatorio-cards {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+@media (max-width: 760px) {
+
+    .pagina-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 14px;
+    }
+
+    .pagina-header .btn-exportar {
+        align-self: flex-start;
+    }
+
+    .relatorio-cards {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .relatorios-content {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .relatorio-item {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 12px;
+    }
+
+    .relatorio-item .btn-exportar {
+        align-self: flex-start;
+    }
+
+    .relatorio-item-info span {
+        white-space: normal;
+    }
+
+}
+
+
+/* =====================================================
+   AJUSTE DOS ÍCONES LUCIDE
+===================================================== */
+
+.relatorio-card svg,
+.relatorio-item svg,
+.btn-exportar svg {
+    display: block;
+}

@@ -26,6 +26,7 @@ public class VendaService {
 
     private final ComissaoService comissaoService;
 
+
     public VendaService(
             VendaRepository vendaRepository,
             ProdutoRepository produtoRepository,
@@ -38,6 +39,11 @@ public class VendaService {
         this.comissaoService = comissaoService;
     }
 
+
+    // =====================================================
+    // REALIZAR VENDA
+    // =====================================================
+
     @Transactional
     public Venda realizarVenda(
             Usuario funcionario,
@@ -49,44 +55,56 @@ public class VendaService {
                     "Funcionário é obrigatório");
         }
 
+
         if (itens == null || itens.isEmpty()) {
 
             throw new IllegalArgumentException(
                     "A venda precisa ter itens");
         }
 
-        Venda venda = new Venda();
 
-        venda.setFuncionario(funcionario);
+        Venda venda =
+                new Venda();
+
+
+        venda.setFuncionario(
+                funcionario);
+
 
         venda.setDataVenda(
                 LocalDateTime.now());
 
+
         venda.setStatus(
                 StatusVenda.EM_ANDAMENTO);
 
+
         BigDecimal valorTotal =
                 BigDecimal.ZERO;
+
 
         for (ItemVenda item : itens) {
 
             if (item.getQuantidade() == null ||
                     item.getQuantidade()
-                        .compareTo(BigDecimal.ZERO) <= 0) {
+                            .compareTo(BigDecimal.ZERO) <= 0) {
 
                 throw new IllegalArgumentException(
                         "Quantidade inválida");
             }
 
+
             Integer idProduto =
                     item.getProduto().getId();
 
+
             Produto produto =
                     produtoRepository
-                        .findById(idProduto)
-                        .orElseThrow(() ->
-                            new RuntimeException(
-                                "Produto não encontrado"));
+                            .findById(idProduto)
+                            .orElseThrow(() ->
+                                    new RuntimeException(
+                                            "Produto não encontrado"));
+
 
             if (!produto.getStatus()) {
 
@@ -94,55 +112,89 @@ public class VendaService {
                         "Produto está inativo");
             }
 
+
             BigDecimal subtotal =
                     produto.getPreco()
                             .multiply(
-                                item.getQuantidade());
+                                    item.getQuantidade());
+
 
             item.setVenda(venda);
+
             item.setProduto(produto);
 
             item.setPrecoUnitario(
                     produto.getPreco());
 
-            item.setSubtotal(subtotal);
+            item.setSubtotal(
+                    subtotal);
+
 
             valorTotal =
-                    valorTotal.add(subtotal);
+                    valorTotal.add(
+                            subtotal);
+
 
             estoqueService.retirar(
                     produto.getId(),
                     item.getQuantidade());
 
-            venda.adicionarItem(item);
+
+            venda.adicionarItem(
+                    item);
         }
 
-        venda.setValorTotal(valorTotal);
+
+        venda.setValorTotal(
+                valorTotal);
+
 
         venda.setStatus(
                 StatusVenda.REALIZADA);
 
-        Venda vendaSalva =
-                vendaRepository.save(venda);
 
+        Venda vendaSalva =
+                vendaRepository.save(
+                        venda);
+
+
+        // Gera a comissão da venda
         comissaoService.gerarComissao(
                 vendaSalva);
+
 
         return vendaSalva;
     }
 
-    public Venda buscarPorId(Integer id) {
 
-        return vendaRepository.findById(id)
+    // =====================================================
+    // BUSCAR VENDA
+    // =====================================================
+
+    public Venda buscarPorId(
+            Integer id) {
+
+        return vendaRepository
+                .findById(id)
                 .orElseThrow(() ->
                         new RuntimeException(
                                 "Venda não encontrada"));
     }
 
+
+    // =====================================================
+    // LISTAR TODAS
+    // =====================================================
+
     public List<Venda> listarTodas() {
 
         return vendaRepository.findAll();
     }
+
+
+    // =====================================================
+    // LISTAR POR FUNCIONÁRIO
+    // =====================================================
 
     public List<Venda> listarPorFuncionario(
             Integer idFuncionario) {
@@ -152,6 +204,11 @@ public class VendaService {
                         idFuncionario);
     }
 
+
+    // =====================================================
+    // LISTAR POR STATUS
+    // =====================================================
+
     public List<Venda> listarPorStatus(
             StatusVenda status) {
 
@@ -159,10 +216,39 @@ public class VendaService {
                 .findByStatus(status);
     }
 
-    @Transactional
-    public void cancelar(Integer id) {
 
-        Venda venda = buscarPorId(id);
+    // =====================================================
+    // TOTAL VENDIDO
+    // =====================================================
+
+    public BigDecimal somarValorVendas(
+            List<Venda> vendas) {
+
+        return vendas
+                .stream()
+                .filter(venda ->
+                        venda.getStatus()
+                                == StatusVenda.REALIZADA)
+                .map(Venda::getValorTotal)
+                .filter(valor -> valor != null)
+                .reduce(
+                        BigDecimal.ZERO,
+                        BigDecimal::add
+                );
+    }
+
+
+    // =====================================================
+    // CANCELAR VENDA
+    // =====================================================
+
+    @Transactional
+    public void cancelar(
+            Integer id) {
+
+        Venda venda =
+                buscarPorId(id);
+
 
         if (venda.getStatus()
                 == StatusVenda.CANCELADA) {
@@ -171,6 +257,7 @@ public class VendaService {
                     "Venda já está cancelada");
         }
 
+
         if (venda.getStatus()
                 != StatusVenda.REALIZADA) {
 
@@ -178,18 +265,34 @@ public class VendaService {
                     "Somente vendas realizadas podem ser canceladas");
         }
 
-        for (ItemVenda item : venda.getItens()) {
+
+        // Devolve os produtos ao estoque
+        for (ItemVenda item :
+                venda.getItens()) {
 
             estoqueService.adicionar(
                     item.getProduto().getId(),
                     item.getQuantidade());
         }
 
+
+        // Remove a comissão da venda
+        comissaoService.excluirPorVenda(
+                venda.getId());
+
+
         venda.setStatus(
                 StatusVenda.CANCELADA);
 
-        vendaRepository.save(venda);
+
+        vendaRepository.save(
+                venda);
     }
+
+
+    // =====================================================
+    // TOTAL VENDIDO NO MÊS
+    // =====================================================
 
     public BigDecimal totalVendidoNoMes(
             int ano,
@@ -203,14 +306,22 @@ public class VendaService {
                         0,
                         0);
 
+
         LocalDateTime fim =
                 inicio.plusMonths(1);
 
-        return vendaRepository.somarVendasEntreDatas(
-                inicio,
-                fim,
-                StatusVenda.REALIZADA);
+
+        return vendaRepository
+                .somarVendasEntreDatas(
+                        inicio,
+                        fim,
+                        StatusVenda.REALIZADA);
     }
+
+
+    // =====================================================
+    // VENDAS DO MÊS
+    // =====================================================
 
     public List<Venda> vendasDoMes(
             int ano,
@@ -224,13 +335,15 @@ public class VendaService {
                         0,
                         0);
 
+
         LocalDateTime fim =
                 inicio.plusMonths(1);
 
-        return vendaRepository.findVendasEntreDatas(
-                inicio,
-                fim,
-                StatusVenda.REALIZADA);
-    }
 
+        return vendaRepository
+                .findVendasEntreDatas(
+                        inicio,
+                        fim,
+                        StatusVenda.REALIZADA);
+    }
 }

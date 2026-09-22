@@ -1,0 +1,354 @@
+/* =========================================================
+   CALENDÁRIO PERSONALIZADO
+========================================================= */
+
+.calendario {
+    position: fixed;
+    width: 300px;
+    background: #ffffff;
+    border: 1px solid #dce4e0;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.14);
+    padding: 14px;
+    z-index: 9999;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-5px);
+
+    transition:
+            opacity 0.15s ease,
+            transform 0.15s ease,
+            visibility 0.15s ease;
+}
+
+.calendario.aberto {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+
+/* =========================================================
+   CABEÇALHO
+========================================================= */
+
+.calendario-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+}
+
+.calendario-mes {
+    color: #063f30;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: capitalize;
+}
+
+.calendario-navegar {
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 6px;
+
+    background: transparent;
+    color: #58756b;
+
+    cursor: pointer;
+
+    transition:
+            background-color 0.15s ease,
+            color 0.15s ease;
+}
+
+.calendario-navegar:hover {
+    background: #e8f1ed;
+    color: #063f30;
+}
+
+.calendario-navegar svg {
+    width: 17px;
+    height: 17px;
+}
+
+
+/* =========================================================
+   DIAS DA SEMANA
+========================================================= */
+
+.calendario-semana {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 3px;
+    margin-bottom: 5px;
+}
+
+.calendario-semana span {
+    height: 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #8a9691;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   DIAS
+========================================================= */
+
+.calendario-dias {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 3px;
+}
+
+.calendario-dia {
+    width: 100%;
+    height: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 6px;
+
+    background: transparent;
+
+    color: #3d4945;
+
+    font-size: 12px;
+
+    cursor: pointer;
+
+    transition:
+            background-color 0.15s ease,
+            color 0.15s ease,
+            transform 0.1s ease;
+}
+
+.calendario-dia:hover {
+    background: #e8f1ed;
+    color: #063f30;
+}
+
+.calendario-dia:active {
+    transform: scale(0.94);
+}
+
+
+/* =========================================================
+   DIAS DO MÊS ANTERIOR / PRÓXIMO
+========================================================= */
+
+.calendario-dia.outro-mes {
+    color: #c2cbc7;
+}
+
+.calendario-dia.outro-mes:hover {
+    color: #71847b;
+    background: #f3f6f4;
+}
+
+
+/* =========================================================
+   HOJE
+========================================================= */
+
+.calendario-dia.hoje {
+    position: relative;
+
+    color: #063f30;
+    font-weight: 700;
+}
+
+.calendario-dia.hoje::after {
+    content: "";
+
+    position: absolute;
+
+    bottom: 4px;
+
+    width: 4px;
+    height: 4px;
+
+    border-radius: 50%;
+
+    background: #d6b84c;
+}
+
+
+/* =========================================================
+   DIA SELECIONADO
+========================================================= */
+
+.calendario-dia.selecionado {
+    background: #063f30;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.calendario-dia.selecionado:hover {
+    background: #0b5a43;
+    color: #ffffff;
+}
+
+.calendario-dia.selecionado.hoje::after {
+    background: #ffffff;
+}
+
+
+/* =========================================================
+   RODAPÉ
+========================================================= */
+
+.calendario-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-top: 12px;
+    padding-top: 11px;
+
+    border-top: 1px solid #e8eeeb;
+}
+
+.calendario-limpar {
+    border: none;
+    background: transparent;
+
+    color: #7a8782;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.calendario-limpar:hover {
+    color: #c74444;
+}
+
+.calendario-hoje {
+    border: none;
+    background: transparent;
+
+    color: #063f30;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.calendario-hoje:hover {
+    color: #0b5a43;
+}
+
+
+/* =========================================================
+   CAMPOS DE DATA
+========================================================= */
+
+.campo-data {
+    position: relative;
+}
+
+.data-input {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    height: 38px;
+    min-width: 155px;
+
+    background: #ffffff;
+
+    border: 1px solid #d9dfdc;
+    border-radius: 7px;
+
+    transition:
+            border-color 0.2s ease,
+            box-shadow 0.2s ease,
+            background-color 0.2s ease;
+}
+
+.data-input:hover {
+    border-color: #9eb5ac;
+    background-color: #fcfdfc;
+}
+
+.data-input:focus-within {
+    border-color: #0b5a43;
+
+    box-shadow:
+            0 0 0 3px rgba(11, 90, 67, 0.10);
+}
+
+.data-input svg {
+    width: 16px;
+    height: 16px;
+
+    margin-left: 11px;
+
+    flex-shrink: 0;
+
+    color: #58756b;
+
+    transition: color 0.2s ease;
+}
+
+.data-input:focus-within svg {
+    color: #0b5a43;
+}
+
+.data-input input[type="text"] {
+    width: 100%;
+    height: 100%;
+
+    padding: 0 9px;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    color: #303a36;
+
+    font-size: 13px;
+    font-family: Arial, sans-serif;
+
+    cursor: pointer;
+}
+
+.data-input input[type="text"]::placeholder {
+    color: #a0aaa6;
+}
+
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .calendario {
+        width: 290px;
+    }
+
+}

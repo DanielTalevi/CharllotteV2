@@ -20,21 +20,6 @@
             </div>
         </header>
 
-        <section class="profile-selection">
-            <p class="section-title">Selecione seu perfil</p>
-
-            <div class="profiles">
-                <button type="button" class="profile-card selected" data-profile="frentista">
-                    <i class="fa-regular fa-user profile-icon"></i>
-                    <span>Frentista</span>
-                </button>
-                <button type="button" class="profile-card" data-profile="admin">
-                    <i class="fa-solid fa-briefcase profile-icon"></i>
-                    <span>RH / Admin</span>
-                </button>
-            </div>
-        </section>
-
         <form th:action="@{/login}" method="post">
             <div class="input-group">
                 <label for="email">Email</label>

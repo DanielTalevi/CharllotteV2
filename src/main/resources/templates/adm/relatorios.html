@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Relatórios - Charllotte</title>
+
+    <!-- CSS GLOBAL -->
+    <link rel="stylesheet"
+          th:href="@{/css/all.css}">
+
+    <!-- CSS ESPECÍFICO DE RELATÓRIOS -->
+    <link rel="stylesheet"
+          th:href="@{/css/adm/relatorios.css}">
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar">
+
+    <div class="logo-area">
+
+        <div class="logo-icon">
+            <i data-lucide="landmark"></i>
+        </div>
+
+        <div class="logo-text">
+            <span>Charllotte</span>
+            <small>GESTÃO</small>
+        </div>
+
+    </div>
+
+
+    <nav class="menu">
+
+        <a th:href="@{/home}">
+
+            <i data-lucide="layout-dashboard"
+               class="icon-dashboard"></i>
+
+            <span>Dashboard</span>
+
+        </a>
+
+
+        <a th:href="@{/funcionario}">
+
+            <i data-lucide="users-round"
+               class="icon-funcionarios"></i>
+
+            <span>Funcionários</span>
+
+        </a>
+
+
+        <a th:href="@{/vendas}">
+
+            <i data-lucide="dollar-sign"
+               class="icon-comissoes"></i>
+
+            <span>Comissões</span>
+
+        </a>
+
+
+        <a th:href="@{/fraudes}">
+
+            <i data-lucide="shield"
+               class="icon-fraudes"></i>
+
+            <span>Fraudes</span>
+
+        </a>
+
+
+        <a th:href="@{/armazen}">
+
+            <i data-lucide="package"
+               class="icon-armazem"></i>
+
+            <span>Armazém</span>
+
+        </a>
+
+
+        <a th:href="@{/relatorios}"
+           class="active">
+
+            <i data-lucide="file-text"
+               class="icon-relatorios"></i>
+
+            <span>Relatórios</span>
+
+        </a>
+
+        <a th:href="@{/config}">
+
+            <i data-lucide="settings"
+               class="icon-config"></i>
+
+            <span>Configurações</span>
+
+        </a>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <a th:href="@{/logout}"
+           class="logout">
+
+            <i data-lucide="log-out"></i>
+
+            <span>Sair</span>
+
+        </a>
+
+    </div>
+
+</aside>
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="main">
+
+
+    <!-- =================================================
+         TOPBAR
+    ================================================== -->
+
+    <header class="topbar">
+
+        <div>
+
+            <h1>Relatórios</h1>
+
+            <p class="usuario-logado">
+                Gestão de Dados
+            </p>
+
+        </div>
+
+
+        <div class="usuario-logado">
+
+            <i data-lucide="user" class="user-icon"></i>
+
+            <span th:text="${usuarioLogado.nome}" class="user-icon">
+                Usuário
+            </span>
+
+        </div>
+
+    </header>
+
+
+    <!-- =================================================
+         CONTEÚDO
+    ================================================== -->
+
+    <section class="content relatorios-content">
+
+        <!-- =================================================
+             CABEÇALHO DA PÁGINA
+        ================================================== -->
+
+        <div class="pagina-header">
+
+            <div>
+
+            <span class="pagina-label">
+                RELATÓRIOS
+            </span>
+
+                <h2>
+                    Relatórios da Charllotte
+                </h2>
+
+            </div>
+
+            <a th:href="@{/relatorios/vendas/pdf}" class="btn-exportar">
+                <i data-lucide="file-down"></i>
+                Exportar PDF
+            </a>
+
+        </div>
+
+
+        <!-- =================================================
+             CARDS DE RESUMO
+        ================================================== -->
+
+        <div class="relatorio-cards">
+
+
+            <!-- FATURAMENTO -->
+
+            <div class="relatorio-card">
+
+                <div>
+
+                <span class="relatorio-label">
+                    Faturamento Mensal
+                </span>
+
+                    <strong>
+                        R$ <span th:text="${#numbers.formatDecimal(faturamentoMensal, 1, 'POINT', 2, 'COMMA')}">0,00</span>
+                    </strong>
+
+                    <small th:text="${periodoRelatorio}">
+                        Setembro 2026
+                    </small>
+
+                </div>
+
+                <div class="relatorio-icon verde">
+
+                    <i data-lucide="trending-up"></i>
+
+                </div>
+
+            </div>
+
+
+            <!-- VENDAS -->
+
+            <div class="relatorio-card">
+
+                <div>
+
+                <span class="relatorio-label">
+                    Total de Vendas
+                </span>
+
+                    <strong th:text="${totalVendas}">
+                        0
+                    </strong>
+
+                    <small>
+                        transações no mês
+                    </small>
+
+                </div>
+
+                <div class="relatorio-icon amarelo">
+
+                    <i data-lucide="shopping-cart"></i>
+
+                </div>
+
+            </div>
+
+
+            <!-- TICKET MÉDIO -->
+
+            <div class="relatorio-card">
+
+                <div>
+
+                <span class="relatorio-label">
+                    Ticket Médio
+                </span>
+
+                    <strong>
+                        R$ <span th:text="${#numbers.formatDecimal(ticketMedio, 1, 'POINT', 2, 'COMMA')}">0,00</span>
+                    </strong>
+
+                    <small>
+                        valor médio por venda
+                    </small>
+
+                </div>
+
+                <div class="relatorio-icon cinza">
+
+                    <i data-lucide="receipt"></i>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             LISTA DE RELATÓRIOS
+        ================================================== -->
+
+        <div class="relatorios-disponiveis">
+
+
+            <!-- CABEÇALHO -->
+
+            <div class="relatorios-titulo">
+
+                <div>
+
+                <span class="card-label">
+                    DOCUMENTOS
+                </span>
+
+                    <h3>
+                        Relatórios Disponíveis
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <!-- LISTA -->
+
+            <div class="lista-relatorios">
+
+
+                <!-- =========================================
+                     RELATÓRIO DE VENDAS
+                ========================================== -->
+
+                <div class="relatorio-item">
+                    <div class="relatorio-item-info">
+                        <div class="relatorio-item-icon verde">
+                            <i data-lucide="shopping-cart"></i>
+                        </div>
+
+                        <div>
+                            <strong>Relatório de Vendas</strong>
+                            <span>Vendas realizadas em Setembro de 2026</span>
+                        </div>
+                    </div>
+
+                    <a th:href="@{/relatorios/vendas/pdf}"
+                       class="btn-exportar">
+                        <i data-lucide="download"></i>
+                        <span>Exportar PDF</span>
+                    </a>
+                </div>
+
+
+                <!-- =========================================
+                     RELATÓRIO DE COMISSÕES
+                ========================================== -->
+
+                <div class="relatorio-item">
+                    <div class="relatorio-item-info">
+                        <div class="relatorio-item-icon amarelo">
+                            <i data-lucide="badge-dollar-sign"></i>
+                        </div>
+
+                        <div>
+                            <strong>Relatório de Comissões</strong>
+                            <span>Comissões geradas pelas vendas do período</span>
+                        </div>
+                    </div>
+
+                    <a th:href="@{/relatorios/comissoes/pdf}"
+                       class="btn-exportar">
+                        <i data-lucide="download"></i>
+                        <span>Exportar PDF</span>
+                    </a>
+                </div>
+
+
+                <!-- =========================================
+                     RELATÓRIO DE ESTOQUE
+                ========================================== -->
+
+                <div class="relatorio-item">
+                    <div class="relatorio-item-info">
+                        <div class="relatorio-item-icon azul">
+                            <i data-lucide="package"></i>
+                        </div>
+
+                        <div>
+                            <strong>Relatório de Estoque</strong>
+                            <span>Situação atual dos produtos armazenados</span>
+                        </div>
+                    </div>
+
+                    <a th:href="@{/relatorios/estoque/pdf}"
+                       class="btn-exportar">
+                        <i data-lucide="download"></i>
+                        <span>Exportar PDF</span>
+                    </a>
+                </div>
+
+
+                <!-- =========================================
+                     RELATÓRIO DE FUNCIONÁRIOS
+                ========================================== -->
+
+                <div class="relatorio-item">
+                    <div class="relatorio-item-info">
+                        <div class="relatorio-item-icon cinza">
+                            <i data-lucide="users"></i>
+                        </div>
+
+                        <div>
+                            <strong>Relatório de Funcionários</strong>
+                            <span>Dados e situação dos funcionários cadastrados</span>
+                        </div>
+                    </div>
+
+                    <a th:href="@{/relatorios/funcionarios/pdf}"
+                       class="btn-exportar">
+                        <i data-lucide="download"></i>
+                        <span>Exportar PDF</span>
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- =====================================================
+     LUCIDE
+===================================================== -->
+
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<script th:src="@{/js/all.js}"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <title>Página não encontrada</title>
+
+  <link rel="stylesheet"
+        th:href="@{/css/erro/all.error.css}">
+
+</head>
+
+<body>
+
+<div class="pagina-erro">
+
+  <div class="erro-container">
+
+    <div class="erro-codigo">
+      403
+    </div>
+
+    <div class="erro-icone">
+      <i data-lucide="lock-keyhole"></i>
+    </div>
+
+    <h1>
+      Página não encontrada
+    </h1>
+
+    <p>
+      A página que você está procurando
+      não existe ou não está mais disponível.
+    </p>
+
+    <a href="javascript:history.back()" class="btn-voltar">
+      <i data-lucide="arrow-left"></i>
+      Voltar
+    </a>
+
+  </div>
+
+</div>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<script>
+  lucide.createIcons();
+</script>
+
+</body>
+
+</html>

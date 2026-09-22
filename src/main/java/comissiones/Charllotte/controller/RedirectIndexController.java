@@ -9,4 +9,10 @@ public class RedirectIndexController {
     public String toLogin(){
         return "redirect:/login";
     }
+
+    @GetMapping("/teste-500")
+    public String testarErro500() {
+        throw new RuntimeException("Erro proposital para teste");
+    }
 }
+

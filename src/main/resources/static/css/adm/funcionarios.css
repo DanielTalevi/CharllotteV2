@@ -1,0 +1,409 @@
+/* =====================================================
+   PÁGINA
+===================================================== */
+
+.pagina-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 22px;
+}
+
+.pagina-header h2 {
+    margin-top: 4px;
+    font-size: 24px;
+    font-weight: 700;
+    color: #091c15;
+}
+.content h2 {
+
+    margin-bottom: 15px;
+
+    font-size: 18px;
+
+    color: var(--text-primary);
+
+}
+
+.acoes{
+
+}
+
+.pagina-label {
+    font-size: 12px;
+    color: #6d8178;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+
+/* =====================================================
+   BOTÃO ADICIONAR
+===================================================== */
+
+.btn-adicionar {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    border: none;
+    border-radius: 8px;
+
+    padding: 10px 16px;
+
+    background: #063f30;
+    color: white;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.btn-adicionar:hover {
+    opacity: 0.9;
+}
+
+.btn-adicionar svg {
+    width: 17px;
+    height: 17px;
+}
+
+
+/* =====================================================
+   CARDS
+===================================================== */
+
+.cards-funcionarios {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.card-funcionario {
+    background: #ffffff;
+
+    border: 1px solid #e3e8e5;
+    border-radius: 12px;
+
+    padding: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    min-height: 110px;
+}
+
+.card-funcionario-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-funcionario-info .card-label {
+    font-size: 12px;
+    color: #718078;
+    margin-bottom: 5px;
+}
+
+.card-funcionario-info strong {
+    font-size: 27px;
+    color: #091c15;
+    line-height: 1.1;
+}
+
+.card-funcionario-info small {
+    margin-top: 4px;
+    color: #7b8983;
+    font-size: 12px;
+}
+
+.card-funcionario-icone {
+    width: 40px;
+    height: 40px;
+
+    border-radius: 9px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #e7efeb;
+}
+
+.card-funcionario-icone svg {
+    width: 20px;
+    height: 20px;
+
+    color: #063f30;
+}
+
+
+/* =====================================================
+   CARD DA LISTA
+===================================================== */
+
+.card-lista {
+    background: #ffffff;
+
+    border: 1px solid #e3e8e5;
+    border-radius: 12px;
+
+    overflow: hidden;
+}
+
+.lista-header {
+    padding: 18px 20px;
+
+    border-bottom: 1px solid #e8ecea;
+}
+
+.lista-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.lista-header > div {
+    display: flex;
+    flex-direction: column;
+}
+
+.lista-header strong {
+    margin-top: 4px;
+    color: #091c15;
+    font-size: 17px;
+}
+
+
+/* =====================================================
+   FUNCIONÁRIO
+===================================================== */
+
+.funcionario-nome {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.avatar {
+    width: 32px;
+    height: 32px;
+
+    border-radius: 50%;
+
+    background: #e7efeb;
+
+    color: #063f30;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    flex-shrink: 0;
+}
+
+.funcionario-nome > span:last-child {
+    font-weight: 600;
+    color: #24352e;
+}
+
+.cargo {
+    color: #53645c;
+    font-size: 13px;
+}
+
+
+/* =====================================================
+   VALORES
+===================================================== */
+
+.valor {
+    font-weight: 600;
+    color: #24352e;
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    padding: 5px 9px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status-ponto {
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+}
+
+.status.ativo {
+    background: #e7f3ec;
+    color: #28734b;
+}
+
+.status.ativo .status-ponto {
+    background: #28734b;
+}
+
+.status.inativo {
+    background: #f0f1f1;
+    color: #737b78;
+}
+
+.status.inativo .status-ponto {
+    background: #737b78;
+}
+
+
+/* =====================================================
+   AÇÕES
+===================================================== */
+
+.btn-acao {
+    border: none;
+    background: transparent;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.btn-acao {
+    border: none;
+    border-radius: 8px;
+    padding: 7px 14px;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    color: #ffffff;
+    cursor: pointer;
+
+    transition:
+            background-color 0.2s ease,
+            transform 0.15s ease,
+            box-shadow 0.2s ease;
+}
+
+.btn-inativar,
+.btn-ativar {
+    width: 80px;
+    height: 32px;
+
+    border: none;
+    border-radius: 7px;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    color: #ffffff;
+    cursor: pointer;
+
+    transition:
+            background-color 0.2s ease,
+            transform 0.15s ease,
+            box-shadow 0.2s ease;
+}
+
+
+/* =========================
+   INATIVAR
+========================= */
+
+.btn-inativar {
+    background-color: #9a5d39;
+}
+
+.btn-inativar:hover {
+    background-color: #b56d45;
+    box-shadow: 0 3px 8px rgba(154, 93, 57, 0.30);
+    transform: translateY(-1px);
+}
+
+
+/* =========================
+   ATIVAR
+========================= */
+
+.btn-ativar {
+    background-color: #28734b;
+}
+
+.btn-ativar:hover {
+    background-color: #348d5d;
+    box-shadow: 0 3px 8px rgba(40, 115, 75, 0.30);
+    transform: translateY(-1px);
+}
+
+
+/* =========================
+   CLIQUE
+========================= */
+
+.btn-inativar:active,
+.btn-ativar:active {
+    transform: translateY(0);
+    box-shadow: none;
+    box-shadow: none;
+}
+
+
+/* =====================================================
+   TABELA VAZIA
+===================================================== */
+
+
+.tabela-vazia {
+    height: 180px;
+
+    text-align: center;
+
+    color: #8a9691;
+}
+
+.tabela-vazia svg {
+    width: 28px;
+    height: 28px;
+
+    margin-bottom: 8px;
+}
+
+
+/* =====================================================
+   RESPONSIVO
+===================================================== */
+
+@media (max-width: 900px) {
+
+    .cards-funcionarios {
+        grid-template-columns: 1fr;
+    }
+
+    .table-container {
+        overflow-x: auto;
+    }
+
+    table {
+        min-width: 850px;
+    }
+
+}

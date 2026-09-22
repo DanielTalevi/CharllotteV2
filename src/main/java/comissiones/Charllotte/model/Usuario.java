@@ -50,7 +50,7 @@ public class Usuario {
     }
 
     public void setAdmin(Boolean admin) {
-        admin = admin;
+        this.admin = admin;
     }
 
     public Usuario() {
