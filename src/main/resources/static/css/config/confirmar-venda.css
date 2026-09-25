@@ -1,0 +1,387 @@
+/* =====================================================
+   MODAL DE CONFIRMAÇÃO DE VENDA
+===================================================== */
+
+.modal-overlay {
+
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.55);
+
+    align-items: center;
+
+    justify-content: center;
+
+    z-index: 9999;
+
+}
+
+
+.modal-overlay.ativo {
+
+    display: flex;
+
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+.modal-confirmacao {
+
+    width: 100%;
+
+    max-width: 500px;
+
+    background: #ffffff;
+
+    border-radius: 14px;
+
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+
+    overflow: hidden;
+
+    animation: abrirModal 0.2s ease;
+
+}
+
+
+@keyframes abrirModal {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(-15px) scale(0.98);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0) scale(1);
+
+    }
+
+}
+
+
+/* =====================================================
+   CABEÇALHO
+===================================================== */
+
+.modal-confirmacao .modal-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 22px 24px;
+
+    border-bottom: 1px solid #e5e7eb;
+
+}
+
+
+.modal-label {
+
+    display: block;
+
+    margin-bottom: 4px;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    color: #6b7280;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.5px;
+
+}
+
+
+.modal-confirmacao h2 {
+
+    margin: 0;
+
+    font-size: 22px;
+
+    color: #063f30;
+
+}
+
+
+.modal-fechar {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 36px;
+
+    height: 36px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: transparent;
+
+    color: #6b7280;
+
+    cursor: pointer;
+
+}
+
+
+.modal-fechar:hover {
+
+    background: #f1f3f1;
+
+    color: #063f30;
+
+}
+
+
+/* =====================================================
+   CONTEÚDO
+===================================================== */
+
+.confirmacao-conteudo {
+
+    padding: 24px;
+
+}
+
+
+.confirmacao-aviso {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 16px;
+
+    margin-bottom: 20px;
+
+    border-radius: 10px;
+
+    background: #f1f6f3;
+
+    color: #063f30;
+
+}
+
+
+.confirmacao-aviso > i {
+
+    width: 22px;
+
+    height: 22px;
+
+    flex-shrink: 0;
+
+}
+
+
+.confirmacao-aviso div {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 3px;
+
+}
+
+
+.confirmacao-aviso strong {
+
+    font-size: 14px;
+
+}
+
+
+.confirmacao-aviso span {
+
+    font-size: 13px;
+
+    color: #647067;
+
+}
+
+
+/* =====================================================
+   DADOS DA VENDA
+===================================================== */
+
+.confirmacao-item {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 13px 0;
+
+    border-bottom: 1px solid #edf0ed;
+
+}
+
+
+.confirmacao-item:last-child {
+
+    border-bottom: none;
+
+}
+
+
+.confirmacao-item span {
+
+    font-size: 14px;
+
+    color: #6b7280;
+
+}
+
+
+.confirmacao-item strong {
+
+    font-size: 15px;
+
+    color: #26332d;
+
+    text-align: right;
+
+}
+
+
+.confirmacao-item.destaque {
+
+    margin-top: 5px;
+
+    padding: 17px 14px;
+
+    border-radius: 8px;
+
+    background: #f5f7f5;
+
+}
+
+
+.confirmacao-item.destaque strong {
+
+    font-size: 20px;
+
+    color: #063f30;
+
+}
+
+
+/* =====================================================
+   RODAPÉ
+===================================================== */
+
+.modal-confirmacao .modal-footer {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 12px;
+
+    padding: 18px 24px;
+
+    border-top: 1px solid #e5e7eb;
+
+    background: #fafbfa;
+
+}
+
+
+.modal-confirmacao .btn-cancelar,
+.modal-confirmacao .btn-cadastrar {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    min-height: 42px;
+
+    padding: 0 18px;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+}
+
+
+.modal-confirmacao .btn-cancelar {
+
+    border: 1px solid #d8ded9;
+
+    background: #ffffff;
+
+    color: #4b5563;
+
+}
+
+
+.modal-confirmacao .btn-cancelar:hover {
+
+    background: #f3f5f3;
+
+}
+
+
+.modal-confirmacao .btn-cadastrar {
+
+    border: none;
+
+    background: #063f30;
+
+    color: #ffffff;
+
+}
+
+
+.modal-confirmacao .btn-cadastrar:hover {
+
+    background: #042f24;
+
+}
+
+
+.modal-confirmacao .btn-cadastrar i {
+
+    width: 17px;
+
+    height: 17px;
+
+}

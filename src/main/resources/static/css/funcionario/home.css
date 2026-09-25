@@ -1,0 +1,486 @@
+/* =====================================================
+   CHARLLOTTE - DASHBOARD FUNCIONÁRIO
+===================================================== */
+
+
+/* =====================================================
+   CONTEÚDO
+===================================================== */
+.botaoarrumado {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.botaoarrumado i {
+    width: 18px;
+    height: 18px;
+}
+.funcionario-home-content {
+
+    padding: 28px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 22px;
+
+}
+
+
+/* =====================================================
+   CABEÇALHO
+===================================================== */
+
+.funcionario-home-header {
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+}
+
+
+.funcionario-home-header h2 {
+
+    margin: 5px 0;
+
+    font-size: 30px;
+
+    font-weight: 400;
+
+    color: var(--text-primary);
+
+}
+
+
+.funcionario-home-header p {
+
+    color: var(--text-secondary);
+
+    font-size: 14px;
+
+}
+
+
+.funcionario-home-header .pagina-label {
+
+    color: var(--accent-color);
+
+}
+
+
+/* =====================================================
+   CARDS
+===================================================== */
+
+.funcionario-dashboard-cards {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 16px;
+
+}
+
+
+.funcionario-dashboard-card {
+
+    min-height: 120px;
+
+    padding: 18px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: 10px;
+
+    box-shadow: var(--shadow);
+
+}
+
+
+.funcionario-card-top {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+}
+
+
+.funcionario-card-title {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: var(--text-secondary);
+
+    font-size: 12px;
+
+}
+
+
+.funcionario-card-value {
+
+    display: block;
+
+    color: var(--text-primary);
+
+    font-size: 25px;
+
+    font-weight: 400;
+
+    line-height: 1.1;
+
+}
+
+
+.funcionario-dashboard-card > small {
+
+    display: block;
+
+    margin-top: 8px;
+
+    color: var(--text-light);
+
+    font-size: 11px;
+
+}
+
+
+.funcionario-card-icon {
+
+    width: 36px;
+
+    height: 36px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 8px;
+
+}
+
+
+.funcionario-card-icon svg {
+
+    width: 18px;
+
+    height: 18px;
+
+}
+
+
+.funcionario-card-icon.compras {
+
+    background: rgba(217, 119, 6, 0.10);
+
+    color: #d97706;
+
+}
+
+
+.funcionario-card-icon.dinheiro {
+
+    background: rgba(214, 184, 76, 0.12);
+
+    color: #a98d24;
+
+}
+
+
+.funcionario-card-icon.comissao {
+
+    background: rgba(6, 63, 48, 0.08);
+
+    color: var(--primary-light);
+
+}
+
+
+/* =====================================================
+   PAINEL DE VENDAS
+===================================================== */
+
+.funcionario-vendas-panel {
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: 10px;
+
+    overflow: hidden;
+
+    box-shadow: var(--shadow);
+
+}
+
+
+.funcionario-panel-header {
+
+    min-height: 65px;
+
+    padding: 16px 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    border-bottom: 1px solid var(--border);
+
+}
+
+
+.funcionario-panel-header h3 {
+
+    margin: 0 0 4px;
+
+    color: var(--text-primary);
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+}
+
+
+.funcionario-panel-header p {
+
+    margin: 0;
+
+    color: var(--text-secondary);
+
+    font-size: 11px;
+
+}
+
+
+.funcionario-panel-header a {
+
+    color: var(--primary-color);
+
+    font-size: 12px;
+
+    text-decoration: none;
+
+}
+
+
+.funcionario-panel-header a:hover {
+
+    text-decoration: underline;
+
+}
+
+
+/* =====================================================
+   TABELA
+===================================================== */
+
+.funcionario-table-container {
+
+    width: 100%;
+
+    overflow-x: auto;
+
+}
+
+
+.funcionario-table-container table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+}
+
+
+.funcionario-table-container th {
+
+    height: 36px;
+
+    padding: 0 14px;
+
+    text-align: left;
+
+    background: var(--surface-soft);
+
+    border-bottom: 1px solid var(--border);
+
+    color: var(--text-secondary);
+
+    font-size: 10px;
+
+    font-weight: 500;
+
+}
+
+
+.funcionario-table-container td {
+
+    height: 40px;
+
+    padding: 0 14px;
+
+    border-bottom: 1px solid var(--border-light);
+
+    color: var(--text-primary);
+
+    font-size: 11px;
+
+}
+
+
+.funcionario-table-container tbody tr:hover {
+
+    background: rgba(6, 63, 48, 0.025);
+
+}
+
+
+.funcionario-table-container tbody tr:last-child td {
+
+    border-bottom: none;
+
+}
+
+
+/* =====================================================
+   SEM RESULTADOS
+===================================================== */
+
+.funcionario-sem-resultados {
+
+    height: 150px;
+
+    text-align: center;
+
+    vertical-align: middle;
+
+}
+
+
+.funcionario-sem-resultados svg {
+
+    display: block;
+
+    width: 26px;
+
+    height: 26px;
+
+    margin: 0 auto 8px;
+
+    color: var(--text-light);
+
+}
+
+
+.funcionario-sem-resultados strong {
+
+    display: block;
+
+    margin-bottom: 4px;
+
+}
+
+
+.funcionario-sem-resultados span {
+
+    color: var(--text-secondary);
+
+    font-size: 11px;
+
+}
+
+
+/* =====================================================
+   TEMA ESCURO
+===================================================== */
+
+body.tema-escuro .funcionario-dashboard-card,
+body.tema-escuro .funcionario-vendas-panel {
+
+    background: var(--surface);
+
+    border-color: var(--border);
+
+}
+
+
+body.tema-escuro .funcionario-table-container th {
+
+    background: var(--surface-soft);
+
+}
+
+
+/* =====================================================
+   RESPONSIVO
+===================================================== */
+
+@media (max-width: 950px) {
+
+    .funcionario-dashboard-cards {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .funcionario-home-content {
+
+        padding: 18px;
+
+    }
+
+
+    .funcionario-home-header {
+
+        align-items: stretch;
+
+        flex-direction: column;
+
+    }
+    a.btn-principal {
+        text-decoration: none;
+    }
+
+    .funcionario-dashboard-cards {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}

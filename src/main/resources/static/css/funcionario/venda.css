@@ -1,0 +1,383 @@
+/* =====================================================
+   CHARLLOTTE - REGISTRAR VENDA
+===================================================== */
+
+
+/* =====================================================
+   CONTEÚDO
+===================================================== */
+
+.funcionario-venda-content {
+
+    padding: 28px;
+
+}
+
+
+.funcionario-venda-content > h2 {
+
+    margin: 0 0 20px;
+
+    color: var(--text-primary);
+
+    font-size: 22px;
+
+    font-weight: 400;
+
+}
+
+
+/* =====================================================
+   CARD
+===================================================== */
+
+.venda-card {
+
+    width: min(570px, 100%);
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: 10px;
+
+    overflow: hidden;
+
+    box-shadow: var(--shadow);
+
+}
+
+
+.venda-card-header {
+
+    height: 46px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 0 18px;
+
+    border-bottom: 1px solid var(--border);
+
+    color: var(--text-primary);
+
+    font-size: 12px;
+
+}
+
+
+.venda-form-content {
+
+    padding: 20px;
+
+}
+
+
+/* =====================================================
+   LABEL
+===================================================== */
+
+.venda-label {
+
+    display: block;
+
+    margin-bottom: 10px;
+
+    color: var(--text-secondary);
+
+    font-size: 11px;
+
+}
+
+
+/* =====================================================
+   PRODUTOS
+===================================================== */
+
+.produtos-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 8px;
+
+    margin-bottom: 18px;
+
+}
+
+
+.produto-venda {
+
+    min-height: 75px;
+
+    padding: 10px 6px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 4px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 7px;
+
+    background: var(--surface);
+
+    color: var(--text-primary);
+
+    cursor: pointer;
+
+    transition:
+            border-color 0.15s ease,
+            background 0.15s ease,
+            box-shadow 0.15s ease;
+
+}
+
+
+.produto-venda strong {
+
+    font-size: 12px;
+
+    font-weight: 500;
+
+    text-align: center;
+
+}
+
+
+.produto-venda span {
+
+    color: var(--text-secondary);
+
+    font-size: 10px;
+
+}
+
+
+.produto-venda:hover {
+
+    border-color: var(--primary-light);
+
+}
+
+
+.produto-venda.selecionado {
+
+    border-color: var(--primary-color);
+
+    background: rgba(6, 63, 48, 0.05);
+
+    box-shadow:
+            0 0 0 2px rgba(6, 63, 48, 0.07);
+
+}
+
+
+/* =====================================================
+   CAMPO
+===================================================== */
+
+.venda-campo {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+
+}
+
+
+.venda-campo label {
+
+    color: var(--text-secondary);
+
+    font-size: 11px;
+
+}
+
+
+.venda-campo input {
+
+    width: 100%;
+
+    height: 40px;
+
+    padding: 0 12px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 7px;
+
+    background: var(--surface);
+
+    color: var(--text-primary);
+
+    outline: none;
+
+    font-size: 12px;
+
+}
+
+
+.venda-campo input:focus {
+
+    border-color: var(--primary-light);
+
+    box-shadow:
+            0 0 0 2px rgba(11, 90, 67, 0.10);
+
+}
+
+
+/* =====================================================
+   RESUMO
+===================================================== */
+
+.venda-resumo {
+
+    margin-top: 14px;
+
+    padding: 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    background: var(--background);
+
+    border-radius: 7px;
+
+}
+
+
+.venda-resumo > div {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+}
+
+
+.venda-resumo span {
+
+    color: var(--text-secondary);
+
+    font-size: 10px;
+
+}
+
+
+.venda-resumo strong {
+
+    color: var(--text-primary);
+
+    font-size: 17px;
+
+    font-weight: 400;
+
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.venda-footer {
+
+    margin-top: 18px;
+
+    display: flex;
+
+    justify-content: flex-end;
+
+}
+
+
+#btnConfirmarVenda:disabled {
+
+    opacity: 0.55;
+
+    cursor: not-allowed;
+
+    box-shadow: none;
+
+}
+
+
+/* =====================================================
+   TEMA ESCURO
+===================================================== */
+
+body.tema-escuro .venda-card,
+body.tema-escuro .produto-venda {
+
+    background: var(--surface);
+
+    border-color: var(--border);
+
+}
+
+
+body.tema-escuro .produto-venda.selecionado {
+
+    background: rgba(255, 255, 255, 0.04);
+
+}
+
+
+body.tema-escuro .venda-campo input {
+
+    background: var(--surface);
+
+    border-color: var(--border);
+
+}
+
+
+/* =====================================================
+   RESPONSIVO
+===================================================== */
+
+@media (max-width: 700px) {
+
+    .funcionario-venda-content {
+
+        padding: 18px;
+
+    }
+
+
+    .produtos-grid {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+    }
+
+
+    .venda-resumo {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+    }
+
+}

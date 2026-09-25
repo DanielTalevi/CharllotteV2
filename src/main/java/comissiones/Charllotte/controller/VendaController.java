@@ -1,4 +1,4 @@
-package comissiones.Charllotte.controller.adm;
+package comissiones.Charllotte.controller;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -41,36 +41,41 @@ public class VendaController {
         this.comissaoService = comissaoService;
     }
 
-
-    // =========================================================
-    // TODAS AS VENDAS
-    // =========================================================
-
+    /*
+     * =========================================================
+     * /vendas
+     * =========================================================
+     *
+     * ADMIN:
+     * -> acessa a tela de vendas administrativa
+     *
+     * FUNCIONÁRIO:
+     * -> não possui tela própria de vendas
+     * -> volta para o dashboard
+     */
     @GetMapping
     public String vendas(
             HttpSession session,
             Model model) {
 
-        String email =
-                AuthUtil.getUsuarioLogado(session);
-
-        if (email == null || email.isBlank()) {
-            return "redirect:/login";
-        }
-
-        Usuario usuario =
-                usuarioService.buscarPorEmail(email);
+        Usuario usuario = obterUsuarioLogado(session);
 
         if (usuario == null) {
             return "redirect:/login";
         }
 
-        if (usuario.getAdmin()) {
+        /*
+         * =====================================================
+         * ADMIN
+         * =====================================================
+         */
+
+        if (Boolean.TRUE.equals(usuario.getAdmin())) {
 
             List<Venda> vendas =
                     vendaService.listarTodas();
 
-            prepararTela(
+            prepararTelaAdmin(
                     vendas,
                     null,
                     null,
@@ -82,14 +87,25 @@ public class VendaController {
             return "adm/vendas";
         }
 
-        return "funcionario/vendas";
+        /*
+         * =====================================================
+         * FUNCIONÁRIO
+         * =====================================================
+         *
+         * Funcionário não possui tela /vendas.
+         * Seu acesso principal é pelo /home.
+         */
+
+        return "redirect:/home";
     }
 
-
-    // =========================================================
-    // VENDAS POR FUNCIONÁRIO
-    // =========================================================
-
+    /*
+     * =========================================================
+     * VENDAS POR FUNCIONÁRIO
+     * =========================================================
+     *
+     * SOMENTE ADMIN
+     */
     @GetMapping("/funcionario")
     public String vendasPorFuncionario(
             @RequestParam(
@@ -108,53 +124,51 @@ public class VendaController {
             LocalDate dataFim,
 
             HttpSession session,
-
             Model model) {
 
-        String email =
-                AuthUtil.getUsuarioLogado(session);
-
-        if (email == null || email.isBlank()) {
-            return "redirect:/login";
-        }
-
-        Usuario usuario =
-                usuarioService.buscarPorEmail(email);
+        Usuario usuario = obterUsuarioLogado(session);
 
         if (usuario == null) {
             return "redirect:/login";
         }
 
-        if (!usuario.getAdmin()) {
+        /*
+         * =====================================================
+         * FUNCIONÁRIO NÃO PODE ACESSAR
+         * =====================================================
+         */
+
+        if (!Boolean.TRUE.equals(usuario.getAdmin())) {
+
             throw new ErroDePermissao(
                     "Você não possui permissão para acessar esta página."
             );
         }
 
-
-        // =========================================================
-        // BUSCA AS VENDAS
-        // =========================================================
+        /*
+         * =====================================================
+         * BUSCA AS VENDAS
+         * =====================================================
+         */
 
         List<Venda> vendas;
 
         if (idFuncionario == null) {
 
-            vendas =
-                    vendaService.listarTodas();
+            vendas = vendaService.listarTodas();
 
         } else {
 
-            vendas =
-                    vendaService.listarPorFuncionario(
-                            idFuncionario
-                    );
+            vendas = vendaService.listarPorFuncionario(
+                    idFuncionario
+            );
         }
 
-
-        // =========================================================
-        // FILTRO POR DATA
-        // =========================================================
+        /*
+         * =====================================================
+         * FILTRO POR DATA
+         * =====================================================
+         */
 
         if (dataInicio != null || dataFim != null) {
 
@@ -168,32 +182,36 @@ public class VendaController {
                         LocalDate dataVenda =
                                 venda.getDataVenda().toLocalDate();
 
-
-                        if (dataInicio != null &&
-                                dataVenda.isBefore(dataInicio)) {
-
-                            return false;
-                        }
-
-
-                        if (dataFim != null &&
-                                dataVenda.isAfter(dataFim)) {
+                        /*
+                         * DATA INICIAL
+                         */
+                        if (dataInicio != null
+                                && dataVenda.isBefore(dataInicio)) {
 
                             return false;
                         }
 
+                        /*
+                         * DATA FINAL
+                         */
+                        if (dataFim != null
+                                && dataVenda.isAfter(dataFim)) {
+
+                            return false;
+                        }
 
                         return true;
                     })
                     .toList();
         }
 
+        /*
+         * =====================================================
+         * PREPARA TELA
+         * =====================================================
+         */
 
-        // =========================================================
-        // PREPARA A TELA
-        // =========================================================
-
-        prepararTela(
+        prepararTelaAdmin(
                 vendas,
                 idFuncionario,
                 dataInicio,
@@ -205,12 +223,12 @@ public class VendaController {
         return "adm/vendas";
     }
 
-
-    // =========================================================
-    // PREPARA OS DADOS DA TELA
-    // =========================================================
-
-    private void prepararTela(
+    /*
+     * =========================================================
+     * PREPARA TELA ADMIN
+     * =========================================================
+     */
+    private void prepararTelaAdmin(
             List<Venda> vendas,
             Integer idFuncionario,
             LocalDate dataInicio,
@@ -218,24 +236,31 @@ public class VendaController {
             Usuario usuario,
             Model model) {
 
-        // Usuário logado
+        /*
+         * =====================================================
+         * USUÁRIO LOGADO
+         * =====================================================
+         */
+
         model.addAttribute(
                 "usuarioLogado",
                 usuario
         );
 
-
-        // -----------------------------------------------------
-        // TOTAL VENDIDO
-        // -----------------------------------------------------
+        /*
+         * =====================================================
+         * TOTAL VENDIDO
+         * =====================================================
+         */
 
         BigDecimal totalVendido =
                 vendaService.somarValorVendas(vendas);
 
-
-        // -----------------------------------------------------
-        // TOTAL DE COMISSÃO
-        // -----------------------------------------------------
+        /*
+         * =====================================================
+         * TOTAL DE COMISSÃO
+         * =====================================================
+         */
 
         BigDecimal totalComissao;
 
@@ -247,16 +272,16 @@ public class VendaController {
         } else {
 
             totalComissao =
-                    comissaoService
-                            .somarComissaoPorFuncionario(
-                                    idFuncionario
-                            );
+                    comissaoService.somarComissaoPorFuncionario(
+                            idFuncionario
+                    );
         }
 
-
-        // -----------------------------------------------------
-        // COMISSÃO DE CADA VENDA
-        // -----------------------------------------------------
+        /*
+         * =====================================================
+         * COMISSÃO POR VENDA
+         * =====================================================
+         */
 
         Map<Integer, BigDecimal> comissoesPorVenda =
                 new HashMap<>();
@@ -285,10 +310,11 @@ public class VendaController {
             }
         }
 
-
-        // -----------------------------------------------------
-        // DADOS PARA O THYMELEAF
-        // -----------------------------------------------------
+        /*
+         * =====================================================
+         * DADOS PARA O THYMELEAF
+         * =====================================================
+         */
 
         model.addAttribute(
                 "vendas",
@@ -297,8 +323,7 @@ public class VendaController {
 
         model.addAttribute(
                 "usuarios",
-                usuarioService
-                        .listarFuncionariosDaVenda()
+                usuarioService.listarFuncionariosDaVenda()
         );
 
         model.addAttribute(
@@ -320,6 +345,7 @@ public class VendaController {
                 "comissoesPorVenda",
                 comissoesPorVenda
         );
+
         model.addAttribute(
                 "dataInicio",
                 dataInicio
@@ -329,5 +355,23 @@ public class VendaController {
                 "dataFim",
                 dataFim
         );
+    }
+
+    /*
+     * =========================================================
+     * USUÁRIO LOGADO
+     * =========================================================
+     */
+    private Usuario obterUsuarioLogado(
+            HttpSession session) {
+
+        String email =
+                AuthUtil.getUsuarioLogado(session);
+
+        if (email == null || email.isBlank()) {
+            return null;
+        }
+
+        return usuarioService.buscarPorEmail(email);
     }
 }

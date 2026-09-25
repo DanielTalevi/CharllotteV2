@@ -14,11 +14,23 @@ import comissiones.Charllotte.model.Venda;
 public interface VendaRepository
         extends JpaRepository<Venda, Integer> {
 
+    // =====================================================
+    // VENDAS DO FUNCIONÁRIO
+    // =====================================================
+
     List<Venda> findByFuncionarioId(
             Integer idFuncionario);
 
+    // =====================================================
+    // VENDAS POR STATUS
+    // =====================================================
+
     List<Venda> findByStatus(
             StatusVenda status);
+
+    // =====================================================
+    // VENDAS ENTRE DATAS
+    // =====================================================
 
     @Query("""
         SELECT v
@@ -33,6 +45,10 @@ public interface VendaRepository
             @Param("fim") LocalDateTime fim,
             @Param("status") StatusVenda status);
 
+    // =====================================================
+    // SOMAR VENDAS ENTRE DATAS
+    // =====================================================
+
     @Query("""
         SELECT COALESCE(SUM(v.valorTotal), 0)
         FROM Venda v
@@ -44,4 +60,20 @@ public interface VendaRepository
             @Param("inicio") LocalDateTime inicio,
             @Param("fim") LocalDateTime fim,
             @Param("status") StatusVenda status);
+
+    // =====================================================
+    // MÉDIA DE VENDAS DO FUNCIONÁRIO
+    // =====================================================
+
+    @Query("""
+        SELECT AVG(v.valorTotal)
+        FROM Venda v
+        WHERE v.funcionario.id = :idFuncionario
+        AND v.dataVenda >= :inicio
+        AND v.dataVenda <= :fim
+    """)
+    BigDecimal calcularMediaVendasFuncionario(
+            @Param("idFuncionario") Integer idFuncionario,
+            @Param("inicio") LocalDateTime inicio,
+            @Param("fim") LocalDateTime fim);
 }

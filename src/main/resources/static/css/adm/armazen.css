@@ -1,0 +1,1308 @@
+/* =====================================================
+   CHARLLOTTE - ARMAZÉM
+   CSS ESPECÍFICO DA PÁGINA
+===================================================== */
+
+
+/* =====================================================
+   TÍTULO
+===================================================== */
+
+.armazen-page .titulo-pagina {
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-between;
+
+    gap: 1rem;
+
+    margin-bottom: 1.5rem;
+
+}
+
+
+.armazen-page .titulo-pagina h2 {
+
+    margin: 0 0 0.35rem 0;
+
+    font-size: 24px;
+
+    font-weight: 700;
+
+    color: var(--text-primary);
+
+}
+
+
+.armazen-page .titulo-pagina p {
+
+    margin: 0;
+
+    color: var(--text-secondary);
+
+    font-size: 0.9rem;
+
+}
+
+
+/* =====================================================
+   BOTÃO PRINCIPAL
+===================================================== */
+
+.armazen-page .btn-principal {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 0.45rem;
+
+    white-space: nowrap;
+
+}
+
+
+.armazen-page .btn-principal svg {
+
+    width: 17px;
+
+    height: 17px;
+
+    flex-shrink: 0;
+
+}
+
+
+/* =====================================================
+   CARDS
+===================================================== */
+
+.armazen-page .estoque-cards {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 1rem;
+
+    margin-bottom: 1.5rem;
+
+}
+
+
+.armazen-page .estoque-card {
+
+    min-height: 126px;
+
+    padding: 1.15rem;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: 0.65rem;
+
+    box-shadow:
+            0 3px 12px rgba(6, 63, 48, 0.06);
+
+}
+
+
+.armazen-page .estoque-card-top {
+
+    width: 100%;
+
+    min-height: 82px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 1rem;
+
+}
+
+
+.armazen-page .estoque-card-top > div:first-child {
+
+    min-width: 0;
+
+    flex: 1;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    justify-content: flex-start;
+
+}
+
+
+.armazen-page .estoque-card-label {
+
+    display: block;
+
+    width: 100%;
+
+    margin: 0 0 0.4rem 0;
+
+    color: var(--text-secondary);
+
+    font-size: 0.75rem;
+
+    font-weight: 500;
+
+    line-height: 1.2;
+
+}
+
+
+.armazen-page .estoque-card strong {
+
+    display: block;
+
+    width: 100%;
+
+    margin: 0;
+
+    color: var(--text-primary);
+
+    font-size: 1.55rem;
+
+    font-weight: 600;
+
+    line-height: 1.2;
+
+}
+
+
+.armazen-page .estoque-card small {
+
+    display: block;
+
+    width: 100%;
+
+    margin: 0.3rem 0 0 0;
+
+    color: var(--text-secondary);
+
+    font-size: 0.75rem;
+
+    font-weight: 400;
+
+    line-height: 1.2;
+
+}
+
+
+.armazen-page .valor-alerta {
+
+    color: var(--danger) !important;
+
+}
+
+
+/* =====================================================
+   ÍCONES DOS CARDS
+===================================================== */
+
+.armazen-page .estoque-card-icon {
+
+    width: 38px;
+
+    height: 38px;
+
+    min-width: 38px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 0.5rem;
+
+    background: rgba(6, 63, 48, 0.10);
+
+    color: var(--primary-color);
+
+}
+
+
+.armazen-page .estoque-card-icon svg {
+
+    width: 19px;
+
+    height: 19px;
+
+}
+
+
+.armazen-page .estoque-card-icon.alerta {
+
+    background: rgba(220, 53, 69, 0.10);
+
+    color: var(--danger);
+
+}
+
+
+.armazen-page .estoque-card-icon.ouro {
+
+    background: rgba(214, 184, 76, 0.14);
+
+    color: #a98d24;
+
+}
+
+
+/* =====================================================
+   FILTRO
+===================================================== */
+
+.armazen-page .filtro-estoque {
+
+    margin-bottom: 1.5rem;
+
+    padding: 1.15rem;
+
+}
+
+
+.armazen-page .filtro-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 1rem;
+
+    margin-bottom: 1rem;
+
+}
+
+
+.armazen-page .filtro-header h3 {
+
+    margin: 0 0 0.25rem 0;
+
+    font-size: 0.95rem;
+
+}
+
+
+.armazen-page .filtro-header p {
+
+    margin: 0;
+
+    color: var(--text-secondary);
+
+    font-size: 0.78rem;
+
+}
+
+
+.armazen-page .btn-limpar {
+
+    border: none;
+
+    background: transparent;
+
+    color: var(--primary-color);
+
+    cursor: pointer;
+
+    font-size: 0.8rem;
+
+}
+
+
+.armazen-page .btn-limpar:hover {
+
+    text-decoration: underline;
+
+}
+
+
+/* =====================================================
+   GRADE DOS FILTROS
+===================================================== */
+
+.armazen-page .filtro-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        2fr 1fr 1fr;
+
+    gap: 1rem;
+
+}
+
+
+/* =====================================================
+   CAMPOS
+===================================================== */
+
+.armazen-page .campo {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 0.4rem;
+
+}
+
+
+.armazen-page .campo label {
+
+    margin: 0;
+
+    color: var(--text-primary);
+
+    font-size: 0.78rem;
+
+    font-weight: 500;
+
+}
+
+
+.armazen-page .campo input,
+.armazen-page .campo select,
+.armazen-page .campo textarea {
+
+    width: 100%;
+
+    min-width: 0;
+
+    padding: 0.65rem 0.75rem;
+
+    border: 1px solid var(--border);
+
+    border-radius: 0.45rem;
+
+    outline: none;
+
+    background: var(--surface);
+
+    color: var(--text-primary);
+
+    font-size: 0.85rem;
+
+    font-family: inherit;
+
+}
+
+
+/* SELECT */
+
+.armazen-page .campo select {
+
+    height: 36px;
+
+    padding: 0 0.75rem;
+
+    line-height: 1.2;
+
+}
+
+
+.armazen-page .campo input::placeholder,
+.armazen-page .campo textarea::placeholder {
+
+    color: var(--text-light);
+
+}
+
+
+.armazen-page .campo input:focus,
+.armazen-page .campo select:focus,
+.armazen-page .campo textarea:focus {
+
+    border-color: var(--primary-light);
+
+    box-shadow:
+            0 0 0 2px rgba(11, 90, 67, 0.10);
+
+}
+
+
+.armazen-page .campo textarea {
+
+    resize: vertical;
+
+}
+
+
+/* =====================================================
+   INPUT COM ÍCONE
+===================================================== */
+
+.armazen-page .input-com-icone {
+
+    position: relative;
+
+}
+
+
+.armazen-page .input-com-icone svg {
+
+    position: absolute;
+
+    top: 50%;
+
+    left: 0.75rem;
+
+    width: 16px;
+
+    height: 16px;
+
+    transform: translateY(-50%);
+
+    color: var(--text-secondary);
+
+    pointer-events: none;
+
+}
+
+
+.armazen-page .input-com-icone input {
+
+    padding-left: 2.3rem;
+
+}
+
+
+/* =====================================================
+   TABELA
+===================================================== */
+
+.armazen-page .tabela-estoque {
+
+    overflow: hidden;
+
+}
+
+
+.armazen-page .tabela-estoque .card-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 1rem;
+
+    padding: 1rem 1.15rem;
+
+}
+
+
+.armazen-page .card-title {
+
+    display: block;
+
+    color: var(--text-primary);
+
+    font-size: 1rem;
+
+    font-weight: 600;
+
+}
+
+
+.armazen-page .card-subtitle {
+
+    display: block;
+
+    margin-top: 0.25rem;
+
+    color: var(--text-secondary);
+
+    font-size: 0.75rem;
+
+}
+
+
+.armazen-page .contador-produtos {
+
+    color: var(--text-secondary);
+
+    font-size: 0.75rem;
+
+    white-space: nowrap;
+
+}
+
+
+.armazen-page .table-container {
+
+    width: 100%;
+
+    overflow-x: auto;
+
+}
+
+
+.armazen-page .table-container table {
+
+    width: 100%;
+
+    min-width: 900px;
+
+    border-collapse: collapse;
+
+}
+
+
+.armazen-page .table-container th {
+
+    height: 40px;
+
+    padding: 0.75rem 1rem;
+
+    background: var(--background);
+
+    border-bottom: 1px solid var(--border);
+
+    color: var(--text-secondary);
+
+    font-size: 0.72rem;
+
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    white-space: nowrap;
+
+}
+
+
+.armazen-page .table-container td {
+
+    height: 58px;
+
+    padding: 0.75rem 1rem;
+
+    border-bottom: 1px solid var(--border-light);
+
+    color: var(--text-primary);
+
+    font-size: 0.82rem;
+
+    white-space: nowrap;
+
+}
+
+
+.armazen-page .table-container tbody tr {
+
+    background: var(--surface);
+
+    transition:
+            background 0.15s ease;
+
+}
+
+
+.armazen-page .table-container tbody tr:hover {
+
+    background: rgba(6, 63, 48, 0.025);
+
+}
+
+
+.armazen-page .table-container tbody tr:last-child td {
+
+    border-bottom: none;
+
+}
+
+
+/* =====================================================
+   ALINHAMENTO
+===================================================== */
+
+.armazen-page .table-container .tr {
+
+    text-align: right;
+
+}
+
+
+.armazen-page .table-container .tc {
+
+    text-align: center;
+
+}
+
+
+/* =====================================================
+   PRODUTO
+===================================================== */
+
+.armazen-page .produto-info {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 0.7rem;
+
+}
+
+
+.armazen-page .produto-icon {
+
+    width: 34px;
+
+    height: 34px;
+
+    min-width: 34px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 0.45rem;
+
+    background: rgba(6, 63, 48, 0.08);
+
+    color: var(--primary-color);
+
+}
+
+
+.armazen-page .produto-icon svg {
+
+    width: 17px;
+
+    height: 17px;
+
+}
+
+
+.armazen-page .produto-info strong {
+
+    display: block;
+
+    margin: 0;
+
+    color: var(--text-primary);
+
+    font-size: 0.82rem;
+
+    font-weight: 600;
+
+}
+
+
+.armazen-page .produto-info small {
+
+    display: block;
+
+    margin-top: 0.15rem;
+
+    color: var(--text-secondary);
+
+    font-size: 0.7rem;
+
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.armazen-page .estoque-status {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 75px;
+
+    padding: 0.3rem 0.6rem;
+
+    border-radius: 20px;
+
+    font-size: 0.7rem;
+
+    font-weight: 600;
+
+}
+
+
+.armazen-page .status-ok {
+
+    background: rgba(25, 135, 84, 0.12);
+
+    color: var(--success);
+
+}
+
+
+.armazen-page .status-baixo {
+
+    background: var(--danger-bg);
+
+    color: var(--danger);
+
+}
+
+
+.armazen-page .status-zerado {
+
+    background: rgba(108, 117, 125, 0.14);
+
+    color: #6c757d;
+
+}
+
+
+/* =====================================================
+   AÇÕES
+===================================================== */
+
+.armazen-page .acoes-produto {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 0.3rem;
+
+}
+
+
+.armazen-page .acao-btn {
+
+    width: 30px;
+
+    height: 30px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 0;
+
+    border: 1px solid var(--border);
+
+    border-radius: 0.35rem;
+
+    background: var(--surface);
+
+    color: var(--text-secondary);
+
+    cursor: pointer;
+
+    transition:
+            background 0.15s ease,
+            color 0.15s ease,
+            border-color 0.15s ease;
+
+}
+
+
+.armazen-page .acao-btn svg {
+
+    width: 15px;
+
+    height: 15px;
+
+}
+
+
+.armazen-page .acao-btn:hover {
+
+    border-color: var(--primary-color);
+
+    background: rgba(6, 63, 48, 0.04);
+
+    color: var(--primary-color);
+
+}
+
+
+.armazen-page .btn-entrada:hover {
+
+    border-color: var(--success);
+
+    color: var(--success);
+
+}
+
+
+.armazen-page .btn-saida:hover {
+
+    border-color: #d97706;
+
+    color: #d97706;
+
+}
+
+
+.armazen-page .btn-editar:hover {
+
+    border-color: var(--primary-color);
+
+    color: var(--primary-color);
+
+}
+
+
+.armazen-page .btn-excluir:hover {
+
+    border-color: var(--danger);
+
+    color: var(--danger);
+
+}
+
+
+/* =====================================================
+   SEM PRODUTOS
+===================================================== */
+
+.armazen-page .sem-produtos {
+
+    height: 220px;
+
+    padding: 2rem !important;
+
+    text-align: center;
+
+    vertical-align: middle;
+
+}
+
+
+.armazen-page .sem-produtos svg {
+
+    display: block;
+
+    width: 30px;
+
+    height: 30px;
+
+    margin: 0 auto 0.7rem;
+
+    color: var(--text-secondary);
+
+}
+
+
+.armazen-page .sem-produtos strong {
+
+    display: block;
+
+    margin-bottom: 0.25rem;
+
+    color: var(--text-primary);
+
+}
+
+
+.armazen-page .sem-produtos span {
+
+    color: var(--text-secondary);
+
+    font-size: 0.78rem;
+
+}
+
+
+/* =====================================================
+   FILTRO SEM RESULTADO
+===================================================== */
+
+.armazen-page .oculto {
+
+    display: none !important;
+
+}
+
+
+/* =====================================================
+   MODAIS
+===================================================== */
+
+.armazen-page .modal-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1000;
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 1rem;
+
+    background: rgba(0, 0, 0, 0.45);
+
+}
+
+
+.armazen-page .modal-overlay.aberto {
+
+    display: flex;
+
+}
+
+
+.armazen-page .modal {
+
+    width: min(560px, 100%);
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: 0.7rem;
+
+    box-shadow:
+            0 20px 50px rgba(0, 0, 0, 0.20);
+
+}
+
+
+.armazen-page .modal-menor {
+
+    width: min(450px, 100%);
+
+}
+
+
+.armazen-page .modal-header {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 1rem;
+
+    padding: 1.2rem;
+
+    border-bottom: 1px solid var(--border);
+
+}
+
+
+.armazen-page .modal-header h3 {
+
+    margin: 0 0 0.25rem 0;
+
+    color: var(--text-primary);
+
+}
+
+
+.armazen-page .modal-header p {
+
+    margin: 0;
+
+    color: var(--text-secondary);
+
+    font-size: 0.78rem;
+
+}
+
+
+.armazen-page .modal-fechar {
+
+    width: 32px;
+
+    height: 32px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border: none;
+
+    border-radius: 0.4rem;
+
+    background: transparent;
+
+    color: var(--text-secondary);
+
+    cursor: pointer;
+
+}
+
+
+.armazen-page .modal-fechar:hover {
+
+    background: var(--background);
+
+    color: var(--text-primary);
+
+}
+
+
+.armazen-page .modal-fechar svg {
+
+    width: 18px;
+
+    height: 18px;
+
+}
+
+
+.armazen-page .modal form {
+
+    padding: 1.2rem;
+
+}
+
+
+.armazen-page .form-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 1rem;
+
+}
+
+
+.armazen-page .campo-completo {
+
+    grid-column: 1 / -1;
+
+}
+
+
+.armazen-page .modal-footer {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 0.7rem;
+
+    margin-top: 1.3rem;
+
+    padding-top: 1rem;
+
+    border-top: 1px solid var(--border);
+
+}
+
+
+.armazen-page .btn-secundario {
+
+    background: transparent;
+
+    border: 1px solid var(--border);
+
+    color: var(--text-primary);
+
+}
+
+
+.armazen-page .btn-secundario:hover {
+
+    background: var(--background);
+
+}
+
+
+/* =====================================================
+   TEMA ESCURO
+===================================================== */
+
+body.tema-escuro.armazen-page .estoque-card,
+body.tema-escuro.armazen-page .filtro-estoque,
+body.tema-escuro.armazen-page .tabela-estoque,
+body.tema-escuro.armazen-page .modal {
+
+    background: var(--surface);
+
+    border-color: var(--border);
+
+}
+
+
+body.tema-escuro.armazen-page .campo input,
+body.tema-escuro.armazen-page .campo select,
+body.tema-escuro.armazen-page .campo textarea {
+
+    background: var(--surface);
+
+    color: var(--text-primary);
+
+    border-color: var(--border);
+
+}
+
+
+body.tema-escuro.armazen-page .campo input::placeholder,
+body.tema-escuro.armazen-page .campo textarea::placeholder {
+
+    color: var(--text-light);
+
+}
+
+
+body.tema-escuro.armazen-page .table-container tbody tr {
+
+    background: var(--surface);
+
+}
+
+
+body.tema-escuro.armazen-page .table-container tbody tr:hover {
+
+    background: #25332d;
+
+}
+
+
+body.tema-escuro.armazen-page .produto-icon {
+
+    background: rgba(255, 255, 255, 0.06);
+
+}
+
+
+body.tema-escuro.armazen-page .acao-btn {
+
+    background: var(--surface);
+
+    border-color: var(--border);
+
+}
+
+
+/* =====================================================
+   RESPONSIVO
+===================================================== */
+
+@media (max-width: 1000px) {
+
+    .armazen-page .estoque-cards {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+    }
+
+
+    .armazen-page .filtro-grid {
+
+        grid-template-columns:
+            1fr 1fr;
+
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .armazen-page .titulo-pagina {
+
+        align-items: stretch;
+
+        flex-direction: column;
+
+    }
+
+
+    .armazen-page .estoque-cards {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .armazen-page .filtro-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .armazen-page .form-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .armazen-page .campo-completo {
+
+        grid-column: auto;
+
+    }
+
+
+    .armazen-page .filtro-header {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+    }
+
+
+    .armazen-page .estoque-card {
+
+        min-height: auto;
+
+    }
+
+
+    .armazen-page .estoque-card-top {
+
+        min-height: auto;
+
+    }
+
+}

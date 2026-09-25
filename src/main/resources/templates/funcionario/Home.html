@@ -1,136 +1,489 @@
 <!DOCTYPE html>
-<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-BR"
+      xmlns:th="http://www.thymeleaf.org">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" th:href="@{/css/all.css}">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-    <title>Dashboard</title>
+    <title>Dashboard - Charllotte</title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/all.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/funcionario/home.css}">
+
 </head>
+
 
 <body>
 
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
 <aside class="sidebar">
 
-    <div class="logo">
-        Charllotte
+    <div class="logo-area">
+
+        <div class="logo-icon">
+
+            <i data-lucide="landmark"></i>
+
+        </div>
+
+
+        <div class="logo-text">
+
+            <span>Charllotte</span>
+
+            <small>GESTÃO</small>
+
+        </div>
+
     </div>
 
+
     <nav class="menu">
-        <a th:href="@{/home}" class="active">Dashboard</a>
-        <a th:href="@{/vendas}">Vendas</a>
-        <a href="#">Livros</a>
-        <a href="#">Empréstimos</a>
-        <a href="#">Relatórios</a>
-        <a href="#">Configurações</a>
-        <a href="#">Sair</a>
+
+
+        <!-- DASHBOARD -->
+
+        <a th:href="@{/home}"
+           class="active">
+
+            <i data-lucide="layout-dashboard"
+               class="icon-fraudes"></i>
+
+            <span>Dashboard</span>
+
+        </a>
+
+
+        <!-- REGISTRAR VENDA -->
+
+        <a th:href="@{/funcionario/venda}">
+
+            <i data-lucide="shopping-cart"
+               class="icon-relatorios"></i>
+
+            <span>Registrar Venda</span>
+
+        </a>
+
+        <a th:href="@{/config}">
+
+            <i data-lucide="settings"
+               class="icon-config"></i>
+
+            <span>Configurações</span>
+
+        </a>
+
     </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <a th:href="@{/logout}"
+           class="logout">
+
+            <i data-lucide="log-out"></i>
+
+            <span>Sair</span>
+
+        </a>
+
+    </div>
 
 </aside>
 
 
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
 <main class="main">
+
+
+    <!-- =================================================
+         TOPBAR
+    ================================================= -->
 
     <header class="topbar">
 
-        <h1>Dashboard</h1>
+        <div>
 
-        <div class="user">
-            Daniel2
+            <h1>
+                Dashboard
+            </h1>
+
+            <p class="usuario-logado">
+                Suas vendas e comissões
+            </p>
+
+        </div>
+
+
+        <div class="usuario-logado">
+
+            <i data-lucide="user"
+               class="user-icon"></i>
+
+            <span th:text="${usuarioLogado.nome}"
+                  class="user-icon">
+
+                Funcionário
+
+            </span>
+
         </div>
 
     </header>
 
 
-    <!-- Cards -->
+    <!-- =================================================
+         CONTEÚDO
+    ================================================= -->
 
-    <section class="cards">
-
-        <div class="card">
-            <span>Usuários</span>
-            <h2></h2>
-        </div>
-
-        <div class="card">
-            <span>Livros</span>
-            <h2>342</h2>
-        </div>
-
-        <div class="card">
-            <span>Empréstimos</span>
-            <h2>56</h2>
-        </div>
-
-        <div class="card">
-            <span>Atrasados</span>
-            <h2>7</h2>
-        </div>
-
-    </section>
+    <div class="funcionario-home-content">
 
 
-    <!-- Tabs -->
+        <!-- =================================================
+             SAUDAÇÃO
+        ================================================= -->
 
-    <div class="tabs">
+        <section class="funcionario-home-header">
 
-        <button class="tab active" onclick="openTab('overview', this)">
-            Visão geral
-        </button>
 
-        <button class="tab" onclick="openTab('activity', this)">
-            Atividade
-        </button>
+            <div>
 
-        <button class="tab" onclick="openTab('reports', this)">
-            Relatórios
-        </button>
+                <span class="pagina-label">
+                    Suas vendas de hoje
+                </span>
+
+
+                <h2>
+
+                    Olá,
+                    <span th:text="${usuarioLogado.nome}">
+                        João
+                    </span>
+                    👋
+
+                </h2>
+
+
+                <p>
+                    Acompanhe seu desempenho e suas vendas.
+                </p>
+
+            </div>
+
+
+            <a th:href="@{/funcionario/venda}"
+               class="btn btn-principal botaoarrumado">
+
+                <i data-lucide="plus"></i>
+
+                Registrar Venda
+
+            </a>
+
+
+        </section>
+
+
+        <!-- =================================================
+             CARDS
+        ================================================= -->
+
+        <section class="funcionario-dashboard-cards">
+
+
+            <!-- VENDAS HOJE -->
+
+            <div class="funcionario-dashboard-card">
+
+
+                <div class="funcionario-card-top">
+
+
+                    <div>
+
+                        <span class="funcionario-card-title">
+                            Vendas Hoje
+                        </span>
+
+
+                        <strong
+                                class="funcionario-card-value"
+                                th:text="${vendasHoje}">
+                            0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="funcionario-card-icon compras">
+
+                        <i data-lucide="shopping-cart"></i>
+
+                    </div>
+
+                </div>
+
+
+                <small
+                        th:text="${'R$ ' + #numbers.formatDecimal(valorVendasHoje, 1, 2, 'COMMA')}">
+
+                    R$ 0,00
+
+                </small>
+
+
+            </div>
+
+
+            <!-- VENDAS NO MÊS -->
+
+            <div class="funcionario-dashboard-card">
+
+
+                <div class="funcionario-card-top">
+
+
+                    <div>
+
+                        <span class="funcionario-card-title">
+                            Vendas no Mês
+                        </span>
+
+
+                        <strong
+                                class="funcionario-card-value"
+                                th:text="${vendasMes}">
+                            0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="funcionario-card-icon dinheiro">
+
+                        <i data-lucide="dollar-sign"></i>
+
+                    </div>
+
+                </div>
+
+
+                <small
+                        th:text="${'R$ ' + #numbers.formatDecimal(valorVendasMes, 1, 2, 'COMMA')}">
+
+                    R$ 0,00
+
+                </small>
+
+
+            </div>
+
+
+            <!-- COMISSÃO -->
+
+            <div class="funcionario-dashboard-card">
+
+
+                <div class="funcionario-card-top">
+
+
+                    <div>
+
+                        <span class="funcionario-card-title">
+                            Comissão do Mês
+                        </span>
+
+
+                        <strong
+                                class="funcionario-card-value money"
+                                th:text="${'R$ ' + #numbers.formatDecimal(comissaoMes, 1, 2, 'COMMA')}">
+
+                            R$ 0,00
+
+                        </strong>
+
+                    </div>
+
+
+                    <div class="funcionario-card-icon comissao">
+
+                        <i data-lucide="trending-up"></i>
+
+                    </div>
+
+                </div>
+
+
+                <small>
+
+                    Comissão acumulada
+
+                </small>
+
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             ÚLTIMAS VENDAS
+        ================================================= -->
+
+        <section class="funcionario-vendas-panel">
+
+            <div class="funcionario-panel-header">
+
+                <div>
+
+                    <h3>
+                        Últimas Vendas
+                    </h3>
+
+                    <p>
+                        Suas vendas mais recentes
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="funcionario-table-container">
+
+                <table>
+
+                    <thead>
+
+                    <tr>
+
+                        <th>
+                            Venda
+                        </th>
+
+                        <th>
+                            Total
+                        </th>
+
+                        <th>
+                            Comissão
+                        </th>
+
+                        <th>
+                            Data/Hora
+                        </th>
+
+                    </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                    <tr th:each="venda : ${vendasRecentes}">
+
+                        <!-- ID -->
+
+                        <td>
+
+                            <strong
+                                    th:text="${'#' + venda.id}">
+                                #1
+                            </strong>
+
+                        </td>
+
+
+                        <!-- TOTAL -->
+
+                        <td
+                                th:text="${'R$ ' + #numbers.formatDecimal(venda.valorTotal, 1, 2, 'COMMA')}">
+
+                            R$ 0,00
+
+                        </td>
+
+
+                        <!-- COMISSÃO -->
+
+                        <td
+                                th:text="${'R$ ' + #numbers.formatDecimal(comissoesPorVenda[venda.id], 1, 2, 'COMMA')}">
+
+                            R$ 0,00
+
+                        </td>
+
+
+                        <!-- DATA -->
+
+                        <td
+                                th:text="${venda.dataVenda != null
+                            ? #temporals.format(venda.dataVenda, 'dd/MM, HH:mm')
+                            : '-'}">
+
+                            25/09, 15:30
+
+                        </td>
+
+                    </tr>
+
+
+                    <tr th:if="${#lists.isEmpty(vendasRecentes)}">
+
+                        <td colspan="4"
+                            class="funcionario-sem-resultados">
+
+                            <i data-lucide="inbox"></i>
+
+                            <strong>
+                                Nenhuma venda registrada
+                            </strong>
+
+                            <span>
+                        Suas vendas aparecerão aqui.
+                    </span>
+
+                        </td>
+
+                    </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
 
     </div>
-
-
-    <!-- Conteúdo -->
-
-    <section class="content">
-
-        <div id="overview" class="tab-content active">
-            <h3>Visão geral</h3>
-        </div>
-
-        <div id="activity" class="tab-content">
-            <h3>Atividade</h3>
-        </div>
-
-        <div id="reports" class="tab-content">
-            <h3>Relatórios</h3>
-        </div>
-
-    </section>
 
 </main>
 
 
-<script>
+<script src="https://unpkg.com/lucide@latest"></script>
 
-    function openTab(tabName, button) {
+<script th:src="@{/js/all.js}"></script>
 
-        const contents = document.querySelectorAll(".tab-content");
-        const buttons = document.querySelectorAll(".tab");
+<script th:src="@{/js/funcionario/home.js}"></script>
 
-        contents.forEach(content => {
-            content.classList.remove("active");
-        });
-
-        buttons.forEach(btn => {
-            btn.classList.remove("active");
-        });
-
-        document.getElementById(tabName).classList.add("active");
-
-        button.classList.add("active");
-    }
-
-</script>
 
 </body>
+
 </html>

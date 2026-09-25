@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <!-- CSS GERAL -->
+  <link rel="stylesheet"
+        th:href="@{/css/all.css}">
+
+  <!-- CSS DA PÁGINA DE FRAUDES -->
+  <link rel="stylesheet"
+        th:href="@{/css/adm/fraudes.css}">
+
+  <!-- CSS DO CALENDÁRIO -->
+  <link rel="stylesheet"
+        th:href="@{/css/config/calendario.css}">
+
+  <title>Fraudes - Charllotte</title>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar">
+
+  <div class="logo-area">
+
+    <div class="logo-icon">
+      <i data-lucide="landmark"></i>
+    </div>
+
+    <div class="logo-text">
+      <span>Charllotte</span>
+      <small>GESTÃO</small>
+    </div>
+
+  </div>
+
+
+  <nav class="menu">
+
+
+    <!-- DASHBOARD -->
+
+    <a th:href="@{/home}">
+
+      <i data-lucide="layout-dashboard"
+         class="icon-dashboard"></i>
+
+      <span>Dashboard</span>
+
+    </a>
+
+
+    <!-- FUNCIONÁRIOS -->
+
+    <a th:href="@{/funcionario}">
+
+      <i data-lucide="users-round"
+         class="icon-funcionarios"></i>
+
+      <span>Funcionários</span>
+
+    </a>
+
+
+    <!-- VENDAS -->
+
+    <a th:href="@{/vendas}">
+
+      <i data-lucide="dollar-sign"
+         class="icon-comissoes"></i>
+
+      <span>Comissões</span>
+
+    </a>
+
+
+    <!-- FRAUDES -->
+
+    <a th:href="@{/fraudes}"
+       class="active">
+
+      <i data-lucide="shield-alert"
+         class="icon-fraudes"></i>
+
+      <span>Fraudes</span>
+
+    </a>
+
+
+    <!-- ARMAZÉM -->
+
+    <a th:href="@{/armazen}">
+
+      <i data-lucide="package"
+         class="icon-armazem"></i>
+
+      <span>Armazém</span>
+
+    </a>
+
+
+    <!-- RELATÓRIOS -->
+
+    <a th:href="@{/relatorios}">
+
+      <i data-lucide="file-text"
+         class="icon-relatorios"></i>
+
+      <span>Relatórios</span>
+
+    </a>
+
+
+    <!-- CONFIGURAÇÕES -->
+
+    <a th:href="@{/config}">
+
+      <i data-lucide="settings"
+         class="icon-config"></i>
+
+      <span>Configurações</span>
+
+    </a>
+
+  </nav>
+
+
+  <div class="sidebar-bottom">
+
+    <a th:href="@{/logout}"
+       class="logout">
+
+      <i data-lucide="log-out"></i>
+
+      <span>Sair</span>
+
+    </a>
+
+  </div>
+
+</aside>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="main">
+
+
+  <!-- =================================================
+       TOPBAR
+  ================================================= -->
+
+  <header class="topbar">
+
+    <div>
+
+      <h1>
+        Fraudes
+      </h1>
+
+      <p class="usuario-logado">
+        Monitoramento e alertas de vendas
+      </p>
+
+    </div>
+
+
+    <div class="usuario-logado">
+
+      <i data-lucide="user"
+         class="user-icon"></i>
+
+      <span th:text="${usuarioLogado.nome}">
+                Usuário
+            </span>
+
+    </div>
+
+  </header>
+
+
+
+  <!-- =================================================
+       CONTEÚDO
+  ================================================= -->
+
+  <section class="content">
+
+
+        <span class="pagina-label">
+            Segurança e análise
+        </span>
+
+
+    <h2>
+      Pesquisa de Fraudes
+    </h2>
+
+
+
+    <!-- =================================================
+         FILTROS
+    ================================================= -->
+
+    <form class="filtro"
+          id="filtroFraudes"
+          onsubmit="return false;">
+
+
+      <!-- STATUS -->
+
+      <div class="campo">
+
+        <label for="filtroStatus">
+          Status
+        </label>
+
+        <select id="filtroStatus">
+
+          <option value="">
+            Todos os status
+          </option>
+
+          <option value="PENDENTE">
+            Pendente
+          </option>
+
+          <option value="EM_ANALISE">
+            Em análise
+          </option>
+
+          <option value="RESOLVIDA">
+            Resolvida
+          </option>
+
+        </select>
+
+      </div>
+
+
+
+      <!-- TIPO -->
+
+      <div class="campo">
+
+        <label for="filtroTipo">
+          Tipo
+        </label>
+
+        <select id="filtroTipo">
+
+          <option value="">
+            Todos os tipos
+          </option>
+
+          <option value="VALOR_ELEVADO">
+            Valor elevado
+          </option>
+
+          <option value="VALOR_FORA_PADRAO">
+            Valor fora do padrão
+          </option>
+
+          <option value="SEM_FUNCIONARIO">
+            Sem funcionário
+          </option>
+
+          <option value="STATUS_INVALIDO">
+            Status inválido
+          </option>
+
+        </select>
+
+      </div>
+
+
+
+      <!-- DATA INICIAL -->
+
+      <div class="campo campo-data">
+
+        <label for="dataInicio">
+          De
+        </label>
+
+        <div class="data-input">
+
+          <i data-lucide="calendar"></i>
+
+          <input
+                  type="text"
+                  id="dataInicio"
+                  placeholder="dd/mm/aaaa"
+                  autocomplete="off"
+                  readonly
+          >
+
+          <input
+                  type="hidden"
+                  id="dataInicioValue"
+          >
+
+        </div>
+
+      </div>
+
+
+
+      <!-- DATA FINAL -->
+
+      <div class="campo campo-data">
+
+        <label for="dataFim">
+          Até
+        </label>
+
+        <div class="data-input">
+
+          <i data-lucide="calendar"></i>
+
+          <input
+                  type="text"
+                  id="dataFim"
+                  placeholder="dd/mm/aaaa"
+                  autocomplete="off"
+                  readonly
+          >
+
+          <input
+                  type="hidden"
+                  id="dataFimValue"
+          >
+
+        </div>
+
+      </div>
+
+
+
+      <!-- BOTÃO -->
+
+      <button
+              type="button"
+              class="btn"
+              id="btnFiltrar">
+
+        Pesquisar
+
+      </button>
+
+
+
+      <!-- LIMPAR -->
+
+      <button
+              type="button"
+              class="btn-limpar"
+              id="btnLimpar">
+
+        Limpar
+
+      </button>
+
+
+
+      <!-- =================================================
+           RESUMO DO FILTRO
+      ================================================= -->
+
+      <div class="filtro-resumo">
+
+        <div class="filtro-info">
+
+                    <span>
+                        Total
+                    </span>
+
+          <strong id="totalFraudes">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="filtro-divisor"></div>
+
+
+        <div class="filtro-info">
+
+                    <span>
+                        Pendentes
+                    </span>
+
+          <strong id="fraudesPendentes">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="filtro-divisor"></div>
+
+
+        <div class="filtro-info">
+
+                    <span>
+                        Em análise
+                    </span>
+
+          <strong id="fraudesAnalise">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="filtro-divisor"></div>
+
+
+        <div class="filtro-info">
+
+                    <span>
+                        Resolvidas
+                    </span>
+
+          <strong id="fraudesResolvidas">
+            0
+          </strong>
+
+        </div>
+
+      </div>
+
+    </form>
+
+
+
+    <!-- =================================================
+         RESUMO
+    ================================================= -->
+
+    <div class="resumo-fraudes">
+
+
+      <!-- TOTAL -->
+
+      <div class="card-resumo">
+
+        <div class="card-topo">
+
+          <div>
+
+                        <span class="card-label">
+                            Alertas encontrados
+                        </span>
+
+            <strong id="cardTotalFraudes">
+              0
+            </strong>
+
+          </div>
+
+          <div class="card-icone">
+
+            <i data-lucide="shield-alert"></i>
+
+          </div>
+
+        </div>
+
+        <span class="card-descricao">
+                    Alertas identificados pelo sistema
+                </span>
+
+      </div>
+
+
+
+      <!-- PENDENTES -->
+
+      <div class="card-resumo">
+
+        <div class="card-topo">
+
+          <div>
+
+                        <span class="card-label">
+                            Pendentes
+                        </span>
+
+            <strong id="cardPendentes">
+              0
+            </strong>
+
+          </div>
+
+          <div class="card-icone alerta">
+
+            <i data-lucide="triangle-alert"></i>
+
+          </div>
+
+        </div>
+
+        <span class="card-descricao">
+                    Aguardando análise
+                </span>
+
+      </div>
+
+
+
+      <!-- EM ANÁLISE -->
+
+      <div class="card-resumo">
+
+        <div class="card-topo">
+
+          <div>
+
+                        <span class="card-label">
+                            Em análise
+                        </span>
+
+            <strong id="cardAnalise">
+              0
+            </strong>
+
+          </div>
+
+          <div class="card-icone analise">
+
+            <i data-lucide="search"></i>
+
+          </div>
+
+        </div>
+
+        <span class="card-descricao">
+                    Fraudes sendo verificadas
+                </span>
+
+      </div>
+
+
+
+      <!-- RESOLVIDAS -->
+
+      <div class="card-resumo">
+
+        <div class="card-topo">
+
+          <div>
+
+                        <span class="card-label">
+                            Resolvidas
+                        </span>
+
+            <strong id="cardResolvidas">
+              0
+            </strong>
+
+          </div>
+
+          <div class="card-icone resolvida">
+
+            <i data-lucide="shield-check"></i>
+
+          </div>
+
+        </div>
+
+        <span class="card-descricao">
+                    Alertas já tratados
+                </span>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         TABELA
+    ================================================= -->
+
+    <div class="table-container">
+
+      <table>
+
+        <thead>
+
+        <tr>
+
+          <th>
+            Venda
+          </th>
+
+          <th>
+            Funcionário
+          </th>
+
+          <th>
+            Tipo
+          </th>
+
+          <th>
+            Valor
+          </th>
+
+          <th>
+            Identificação
+          </th>
+
+          <th>
+            Status
+          </th>
+
+          <th>
+            Ação
+          </th>
+
+        </tr>
+
+        </thead>
+
+
+        <tbody id="tabelaFraudes">
+
+
+        <!-- =================================================
+             FRAUDE
+        ================================================= -->
+
+        <tr
+                th:each="fraude : ${fraudes}"
+
+                th:attr="
+                            data-id=${fraude.id},
+                            data-status=${fraude.status != null ? fraude.status.name() : ''},
+                            data-tipo=${fraude.tipo},
+                            data-data=${fraude.dataIdentificacao},
+                            data-descricao=${fraude.descricao},
+                            data-venda=${fraude.venda != null ? fraude.venda.id : ''},
+                            data-valor=${fraude.venda != null ? fraude.venda.valorTotal : ''},
+                            data-funcionario=${fraude.venda != null and fraude.venda.funcionario != null ? fraude.venda.funcionario.nome : 'Não informado'}
+                        ">
+
+
+          <!-- VENDA -->
+
+          <td>
+
+                        <span class="codigo-venda"
+                              th:text="${fraude.venda != null
+                                    ? '#' + fraude.venda.id
+                                    : 'Sem venda'}">
+
+                            #0000
+
+                        </span>
+
+          </td>
+
+
+
+          <!-- FUNCIONÁRIO -->
+
+          <td>
+
+            <div class="funcionario">
+
+              <div class="avatar"
+
+                   th:text="${fraude.venda != null
+                                    and fraude.venda.funcionario != null
+                                    ? #strings.substring(
+                                        fraude.venda.funcionario.nome,
+                                        0,
+                                        fraude.venda.funcionario.nome.length() >= 2 ? 2 : 1
+                                      )
+                                    : '?'}">
+
+                JS
+
+              </div>
+
+
+              <div>
+
+                <strong
+                        th:text="${fraude.venda != null
+                                            and fraude.venda.funcionario != null
+                                            ? fraude.venda.funcionario.nome
+                                            : 'Não informado'}">
+
+                  Funcionário
+
+                </strong>
+
+
+                <small>
+                  Funcionário
+                </small>
+
+              </div>
+
+            </div>
+
+          </td>
+
+
+
+          <!-- TIPO -->
+
+          <td>
+
+                        <span class="tipo-fraude"
+                              th:text="${fraude.tipo}">
+
+                            VALOR_ELEVADO
+
+                        </span>
+
+          </td>
+
+
+
+          <!-- VALOR -->
+
+          <td>
+
+            <strong class="valor-venda"
+
+                    th:text="${fraude.venda != null
+                                    ? 'R$ ' + #numbers.formatDecimal(
+                                        fraude.venda.valorTotal,
+                                        1,
+                                        2,
+                                        'COMMA')
+                                    : '—'}">
+
+              R$ 0,00
+
+            </strong>
+
+          </td>
+
+
+
+          <!-- DATA -->
+
+          <td
+
+                  th:text="${fraude.dataIdentificacao != null
+                                ? #temporals.format(
+                                    fraude.dataIdentificacao,
+                                    'dd/MM/yyyy HH:mm')
+                                : '—'}">
+
+            25/09/2026 13:30
+
+          </td>
+
+
+
+          <!-- STATUS -->
+
+          <td>
+
+                        <span
+                                th:if="${fraude.status != null
+                                    and fraude.status.name() == 'PENDENTE'}"
+
+                                class="status pendente">
+
+                            Pendente
+
+                        </span>
+
+
+            <span
+                    th:if="${fraude.status != null
+                                    and fraude.status.name() == 'EM_ANALISE'}"
+
+                    class="status analise">
+
+                            Em análise
+
+                        </span>
+
+
+            <span
+                    th:if="${fraude.status != null
+                                    and fraude.status.name() == 'RESOLVIDA'}"
+
+                    class="status resolvida">
+
+                            Resolvida
+
+                        </span>
+
+
+            <span
+                    th:if="${fraude.status == null
+                                    or (
+                                        fraude.status.name() != 'PENDENTE'
+                                        and fraude.status.name() != 'EM_ANALISE'
+                                        and fraude.status.name() != 'RESOLVIDA'
+                                    )}"
+
+                    class="status desconhecido"
+
+                    th:text="${fraude.status != null
+                                    ? fraude.status.name()
+                                    : 'Sem status'}">
+
+                            Sem status
+
+                        </span>
+
+          </td>
+
+
+
+          <!-- AÇÃO -->
+
+          <td>
+
+            <button
+                    type="button"
+                    class="btn-visualizar"
+                    th:attr="data-fraude-id=${fraude.id}">
+
+              <i data-lucide="eye"></i>
+
+              Ver
+
+            </button>
+
+          </td>
+
+        </tr>
+
+
+
+        <!-- =================================================
+             SEM RESULTADOS
+        ================================================= -->
+
+        <tr id="semFraudes">
+
+          <td
+                  colspan="7"
+                  class="sem-fraudes">
+
+            <i data-lucide="shield-off"></i>
+
+            <strong>
+              Nenhuma fraude encontrada
+            </strong>
+
+            <span>
+                            Não existem alertas para os filtros selecionados.
+                        </span>
+
+          </td>
+
+        </tr>
+
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+
+<!-- =====================================================
+     MODAL
+===================================================== -->
+
+<div
+        class="modal-overlay"
+        id="modalFraude">
+
+
+  <div class="modal-fraude">
+
+
+    <div class="modal-header">
+
+      <div>
+
+                <span class="modal-label">
+                    Detalhes do alerta
+                </span>
+
+        <h3 id="modalTitulo">
+          Fraude
+        </h3>
+
+      </div>
+
+
+      <button
+              type="button"
+              class="modal-fechar"
+              id="fecharModal">
+
+        <i data-lucide="x"></i>
+
+      </button>
+
+    </div>
+
+
+
+    <div class="modal-conteudo">
+
+
+      <div class="modal-item">
+
+                <span>
+                    Venda
+                </span>
+
+        <strong id="modalVenda">
+          —
+        </strong>
+
+      </div>
+
+
+      <div class="modal-item">
+
+                <span>
+                    Funcionário
+                </span>
+
+        <strong id="modalFuncionario">
+          —
+        </strong>
+
+      </div>
+
+
+      <div class="modal-item">
+
+                <span>
+                    Valor
+                </span>
+
+        <strong id="modalValor">
+          —
+        </strong>
+
+      </div>
+
+
+      <div class="modal-item">
+
+                <span>
+                    Tipo
+                </span>
+
+        <strong id="modalTipo">
+          —
+        </strong>
+
+      </div>
+
+
+      <div class="modal-item">
+
+                <span>
+                    Identificação
+                </span>
+
+        <strong id="modalData">
+          —
+        </strong>
+
+      </div>
+
+
+      <div class="modal-descricao">
+
+                <span>
+                    Descrição
+                </span>
+
+        <p id="modalDescricao">
+          —
+        </p>
+
+      </div>
+
+
+      <div class="modal-status">
+
+                <span>
+                    Status
+                </span>
+
+        <strong id="modalStatus">
+          —
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <div class="modal-footer">
+
+      <button
+              type="button"
+              class="btn-modal-fechar"
+              id="btnFecharModal">
+
+        Fechar
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     SCRIPTS
+===================================================== -->
+
+<!-- Lucide -->
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<!-- JS GERAL -->
+<script th:src="@{/js/all.js}"></script>
+
+<!-- JS DA PÁGINA DE FRAUDES -->
+<script th:src="@{/js/adm/fraudes.js}"></script>
+
+<!-- JS DO CALENDÁRIO -->
+<script th:src="@{/js/config/calendario.js}"></script>
+
+
+</body>
+
+</html>

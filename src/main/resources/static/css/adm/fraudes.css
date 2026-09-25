@@ -1,0 +1,1539 @@
+/* =====================================================
+   CHARLLOTTE - FRAUDES
+===================================================== */
+
+
+/* =====================================================
+   CABEÇALHO
+===================================================== */
+
+
+/* =====================================================
+   CONTEÚDO
+===================================================== */
+
+.content {
+
+    min-height: calc(100vh - 76px);
+
+    padding: 28px 32px 40px;
+
+    background:
+            radial-gradient(
+                    circle at 85% 0%,
+                    rgba(214, 184, 76, 0.06),
+                    transparent 28%
+            ),
+            linear-gradient(
+                    135deg,
+                    #f4f7f4 0%,
+                    #e8ede8 100%
+            );
+
+}
+
+
+.pagina-label {
+
+    display: block;
+
+    margin-bottom: 5px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    color: #6d8178;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.6px;
+
+}
+
+
+.content h2 {
+
+    margin-bottom: 22px;
+
+    font-size: 24px;
+
+    color: #091c15;
+
+}
+
+
+
+/* =====================================================
+   FILTRO
+===================================================== */
+
+.filtro {
+
+    display: flex;
+
+    align-items: flex-end;
+
+    flex-wrap: wrap;
+
+    gap: 14px;
+
+    padding: 18px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: 10px;
+
+    box-shadow: var(--shadow);
+
+}
+
+
+.campo {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+
+}
+
+
+.campo label {
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    color: var(--text-secondary);
+
+}
+
+
+.campo select {
+
+    width: 170px;
+
+    height: 38px;
+
+    padding: 0 10px;
+
+    border: 1px solid #d9dfdc;
+
+    border-radius: 7px;
+
+    outline: none;
+
+    background: #ffffff;
+
+    color: #303a36;
+
+    font-size: 13px;
+
+    cursor: pointer;
+
+}
+
+
+.campo select:focus {
+
+    border-color: var(--primary-light);
+
+    box-shadow:
+            0 0 0 3px rgba(11, 90, 67, 0.10);
+
+}
+
+
+
+/* =====================================================
+   BOTÕES
+===================================================== */
+
+.btn {
+
+    height: 38px;
+
+    padding: 0 19px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: var(--primary-color);
+
+    color: #ffffff;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+            background 0.2s ease,
+            transform 0.1s ease;
+
+}
+
+
+.btn:hover {
+
+    background: var(--primary-light);
+
+}
+
+
+.btn:active {
+
+    transform: scale(0.98);
+
+}
+
+
+.btn-limpar {
+
+    height: 38px;
+
+    padding: 0 15px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 7px;
+
+    background: transparent;
+
+    color: var(--text-secondary);
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+}
+
+
+.btn-limpar:hover {
+
+    background: var(--surface-soft);
+
+    color: var(--danger);
+
+}
+
+
+
+/* =====================================================
+   RESUMO DO FILTRO
+===================================================== */
+
+.filtro-resumo {
+
+    display: flex;
+
+    align-items: center;
+
+    min-height: 38px;
+
+    margin-left: auto;
+
+    padding-left: 8px;
+
+}
+
+
+.filtro-info {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 2px;
+
+    min-width: 70px;
+
+}
+
+
+.filtro-info span {
+
+    font-size: 10px;
+
+    color: var(--text-light);
+
+}
+
+
+.filtro-info strong {
+
+    font-size: 14px;
+
+    color: var(--text-primary);
+
+}
+
+
+.filtro-divisor {
+
+    width: 1px;
+
+    height: 28px;
+
+    margin: 0 14px;
+
+    background: var(--border);
+
+}
+
+
+
+/* =====================================================
+   RESUMO DOS CARDS
+===================================================== */
+
+.resumo-fraudes {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 16px;
+
+    margin-top: 18px;
+
+}
+
+
+.card-resumo {
+
+    min-height: 130px;
+
+    padding: 18px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: 10px;
+
+    box-shadow: var(--shadow);
+
+}
+
+
+.card-topo {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+}
+
+
+.card-label {
+
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    color: var(--text-secondary);
+
+}
+
+
+.card-topo strong {
+
+    display: block;
+
+    font-size: 25px;
+
+    color: var(--text-primary);
+
+}
+
+
+.card-descricao {
+
+    display: block;
+
+    margin-top: 14px;
+
+    font-size: 11px;
+
+    color: var(--text-light);
+
+}
+
+
+.card-icone {
+
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 8px;
+
+    background: rgba(41, 154, 168, 0.12);
+
+    color: #299aa8;
+
+}
+
+
+.card-icone svg {
+
+    width: 19px;
+    height: 19px;
+
+}
+
+
+.card-icone.alerta {
+
+    background: var(--warning-bg);
+
+    color: var(--warning);
+
+}
+
+
+.card-icone.analise {
+
+    background: rgba(214, 184, 76, 0.14);
+
+    color: #b18d17;
+
+}
+
+
+.card-icone.resolvida {
+
+    background: var(--success-bg);
+
+    color: var(--success);
+
+}
+
+
+
+/* =====================================================
+   TABELA
+===================================================== */
+
+.table-container {
+
+    margin-top: 18px;
+
+    overflow-x: auto;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: 10px;
+
+    box-shadow: var(--shadow);
+
+}
+
+
+table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    min-width: 900px;
+
+}
+
+
+thead {
+
+    background: #f5f7f5;
+
+}
+
+
+th {
+
+    height: 46px;
+
+    padding: 0 16px;
+
+    text-align: left;
+
+    border-bottom: 1px solid var(--border);
+
+    color: #718078;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.4px;
+
+}
+
+
+td {
+
+    height: 62px;
+
+    padding: 10px 16px;
+
+    border-bottom: 1px solid var(--border-light);
+
+    color: var(--text-primary);
+
+    font-size: 12px;
+
+}
+
+
+tbody tr {
+
+    background: var(--surface);
+
+    transition: background 0.15s ease;
+
+}
+
+
+tbody tr:hover {
+
+    background: #f7faf8;
+
+}
+
+
+tbody tr:last-child td {
+
+    border-bottom: none;
+
+}
+
+
+
+/* =====================================================
+   CÓDIGO DA VENDA
+===================================================== */
+
+.codigo-venda {
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    color: var(--primary-light);
+
+}
+
+
+
+/* =====================================================
+   FUNCIONÁRIO
+===================================================== */
+
+.funcionario {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+}
+
+
+.avatar {
+
+    width: 32px;
+    height: 32px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: #e6efeb;
+
+    color: var(--primary-color);
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+}
+
+
+.funcionario strong {
+
+    display: block;
+
+    font-size: 12px;
+
+    color: var(--text-primary);
+
+}
+
+
+.funcionario small {
+
+    display: block;
+
+    margin-top: 2px;
+
+    font-size: 9px;
+
+    color: var(--text-light);
+
+}
+
+
+
+/* =====================================================
+   TIPO DE FRAUDE
+===================================================== */
+
+.tipo-fraude {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 5px 8px;
+
+    border-radius: 5px;
+
+    background: #edf3f0;
+
+    color: #466359;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+}
+
+
+.valor-venda {
+
+    color: var(--text-primary);
+
+    font-size: 12px;
+
+}
+
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.status {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 82px;
+
+    padding: 5px 9px;
+
+    border-radius: 5px;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+}
+
+
+.status.pendente {
+
+    background: var(--warning-bg);
+
+    color: #9b7600;
+
+}
+
+
+.status.analise {
+
+    background: #e9edf7;
+
+    color: #566b9d;
+
+}
+
+
+.status.resolvida {
+
+    background: var(--success-bg);
+
+    color: var(--success);
+
+}
+
+
+.status.desconhecido {
+
+    background: #edf0ef;
+
+    color: #68746f;
+
+}
+
+
+
+/* =====================================================
+   BOTÃO VISUALIZAR
+===================================================== */
+
+.btn-visualizar {
+
+    height: 31px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    padding: 0 10px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 6px;
+
+    background: transparent;
+
+    color: var(--primary-light);
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+}
+
+
+.btn-visualizar:hover {
+
+    background: #edf5f1;
+
+    border-color: #b8ccc3;
+
+}
+
+
+.btn-visualizar svg {
+
+    width: 14px;
+    height: 14px;
+
+}
+
+
+
+/* =====================================================
+   SEM RESULTADOS
+===================================================== */
+
+.sem-fraudes {
+
+    height: 190px;
+
+    text-align: center;
+
+}
+
+
+.sem-fraudes svg {
+
+    display: block;
+
+    width: 30px;
+    height: 30px;
+
+    margin: 0 auto 10px;
+
+    color: #a2ada8;
+
+}
+
+
+.sem-fraudes strong {
+
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: var(--text-secondary);
+
+    font-size: 13px;
+
+}
+
+
+.sem-fraudes span {
+
+    color: var(--text-light);
+
+    font-size: 11px;
+
+}
+
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+.modal-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(0, 0, 0, 0.42);
+
+    z-index: 9998;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition:
+            opacity 0.2s ease,
+            visibility 0.2s ease;
+
+}
+
+
+.modal-overlay.aberto {
+
+    opacity: 1;
+
+    visibility: visible;
+
+}
+
+
+.modal-fraude {
+
+    width: 100%;
+
+    max-width: 560px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: 12px;
+
+    box-shadow:
+            0 20px 50px rgba(0, 0, 0, 0.22);
+
+    transform: translateY(-8px);
+
+    transition: transform 0.2s ease;
+
+}
+
+
+.modal-overlay.aberto .modal-fraude {
+
+    transform: translateY(0);
+
+}
+
+
+.modal-header {
+
+    display: flex;
+
+    align-items: flex-start;
+    justify-content: space-between;
+
+    padding: 20px;
+
+    border-bottom: 1px solid var(--border);
+
+}
+
+
+.modal-label {
+
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: var(--text-light);
+
+    font-size: 10px;
+
+    text-transform: uppercase;
+
+    font-weight: 700;
+
+}
+
+
+.modal-header h3 {
+
+    color: var(--text-primary);
+
+    font-size: 18px;
+
+}
+
+
+.modal-fechar {
+
+    width: 32px;
+    height: 32px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+
+    border-radius: 6px;
+
+    background: transparent;
+
+    color: var(--text-secondary);
+
+    cursor: pointer;
+
+}
+
+
+.modal-fechar:hover {
+
+    background: var(--surface-soft);
+
+    color: var(--danger);
+
+}
+
+
+.modal-fechar svg {
+
+    width: 17px;
+    height: 17px;
+
+}
+
+
+
+/* =====================================================
+   CONTEÚDO MODAL
+===================================================== */
+
+.modal-conteudo {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 14px;
+
+    padding: 20px;
+
+}
+
+
+.modal-item {
+
+    padding: 11px;
+
+    border: 1px solid var(--border-light);
+
+    border-radius: 7px;
+
+    background: var(--surface-soft);
+
+}
+
+
+.modal-item span,
+.modal-descricao span,
+.modal-status span {
+
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: var(--text-light);
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+}
+
+
+.modal-item strong {
+
+    color: var(--text-primary);
+
+    font-size: 12px;
+
+}
+
+
+.modal-descricao {
+
+    grid-column: 1 / -1;
+
+    padding: 11px;
+
+    border: 1px solid var(--border-light);
+
+    border-radius: 7px;
+
+    background: var(--surface-soft);
+
+}
+
+
+.modal-descricao p {
+
+    color: var(--text-secondary);
+
+    font-size: 12px;
+
+    line-height: 1.5;
+
+}
+
+
+.modal-status {
+
+    grid-column: 1 / -1;
+
+}
+
+
+
+/* =====================================================
+   RODAPÉ MODAL
+===================================================== */
+
+.modal-footer {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    padding: 14px 20px;
+
+    border-top: 1px solid var(--border);
+
+}
+
+
+.btn-modal-fechar {
+
+    height: 34px;
+
+    padding: 0 15px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 6px;
+
+    background: transparent;
+
+    color: var(--text-secondary);
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+}
+
+
+.btn-modal-fechar:hover {
+
+    background: var(--surface-soft);
+
+}
+
+
+
+/* =====================================================
+   DARK MODE
+===================================================== */
+
+body.tema-escuro .topbar {
+
+    background: var(--surface);
+
+    border-color: var(--border);
+
+}
+
+
+body.tema-escuro .content {
+
+    background:
+            radial-gradient(
+                    circle at 85% 0%,
+                    rgba(214, 184, 76, 0.06),
+                    transparent 28%
+            ),
+            linear-gradient(
+                    135deg,
+                    #121a17 0%,
+                    #17201d 45%,
+                    #111916 100%
+            );
+
+}
+
+
+body.tema-escuro .content h2 {
+
+    color: var(--text-primary);
+
+}
+
+
+body.tema-escuro .pagina-label {
+
+    color: var(--text-secondary);
+
+}
+
+
+
+/* FILTRO */
+
+body.tema-escuro .filtro {
+
+    background: var(--surface);
+
+    border-color: var(--border);
+
+}
+
+
+body.tema-escuro .campo label {
+
+    color: var(--text-secondary);
+
+}
+
+
+body.tema-escuro .campo select {
+
+    background: var(--surface);
+
+    color: var(--text-primary);
+
+    border-color: var(--border);
+
+}
+
+
+body.tema-escuro .btn-limpar {
+
+    border-color: var(--border);
+
+    color: var(--text-secondary);
+
+}
+
+
+body.tema-escuro .btn-limpar:hover {
+
+    background: var(--surface-soft);
+
+}
+
+
+
+/* RESUMO */
+
+body.tema-escuro .card-resumo {
+
+    background: var(--surface);
+
+    border-color: var(--border);
+
+    box-shadow:
+            0 3px 12px rgba(0, 0, 0, 0.20);
+
+}
+
+
+body.tema-escuro .card-label {
+
+    color: var(--text-secondary);
+
+}
+
+
+body.tema-escuro .card-topo strong {
+
+    color: var(--text-primary);
+
+}
+
+
+body.tema-escuro .card-descricao {
+
+    color: var(--text-light);
+
+}
+
+
+
+/* TABELA */
+
+body.tema-escuro .table-container {
+
+    background: var(--surface);
+
+    border-color: var(--border);
+
+}
+
+
+body.tema-escuro thead {
+
+    background: #202c27;
+
+}
+
+
+body.tema-escuro th {
+
+    color: var(--text-secondary);
+
+    border-color: var(--border);
+
+}
+
+
+body.tema-escuro tbody tr {
+
+    background: var(--surface);
+
+}
+
+
+body.tema-escuro tbody tr:hover {
+
+    background: #25332d;
+
+}
+
+
+body.tema-escuro td {
+
+    color: var(--text-primary);
+
+    border-color: var(--border-light);
+
+}
+
+
+body.tema-escuro .funcionario strong {
+
+    color: var(--text-primary);
+
+}
+
+
+body.tema-escuro .funcionario small {
+
+    color: var(--text-light);
+
+}
+
+
+body.tema-escuro .avatar {
+
+    background: rgba(25, 135, 84, 0.18);
+
+    color: #52c997;
+
+}
+
+
+body.tema-escuro .tipo-fraude {
+
+    background: #26352f;
+
+    color: #b7c8c0;
+
+}
+
+
+body.tema-escuro .btn-visualizar {
+
+    border-color: var(--border);
+
+    color: #67c9a3;
+
+}
+
+
+body.tema-escuro .btn-visualizar:hover {
+
+    background: #25332d;
+
+}
+
+
+
+/* MODAL */
+
+body.tema-escuro .modal-fraude {
+
+    background: var(--surface);
+
+    border-color: var(--border);
+
+}
+
+
+body.tema-escuro .modal-header {
+
+    border-color: var(--border);
+
+}
+
+
+body.tema-escuro .modal-header h3 {
+
+    color: var(--text-primary);
+
+}
+
+
+body.tema-escuro .modal-item,
+body.tema-escuro .modal-descricao {
+
+    background: var(--surface-soft);
+
+    border-color: var(--border);
+
+}
+
+
+body.tema-escuro .modal-item strong {
+
+    color: var(--text-primary);
+
+}
+
+
+body.tema-escuro .modal-descricao p {
+
+    color: var(--text-secondary);
+
+}
+
+
+body.tema-escuro .modal-footer {
+
+    border-color: var(--border);
+
+}
+
+
+
+/* =====================================================
+   RESPONSIVO
+===================================================== */
+
+@media (max-width: 1100px) {
+
+    .resumo-fraudes {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+
+    .filtro-resumo {
+
+        width: 100%;
+
+        margin-left: 0;
+
+        padding-top: 10px;
+
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .content {
+
+        padding: 20px 15px;
+
+    }
+
+
+    .topbar {
+
+        padding: 0 18px;
+
+    }
+
+
+    .resumo-fraudes {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .filtro {
+
+        align-items: stretch;
+
+        flex-direction: column;
+
+    }
+
+
+    .campo select {
+
+        width: 100%;
+
+    }
+
+
+    .btn,
+    .btn-limpar {
+
+        width: 100%;
+
+    }
+
+
+    .filtro-resumo {
+
+        justify-content: space-between;
+
+    }
+
+
+    .filtro-divisor {
+
+        margin: 0 8px;
+
+    }
+
+
+    .modal-conteudo {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .modal-descricao,
+    .modal-status {
+
+        grid-column: auto;
+
+    }
+
+}
+
+
+
+/* =====================================================
+   FONTE GRANDE
+===================================================== */
+
+body.fonte-grande {
+
+    font-size: 17px;
+
+}
+
+
+body.fonte-grande .campo label {
+
+    font-size: 13px;
+
+}
+
+
+body.fonte-grande .campo select {
+
+    font-size: 14px;
+
+}
+
+
+body.fonte-grande .btn {
+
+    font-size: 14px;
+
+}
+
+
+body.fonte-grande th {
+
+    font-size: 12px;
+
+}
+
+
+body.fonte-grande td {
+
+    font-size: 13px;
+
+}

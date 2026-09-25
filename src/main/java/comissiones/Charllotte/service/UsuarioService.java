@@ -232,4 +232,24 @@ public class UsuarioService {
 
         usuarioRepository.save(usuario);
     }
+    public boolean alterarSenha(
+            Usuario usuario,
+            String senhaAtual,
+            String novaSenha,
+            String confirmarNovaSenha) {
+
+        if (!usuario.getSenha().equals(senhaAtual)) {
+            return false;
+        }
+
+        if (!novaSenha.equals(confirmarNovaSenha)) {
+            return false;
+        }
+
+        usuario.setSenha(novaSenha);
+
+        usuarioRepository.save(usuario);
+
+        return true;
+    }
 }
