@@ -190,3 +190,157 @@ body {
 .login-button:active {
     transform: scale(0.99);
 }
+/* =====================================================
+   MODO ESCURO
+===================================================== */
+
+body.tema-escuro {
+
+    background-color: #101815;
+
+}
+
+
+/* =====================================================
+   CARD DE LOGIN
+===================================================== */
+
+body.tema-escuro .login-box {
+
+    background-color: #1b2621;
+
+    box-shadow:
+            0 10px 35px rgba(0, 0, 0, 0.35);
+
+}
+
+
+/* =====================================================
+   LOGO
+===================================================== */
+
+body.tema-escuro .logo-title {
+
+    color: #91e1d4;
+
+}
+
+
+body.tema-escuro .logo-subtitle {
+
+    color: #9aa9a3;
+
+}
+
+
+/* =====================================================
+   PERFIL
+===================================================== */
+
+body.tema-escuro .section-title {
+
+    color: #aebbb5;
+
+}
+
+
+body.tema-escuro .profile-card {
+
+    background-color: #1f2c26;
+
+    border-color: #34433c;
+
+    color: #dce5e1;
+
+}
+
+
+body.tema-escuro .profile-icon {
+
+    color: #8c9b95;
+
+}
+
+
+body.tema-escuro .profile-card:hover {
+
+    border-color: var(--terciary-color);
+
+}
+
+
+body.tema-escuro .profile-card.selected {
+
+    background-color: #26352e;
+
+    border-color: var(--terciary-color);
+
+    color: var(--terciary-color);
+
+}
+
+
+body.tema-escuro .profile-card.selected .profile-icon {
+
+    color: var(--terciary-color);
+
+}
+
+
+/* =====================================================
+   CAMPOS
+===================================================== */
+
+body.tema-escuro .input-group label {
+
+    color: #c4cfca;
+
+}
+
+
+body.tema-escuro .input-group input {
+
+    background-color: #202d27;
+
+    border-color: #3a4a43;
+
+    color: #e1e9e5;
+
+}
+
+
+body.tema-escuro .input-group input::placeholder {
+
+    color: #82918a;
+
+}
+
+
+body.tema-escuro .input-group input:focus {
+
+    border-color: var(--terciary-color);
+
+    box-shadow:
+            0 0 0 2px rgba(214, 173, 50, 0.18);
+
+}
+
+
+/* =====================================================
+   BOTÃO
+===================================================== */
+
+body.tema-escuro .login-button {
+
+    background-color: var(--terciary-color);
+
+    color: #202020;
+
+}
+
+
+body.tema-escuro .login-button:hover {
+
+    background-color: #e0b83e;
+
+}

@@ -4,13 +4,16 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import comissiones.Charllotte.config.AuthUtil;
+import comissiones.Charllotte.model.Comissao;
 import comissiones.Charllotte.model.StatusVenda;
 import comissiones.Charllotte.model.Usuario;
 import comissiones.Charllotte.model.Venda;
@@ -27,6 +30,7 @@ public class DashBoardController {
     private final VendaService vendaService;
     private final ComissaoService comissaoService;
 
+
     public DashBoardController(
             UsuarioService usuarioService,
             VendaService vendaService,
@@ -37,165 +41,68 @@ public class DashBoardController {
         this.comissaoService = comissaoService;
     }
 
+
+    // =========================================================
+    // DASHBOARD
+    // =========================================================
+
     @GetMapping("/home")
     public String mostrarDashboard(
             HttpSession session,
             Model model) {
 
-        String email = AuthUtil.getUsuarioLogado(session);
+        /*
+         * =====================================================
+         * BUSCA USUÁRIO LOGADO
+         * =====================================================
+         */
+
+        String email =
+                AuthUtil.getUsuarioLogado(session);
+
 
         if (email == null || email.isBlank()) {
+
             return "redirect:/login";
         }
 
-        Usuario usuario = usuarioService.buscarPorEmail(email);
+
+        Usuario usuario =
+                usuarioService.buscarPorEmail(email);
+
 
         if (usuario == null) {
+
+            session.invalidate();
+
             return "redirect:/login";
         }
-
-        model.addAttribute("usuarioLogado", usuario);
 
 
         /*
          * =====================================================
-         * DASHBOARD DO FUNCIONÁRIO
+         * USUÁRIO LOGADO
          * =====================================================
          */
 
-        if (!usuario.getAdmin()) {
-
-            List<Venda> minhasVendas =
-                    vendaService.listarPorFuncionario(usuario.getId());
-
-            /*
-             * VENDAS REALIZADAS
-             */
-
-            List<Venda> minhasVendasRealizadas =
-                    minhasVendas.stream()
-                            .filter(venda ->
-                                    venda.getStatus() == StatusVenda.REALIZADA
-                            )
-                            .toList();
+        model.addAttribute(
+                "usuarioLogado",
+                usuario
+        );
 
 
-            /*
-             * DATA ATUAL
-             */
+        /*
+         * =====================================================
+         * FUNCIONÁRIO
+         * =====================================================
+         */
 
-            LocalDate hoje = LocalDate.now();
+        if (!Boolean.TRUE.equals(usuario.getAdmin())) {
 
-            int mesAtual = hoje.getMonthValue();
-
-            int anoAtual = hoje.getYear();
-
-
-            /*
-             * VENDAS DE HOJE
-             */
-
-            List<Venda> vendasHoje =
-                    minhasVendasRealizadas.stream()
-                            .filter(venda ->
-                                    venda.getDataVenda() != null &&
-                                            venda.getDataVenda().toLocalDate().equals(hoje)
-                            )
-                            .toList();
-
-
-            /*
-             * VENDAS DO MÊS
-             */
-
-            List<Venda> vendasDoMes =
-                    minhasVendasRealizadas.stream()
-                            .filter(venda ->
-                                    venda.getDataVenda() != null &&
-                                            venda.getDataVenda().getMonthValue() == mesAtual &&
-                                            venda.getDataVenda().getYear() == anoAtual
-                            )
-                            .toList();
-
-
-            /*
-             * TOTAIS
-             */
-
-            BigDecimal valorVendasHoje =
-                    vendaService.somarValorVendas(vendasHoje);
-
-            BigDecimal valorVendasMes =
-                    vendaService.somarValorVendas(vendasDoMes);
-
-
-            /*
-             * COMISSÃO DO MÊS
-             */
-
-            BigDecimal comissaoMes =
-                    comissaoService.somarComissaoPorFuncionario(
-                            usuario.getId()
-                    );
-
-
-            /*
-             * ÚLTIMAS VENDAS
-             */
-
-            List<Venda> vendasRecentes =
-                    minhasVendasRealizadas.stream()
-                            .sorted(
-                                    Comparator.comparing(
-                                            Venda::getDataVenda,
-                                            Comparator.nullsLast(
-                                                    Comparator.naturalOrder()
-                                            )
-                                    ).reversed()
-                            )
-                            .limit(8)
-                            .toList();
-
-
-            /*
-             * MODEL DO FUNCIONÁRIO
-             */
-
-            model.addAttribute(
-                    "vendasHoje",
-                    vendasHoje.size()
+            prepararDashboardFuncionario(
+                    usuario,
+                    model
             );
-
-            model.addAttribute(
-                    "valorVendasHoje",
-                    valorVendasHoje
-            );
-
-            model.addAttribute(
-                    "totalVendasMes",
-                    vendasDoMes.size()
-            );
-
-            model.addAttribute(
-                    "valorVendasMes",
-                    valorVendasMes
-            );
-
-            model.addAttribute(
-                    "comissaoMes",
-                    comissaoMes
-            );
-
-            model.addAttribute(
-                    "vendasRecentes",
-                    vendasRecentes
-            );
-
-            model.addAttribute(
-                    "dataAtual",
-                    hoje
-            );
-
 
             return "funcionario/Home";
         }
@@ -203,17 +110,379 @@ public class DashBoardController {
 
         /*
          * =====================================================
-         * DASHBOARD DO ADMIN
+         * ADMIN
+         * =====================================================
+         */
+
+        prepararDashboardAdmin(model);
+
+        return "adm/Home";
+    }
+
+
+    // =========================================================
+    // DASHBOARD DO FUNCIONÁRIO
+    // =========================================================
+
+    private void prepararDashboardFuncionario(
+            Usuario usuario,
+            Model model) {
+
+
+        /*
+         * =====================================================
+         * BUSCA SOMENTE AS VENDAS DO FUNCIONÁRIO
+         * =====================================================
+         */
+
+        List<Venda> minhasVendas =
+                vendaService.listarPorFuncionario(
+                        usuario.getId()
+                );
+
+
+        if (minhasVendas == null) {
+
+            minhasVendas = new ArrayList<>();
+        }
+
+
+        /*
+         * =====================================================
+         * SOMENTE VENDAS REALIZADAS
+         * =====================================================
+         */
+
+        List<Venda> minhasVendasRealizadas =
+                minhasVendas.stream()
+                        .filter(venda ->
+                                venda != null
+                                        &&
+                                        venda.getStatus()
+                                                == StatusVenda.REALIZADA
+                        )
+                        .toList();
+
+
+        /*
+         * =====================================================
+         * DATA ATUAL
+         * =====================================================
+         */
+
+        LocalDate hoje =
+                LocalDate.now();
+
+
+        int mesAtual =
+                hoje.getMonthValue();
+
+
+        int anoAtual =
+                hoje.getYear();
+
+
+        /*
+         * =====================================================
+         * VENDAS DE HOJE
+         * =====================================================
+         */
+
+        List<Venda> vendasHoje =
+                minhasVendasRealizadas.stream()
+                        .filter(venda -> {
+
+                            if (venda.getDataVenda() == null) {
+
+                                return false;
+                            }
+
+                            return venda.getDataVenda()
+                                    .toLocalDate()
+                                    .equals(hoje);
+                        })
+                        .toList();
+
+
+        /*
+         * =====================================================
+         * VENDAS DO MÊS
+         * =====================================================
+         */
+
+        List<Venda> vendasDoMes =
+                minhasVendasRealizadas.stream()
+                        .filter(venda -> {
+
+                            if (venda.getDataVenda() == null) {
+
+                                return false;
+                            }
+
+
+                            return
+                                    venda.getDataVenda()
+                                            .getMonthValue()
+                                            == mesAtual
+                                            &&
+                                            venda.getDataVenda()
+                                                    .getYear()
+                                                    == anoAtual;
+                        })
+                        .toList();
+
+
+        /*
+         * =====================================================
+         * VALOR VENDAS HOJE
+         * =====================================================
+         */
+
+        BigDecimal valorVendasHoje =
+                vendaService.somarValorVendas(
+                        vendasHoje
+                );
+
+
+        if (valorVendasHoje == null) {
+
+            valorVendasHoje =
+                    BigDecimal.ZERO;
+        }
+
+
+        /*
+         * =====================================================
+         * VALOR VENDAS DO MÊS
+         * =====================================================
+         */
+
+        BigDecimal valorVendasMes =
+                vendaService.somarValorVendas(
+                        vendasDoMes
+                );
+
+
+        if (valorVendasMes == null) {
+
+            valorVendasMes =
+                    BigDecimal.ZERO;
+        }
+
+
+        /*
+         * =====================================================
+         * COMISSÃO DO FUNCIONÁRIO
+         * =====================================================
+         */
+
+        BigDecimal comissaoMes =
+                comissaoService
+                        .somarComissaoPorFuncionario(
+                                usuario.getId()
+                        );
+
+
+        if (comissaoMes == null) {
+
+            comissaoMes =
+                    BigDecimal.ZERO;
+        }
+
+
+        /*
+         * =====================================================
+         * ÚLTIMAS VENDAS
+         * =====================================================
+         */
+
+        List<Venda> vendasRecentes =
+                minhasVendasRealizadas.stream()
+                        .filter(venda ->
+                                venda != null
+                        )
+                        .sorted(
+                                Comparator.comparing(
+                                        Venda::getDataVenda,
+                                        Comparator.nullsLast(
+                                                Comparator.naturalOrder()
+                                        )
+                                ).reversed()
+                        )
+                        .limit(8)
+                        .toList();
+
+
+        /*
+         * =====================================================
+         * COMISSÃO DE CADA VENDA
+         * =====================================================
+         */
+
+        Map<Integer, BigDecimal> comissoesPorVenda =
+                new HashMap<>();
+
+
+        for (Venda venda :
+                vendasRecentes) {
+
+            if (venda.getId() == null) {
+
+                continue;
+            }
+
+
+            Comissao comissao =
+                    comissaoService.buscarPorVenda(
+                            venda.getId()
+                    );
+
+
+            if (
+                    comissao != null
+                            &&
+                            comissao.getValor() != null
+            ) {
+
+                comissoesPorVenda.put(
+                        venda.getId(),
+                        comissao.getValor()
+                );
+
+            } else {
+
+                comissoesPorVenda.put(
+                        venda.getId(),
+                        BigDecimal.ZERO
+                );
+            }
+        }
+
+
+        /*
+         * =====================================================
+         * MODEL DO FUNCIONÁRIO
+         * =====================================================
+         */
+
+        model.addAttribute(
+                "usuarioLogado",
+                usuario
+        );
+
+
+        model.addAttribute(
+                "vendasHoje",
+                vendasHoje.size()
+        );
+
+
+        model.addAttribute(
+                "valorVendasHoje",
+                valorVendasHoje
+        );
+
+
+        /*
+         * Nome principal usado no HTML
+         */
+
+        model.addAttribute(
+                "vendasMes",
+                vendasDoMes.size()
+        );
+
+
+        /*
+         * Mantido para compatibilidade
+         */
+
+        model.addAttribute(
+                "totalVendasMes",
+                vendasDoMes.size()
+        );
+
+
+        model.addAttribute(
+                "valorVendasMes",
+                valorVendasMes
+        );
+
+
+        model.addAttribute(
+                "comissaoMes",
+                comissaoMes
+        );
+
+
+        model.addAttribute(
+                "vendasRecentes",
+                vendasRecentes
+        );
+
+
+        model.addAttribute(
+                "comissoesPorVenda",
+                comissoesPorVenda
+        );
+
+
+        model.addAttribute(
+                "dataAtual",
+                hoje
+        );
+    }
+
+
+    // =========================================================
+    // DASHBOARD DO ADMIN
+    // =========================================================
+
+    private void prepararDashboardAdmin(
+            Model model) {
+
+
+        /*
+         * =====================================================
+         * TODAS AS VENDAS
          * =====================================================
          */
 
         List<Venda> todasVendas =
                 vendaService.listarTodas();
 
+
+        if (todasVendas == null) {
+
+            todasVendas =
+                    new ArrayList<>();
+        }
+
+
+        /*
+         * =====================================================
+         * VENDAS REALIZADAS
+         * =====================================================
+         */
+
         List<Venda> vendasRealizadas =
                 vendaService.listarPorStatus(
                         StatusVenda.REALIZADA
                 );
+
+
+        if (vendasRealizadas == null) {
+
+            vendasRealizadas =
+                    new ArrayList<>();
+        }
+
+
+        /*
+         * =====================================================
+         * VENDAS CANCELADAS
+         * =====================================================
+         */
 
         List<Venda> vendasCanceladas =
                 vendaService.listarPorStatus(
@@ -221,17 +490,48 @@ public class DashBoardController {
                 );
 
 
+        if (vendasCanceladas == null) {
+
+            vendasCanceladas =
+                    new ArrayList<>();
+        }
+
+
         /*
          * =====================================================
-         * TOTAIS
+         * TOTAL VENDIDO
          * =====================================================
          */
 
         BigDecimal totalVendido =
-                vendaService.somarValorVendas(todasVendas);
+                vendaService.somarValorVendas(
+                        todasVendas
+                );
+
+
+        if (totalVendido == null) {
+
+            totalVendido =
+                    BigDecimal.ZERO;
+        }
+
+
+        /*
+         * =====================================================
+         * TOTAL COMISSÃO
+         * =====================================================
+         */
 
         BigDecimal totalComissao =
-                comissaoService.somarTodasAsComissoes();
+                comissaoService
+                        .somarTodasAsComissoes();
+
+
+        if (totalComissao == null) {
+
+            totalComissao =
+                    BigDecimal.ZERO;
+        }
 
 
         /*
@@ -241,7 +541,9 @@ public class DashBoardController {
          */
 
         int totalFuncionarios =
-                usuarioService.listarTodos().size();
+                usuarioService
+                        .listarTodos()
+                        .size();
 
 
         /*
@@ -252,6 +554,9 @@ public class DashBoardController {
 
         List<Venda> vendasRecentes =
                 todasVendas.stream()
+                        .filter(venda ->
+                                venda != null
+                        )
                         .sorted(
                                 Comparator.comparing(
                                         Venda::getDataVenda,
@@ -266,13 +571,22 @@ public class DashBoardController {
 
         /*
          * =====================================================
-         * GRÁFICO - VENDAS POR MÊS
+         * ANO
          * =====================================================
          */
 
-        int anoAtual = LocalDate.now().getYear();
+        int anoAtual =
+                LocalDate.now().getYear();
+
+
+        /*
+         * =====================================================
+         * MESES
+         * =====================================================
+         */
 
         String[] nomesMeses = {
+
                 "JAN",
                 "FEV",
                 "MAR",
@@ -285,10 +599,19 @@ public class DashBoardController {
                 "OUT",
                 "NOV",
                 "DEZ"
+
         };
+
+
+        /*
+         * =====================================================
+         * VENDAS POR MÊS
+         * =====================================================
+         */
 
         List<BigDecimal> vendasPorMes =
                 new ArrayList<>();
+
 
         for (int mes = 1; mes <= 12; mes++) {
 
@@ -298,16 +621,36 @@ public class DashBoardController {
                             mes
                     );
 
-            BigDecimal totalMes =
-                    vendaService.somarValorVendas(vendasMes);
 
-            vendasPorMes.add(totalMes);
+            if (vendasMes == null) {
+
+                vendasMes =
+                        new ArrayList<>();
+            }
+
+
+            BigDecimal totalMes =
+                    vendaService.somarValorVendas(
+                            vendasMes
+                    );
+
+
+            if (totalMes == null) {
+
+                totalMes =
+                        BigDecimal.ZERO;
+            }
+
+
+            vendasPorMes.add(
+                    totalMes
+            );
         }
 
 
         /*
          * =====================================================
-         * ALTURA DO GRÁFICO
+         * MAIOR VALOR DO GRÁFICO
          * =====================================================
          */
 
@@ -316,35 +659,63 @@ public class DashBoardController {
                         .max(BigDecimal::compareTo)
                         .orElse(BigDecimal.ZERO);
 
+
+        /*
+         * =====================================================
+         * ALTURA DAS BARRAS
+         * =====================================================
+         */
+
         List<Integer> alturasGrafico =
                 new ArrayList<>();
 
-        for (BigDecimal valor : vendasPorMes) {
 
-            if (maiorVendaMes.compareTo(BigDecimal.ZERO) == 0) {
+        for (BigDecimal valor :
+                vendasPorMes) {
+
+
+            if (
+                    maiorVendaMes
+                            .compareTo(
+                                    BigDecimal.ZERO
+                            )
+                            == 0
+            ) {
 
                 alturasGrafico.add(0);
 
-            } else {
-
-                int altura =
-                        valor
-                                .multiply(BigDecimal.valueOf(100))
-                                .divide(
-                                        maiorVendaMes,
-                                        0,
-                                        java.math.RoundingMode.HALF_UP
-                                )
-                                .intValue();
-
-                if (altura < 4 &&
-                        valor.compareTo(BigDecimal.ZERO) > 0) {
-
-                    altura = 4;
-                }
-
-                alturasGrafico.add(altura);
+                continue;
             }
+
+
+            int altura =
+                    valor
+                            .multiply(
+                                    BigDecimal.valueOf(100)
+                            )
+                            .divide(
+                                    maiorVendaMes,
+                                    0,
+                                    java.math.RoundingMode.HALF_UP
+                            )
+                            .intValue();
+
+
+            if (
+                    altura < 4
+                            &&
+                            valor.compareTo(
+                                    BigDecimal.ZERO
+                            ) > 0
+            ) {
+
+                altura = 4;
+            }
+
+
+            alturasGrafico.add(
+                    altura
+            );
         }
 
 
@@ -359,57 +730,64 @@ public class DashBoardController {
                 totalFuncionarios
         );
 
+
         model.addAttribute(
                 "totalVendas",
                 vendasRealizadas.size()
         );
+
 
         model.addAttribute(
                 "totalVendido",
                 totalVendido
         );
 
+
         model.addAttribute(
                 "totalComissao",
                 totalComissao
         );
+
 
         model.addAttribute(
                 "totalCanceladas",
                 vendasCanceladas.size()
         );
 
+
         model.addAttribute(
                 "vendasRecentes",
                 vendasRecentes
         );
+
 
         model.addAttribute(
                 "nomesMeses",
                 nomesMeses
         );
 
+
         model.addAttribute(
                 "vendasPorMes",
                 vendasPorMes
         );
+
 
         model.addAttribute(
                 "alturasGrafico",
                 alturasGrafico
         );
 
+
         model.addAttribute(
                 "anoAtual",
                 anoAtual
         );
 
+
         model.addAttribute(
                 "dataAtual",
                 LocalDate.now()
         );
-
-
-        return "adm/Home";
     }
 }

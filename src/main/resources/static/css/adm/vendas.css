@@ -1024,3 +1024,241 @@
     }
 
 }
+/* =========================================================
+   DARK MODE - DASHBOARD
+========================================================= */
+
+
+/* =========================================================
+   CABEÇALHO
+========================================================= */
+
+body.tema-escuro .home-header h2 {
+    color: var(--text-primary);
+}
+
+body.tema-escuro .home-header p {
+    color: var(--text-secondary);
+}
+
+body.tema-escuro .home-date {
+    background: var(--surface);
+
+    border-color: var(--border);
+
+    color: var(--text-secondary);
+}
+
+body.tema-escuro .home-date svg {
+    color: var(--accent-color);
+}
+
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+body.tema-escuro .dashboard-card {
+
+    background: var(--surface);
+
+    border-color: var(--border);
+
+    box-shadow:
+            0 3px 12px rgba(0, 0, 0, 0.20);
+}
+
+body.tema-escuro .dashboard-card:hover {
+
+    box-shadow:
+            0 7px 20px rgba(0, 0, 0, 0.30);
+}
+
+body.tema-escuro .card-title {
+    color: var(--text-secondary);
+}
+
+body.tema-escuro .card-value {
+    color: #dce8e2;
+}
+
+body.tema-escuro .card-description {
+    color: var(--text-light);
+}
+
+
+/* =========================================================
+   ÍCONES DOS CARDS
+========================================================= */
+
+body.tema-escuro .card-icon.green {
+    background: rgba(25, 135, 84, 0.18);
+
+    color: #52c997;
+}
+
+body.tema-escuro .card-icon.yellow {
+    background: rgba(214, 184, 76, 0.16);
+
+    color: #e1c65d;
+}
+
+
+/* =========================================================
+   PAINÉIS
+========================================================= */
+
+body.tema-escuro .dashboard-panel {
+
+    background: var(--surface);
+
+    border-color: var(--border);
+
+    box-shadow:
+            0 3px 12px rgba(0, 0, 0, 0.20);
+}
+
+body.tema-escuro .panel-title {
+    color: var(--text-primary);
+}
+
+body.tema-escuro .panel-subtitle {
+    color: var(--text-secondary);
+}
+
+body.tema-escuro .panel-icon {
+
+    background: rgba(25, 135, 84, 0.18);
+
+    color: #52c997;
+}
+
+
+/* =========================================================
+   GRÁFICO
+========================================================= */
+
+body.tema-escuro .chart-bars {
+
+    border-color: var(--border);
+}
+
+body.tema-escuro .chart-value {
+    color: var(--text-secondary);
+}
+
+body.tema-escuro .chart-label {
+    color: var(--text-secondary);
+}
+
+body.tema-escuro .chart-bar {
+
+    background:
+            linear-gradient(
+                    180deg,
+                    #20a879 0%,
+                    #087053 100%
+            );
+
+    box-shadow:
+            0 3px 8px rgba(8, 112, 83, 0.28);
+}
+
+
+/* =========================================================
+   RESUMO
+========================================================= */
+
+body.tema-escuro .summary-item {
+
+    background: #222e29;
+}
+
+body.tema-escuro .summary-item span {
+    color: var(--text-secondary);
+}
+
+body.tema-escuro .summary-item strong {
+    color: var(--text-primary);
+}
+
+
+/* =========================================================
+   ÍCONES DO RESUMO
+========================================================= */
+
+body.tema-escuro .summary-item-icon.green {
+
+    background: rgba(25, 135, 84, 0.18);
+
+    color: #52c997;
+}
+
+body.tema-escuro .summary-item-icon.red {
+
+    background: rgba(220, 53, 69, 0.16);
+
+    color: #f07883;
+}
+
+body.tema-escuro .summary-item-icon.yellow {
+
+    background: rgba(214, 184, 76, 0.16);
+
+    color: #e1c65d;
+}
+
+
+/* =========================================================
+   ATIVIDADE
+========================================================= */
+
+body.tema-escuro .activity-item {
+
+    border-color: var(--border-light);
+}
+
+body.tema-escuro .activity-title {
+    color: var(--text-primary);
+}
+
+body.tema-escuro .activity-description {
+    color: var(--text-secondary);
+}
+
+body.tema-escuro .activity-description strong {
+    color: #52c997;
+}
+
+body.tema-escuro .activity-time {
+    color: var(--text-light);
+}
+
+
+/* =========================================================
+   ÍCONE DA ATIVIDADE
+========================================================= */
+
+body.tema-escuro .activity-icon {
+
+    background: rgba(25, 135, 84, 0.18);
+
+    color: #52c997;
+}
+
+
+/* =========================================================
+   ESTADO VAZIO
+========================================================= */
+
+body.tema-escuro .empty-state {
+    color: var(--text-light);
+}
+
+body.tema-escuro .empty-state svg {
+    color: #687a71;
+}
+
+body.tema-escuro .empty-state p {
+    color: var(--text-secondary);
+}

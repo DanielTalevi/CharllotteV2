@@ -124,3 +124,105 @@ body {
     width: 17px;
     height: 17px;
 }
+/* =====================================================
+   MODO ESCURO
+===================================================== */
+
+body.tema-escuro {
+
+    background: var(--background);
+
+    color: var(--text-primary);
+
+}
+
+
+/* =====================================================
+   PÁGINA DE ERRO
+===================================================== */
+
+body.tema-escuro .pagina-erro {
+
+    background: var(--background);
+
+}
+
+
+/* =====================================================
+   CARD DE ERRO
+===================================================== */
+
+body.tema-escuro .erro-container {
+
+    background: var(--surface);
+
+    box-shadow:
+            0 10px 35px rgba(0, 0, 0, 0.30);
+
+}
+
+
+/* =====================================================
+   CÓDIGO DO ERRO
+===================================================== */
+
+body.tema-escuro .erro-codigo {
+
+    color: #52c997;
+
+}
+
+
+/* =====================================================
+   ÍCONE
+===================================================== */
+
+body.tema-escuro .erro-icone {
+
+    background: rgba(25, 135, 84, 0.18);
+
+    color: #52c997;
+
+}
+
+
+/* =====================================================
+   TÍTULO
+===================================================== */
+
+body.tema-escuro .erro-container h1 {
+
+    color: var(--text-primary);
+
+}
+
+
+/* =====================================================
+   DESCRIÇÃO
+===================================================== */
+
+body.tema-escuro .erro-container p {
+
+    color: var(--text-secondary);
+
+}
+
+
+/* =====================================================
+   BOTÃO
+===================================================== */
+
+body.tema-escuro .btn-voltar {
+
+    background: var(--primary-color);
+
+    color: #ffffff;
+
+}
+
+
+body.tema-escuro .btn-voltar:hover {
+
+    background: var(--primary-light);
+
+}

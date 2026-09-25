@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Registrar Venda - Charllotte</title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/all.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/funcionario/venda.css}">
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar">
+
+
+    <div class="logo-area">
+
+
+        <div class="logo-icon">
+
+            <i data-lucide="landmark"></i>
+
+        </div>
+
+
+        <div class="logo-text">
+
+            <span>Charllotte</span>
+
+            <small>GESTÃO</small>
+
+        </div>
+
+
+    </div>
+
+
+    <nav class="menu">
+
+
+        <a th:href="@{/home}">
+
+            <i data-lucide="layout-dashboard"
+               class="icon-fraudes"></i>
+
+            <span>Dashboard</span>
+
+        </a>
+
+
+        <a th:href="@{/funcionario/venda}"
+           class="active">
+
+            <i data-lucide="shopping-cart"
+               class="icon-relatorios"></i>
+
+            <span>Registrar Venda</span>
+
+        </a>
+
+
+        <a th:href="@{/config}">
+
+            <i data-lucide="settings"
+               class="icon-config"></i>
+
+            <span>Configurações</span>
+
+        </a>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <a th:href="@{/logout}"
+           class="logout">
+
+            <i data-lucide="log-out"></i>
+
+            <span>Sair</span>
+
+        </a>
+
+    </div>
+
+</aside>
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="main">
+
+
+    <header class="topbar">
+
+        <div>
+
+            <h1>
+                Registrar Venda
+            </h1>
+
+            <p class="usuario-logado">
+                Registre uma nova venda
+            </p>
+
+        </div>
+
+
+        <div class="usuario-logado">
+
+            <i data-lucide="user"
+               class="user-icon"></i>
+
+            <span th:text="${usuarioLogado.nome}"
+                  class="user-icon">
+                Funcionário
+            </span>
+
+        </div>
+
+    </header>
+
+
+    <!-- =================================================
+         CONTEÚDO
+    ================================================= -->
+
+    <div class="funcionario-venda-content">
+
+
+        <h2>
+            Registrar Venda
+        </h2>
+
+
+        <div class="venda-card">
+
+
+            <div class="venda-card-header">
+
+                <span>
+                    Nova Venda
+                </span>
+
+            </div>
+
+
+            <form method="post"
+                  th:action="@{/funcionario/venda}"
+                  id="formVenda">
+
+
+                <div class="venda-form-content">
+
+
+                    <!-- PRODUTOS -->
+
+                    <label class="venda-label">
+                        Selecione o produto
+                    </label>
+
+
+                    <div class="produtos-grid">
+
+
+                        <button type="button"
+                                class="produto-venda"
+                                th:each="produto : ${produtos}"
+                                th:data-id="${produto.id}"
+                                th:data-preco="${produto.preco}"
+                                th:data-comissao="${produto.percentualComissao}"
+                                th:data-nome="${produto.nome}">
+
+
+                            <strong
+                                    th:text="${produto.nome}">
+                                Gasolina Comum
+                            </strong>
+
+
+                            <span
+                                    th:text="${'R$ ' + #numbers.formatDecimal(produto.preco, 1, 2, 'COMMA') + '/' + produto.unidade}">
+                                R$ 7,00/L
+                            </span>
+
+
+                        </button>
+
+
+                    </div>
+
+
+                    <input type="hidden"
+                           name="produtoIds"
+                           id="idProduto">
+
+
+                    <!-- QUANTIDADE -->
+
+                    <div class="venda-campo">
+
+
+                        <label for="quantidade">
+                            Quantidade
+                        </label>
+
+
+                        <input type="number"
+                               id="quantidade"
+                               name="quantidades"
+                               min="0.01"
+                               step="0.01"
+                               placeholder="0,00"
+                               required>
+
+
+                    </div>
+
+
+                    <!-- RESUMO -->
+
+                    <div class="venda-resumo">
+
+
+                        <div>
+
+                            <span>
+                                Total da Venda
+                            </span>
+
+
+                            <strong id="totalVenda">
+                                R$ 0,00
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Sua Comissão
+                            </span>
+
+
+                            <strong id="valorComissao">
+                                R$ 0,00
+                            </strong>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <!-- BOTÃO -->
+
+                    <div class="venda-footer">
+
+
+                        <button type="submit"
+                                class="btn btn-principal"
+                                id="btnConfirmarVenda"
+                                disabled>
+
+                            Confirmar Venda
+
+                        </button>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </form>
+
+
+        </div>
+
+
+    </div>
+
+
+</main>
+
+
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<script th:src="@{/js/all.js}"></script>
+
+<script th:src="@{/js/funcionario/venda.js}"></script>
+
+
+</body>
+
+</html>

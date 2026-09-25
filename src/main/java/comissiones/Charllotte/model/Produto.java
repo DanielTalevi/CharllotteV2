@@ -28,18 +28,42 @@ public class Produto {
     private String unidade;
 
     @Column(
-        name = "percentual_comissao",
-        nullable = false,
-        precision = 5,
-        scale = 2
+            name = "percentual_comissao",
+            nullable = false,
+            precision = 5,
+            scale = 2
     )
     private BigDecimal percentualComissao;
 
     @Column(nullable = false)
     private Boolean status = true;
 
+    /*
+     * =====================================================
+     * ESTOQUE
+     * =====================================================
+     */
+
+    @Column(
+            name = "quantidade_estoque",
+            nullable = false,
+            precision = 12,
+            scale = 2
+    )
+    private BigDecimal quantidadeEstoque = BigDecimal.ZERO;
+
+    @Column(
+            name = "estoque_minimo",
+            nullable = false,
+            precision = 12,
+            scale = 2
+    )
+    private BigDecimal estoqueMinimo = BigDecimal.ZERO;
+
+
     public Produto() {
     }
+
 
     public Integer getId() {
         return id;
@@ -49,6 +73,7 @@ public class Produto {
         this.id = id;
     }
 
+
     public String getNome() {
         return nome;
     }
@@ -56,6 +81,7 @@ public class Produto {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
 
     public BigDecimal getPreco() {
         return preco;
@@ -65,6 +91,7 @@ public class Produto {
         this.preco = preco;
     }
 
+
     public String getUnidade() {
         return unidade;
     }
@@ -73,13 +100,18 @@ public class Produto {
         this.unidade = unidade;
     }
 
+
     public BigDecimal getPercentualComissao() {
         return percentualComissao;
     }
 
-    public void setPercentualComissao(BigDecimal percentualComissao) {
-        this.percentualComissao = percentualComissao;
+    public void setPercentualComissao(
+            BigDecimal percentualComissao) {
+
+        this.percentualComissao =
+                percentualComissao;
     }
+
 
     public Boolean getStatus() {
         return status;
@@ -87,5 +119,29 @@ public class Produto {
 
     public void setStatus(Boolean status) {
         this.status = status;
+    }
+
+
+    public BigDecimal getQuantidadeEstoque() {
+        return quantidadeEstoque;
+    }
+
+    public void setQuantidadeEstoque(
+            BigDecimal quantidadeEstoque) {
+
+        this.quantidadeEstoque =
+                quantidadeEstoque;
+    }
+
+
+    public BigDecimal getEstoqueMinimo() {
+        return estoqueMinimo;
+    }
+
+    public void setEstoqueMinimo(
+            BigDecimal estoqueMinimo) {
+
+        this.estoqueMinimo =
+                estoqueMinimo;
     }
 }

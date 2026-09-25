@@ -26,17 +26,30 @@ public class VendaService {
 
     private final ComissaoService comissaoService;
 
+    private final FraudeService fraudeService;
+
 
     public VendaService(
             VendaRepository vendaRepository,
             ProdutoRepository produtoRepository,
             EstoqueService estoqueService,
-            ComissaoService comissaoService) {
+            ComissaoService comissaoService,
+            FraudeService fraudeService) {
 
-        this.vendaRepository = vendaRepository;
-        this.produtoRepository = produtoRepository;
-        this.estoqueService = estoqueService;
-        this.comissaoService = comissaoService;
+        this.vendaRepository =
+                vendaRepository;
+
+        this.produtoRepository =
+                produtoRepository;
+
+        this.estoqueService =
+                estoqueService;
+
+        this.comissaoService =
+                comissaoService;
+
+        this.fraudeService =
+                fraudeService;
     }
 
 
@@ -153,13 +166,28 @@ public class VendaService {
                 StatusVenda.REALIZADA);
 
 
+        // =================================================
+        // SALVA A VENDA
+        // =================================================
+
         Venda vendaSalva =
                 vendaRepository.save(
                         venda);
 
 
-        // Gera a comissão da venda
+        // =================================================
+        // GERA A COMISSÃO
+        // =================================================
+
         comissaoService.gerarComissao(
+                vendaSalva);
+
+
+        // =================================================
+        // ANALISA POSSÍVEIS FRAUDES
+        // =================================================
+
+        fraudeService.analisarVenda(
                 vendaSalva);
 
 

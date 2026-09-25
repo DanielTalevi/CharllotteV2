@@ -1,0 +1,1554 @@
+/* =====================================================
+   CHARLLOTTE - CONFIGURAÇÕES
+===================================================== */
+
+
+/* =====================================================
+   CONTEÚDO PRINCIPAL
+===================================================== */
+
+.content {
+
+    padding-bottom: 30px;
+
+}
+
+
+/* =====================================================
+   DESCRIÇÃO DA PÁGINA
+===================================================== */
+
+.pagina-descricao {
+
+    margin-top: 5px;
+
+    margin-bottom: 20px;
+
+    font-size: 13px;
+
+    color: #7a8782;
+
+}
+
+
+/* =====================================================
+   CARD DE CONFIGURAÇÃO
+===================================================== */
+
+.config-card {
+
+    background: #ffffff;
+
+    border: 1px solid #e1e7e4;
+
+    border-radius: 8px;
+
+    padding: 20px;
+
+    box-shadow:
+            0 2px 10px rgba(0, 0, 0, 0.04);
+
+}
+
+
+/* =====================================================
+   CARD PRINCIPAL - CONTA
+===================================================== */
+
+.conta-card {
+
+    margin-bottom: 18px;
+
+}
+
+
+/* =====================================================
+   CABEÇALHO DO CARD
+===================================================== */
+
+.config-card-header {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    margin-bottom: 20px;
+
+}
+
+
+/* =====================================================
+   ÍCONE DO CARD
+===================================================== */
+
+.config-icon {
+
+    width: 40px;
+
+    height: 40px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 8px;
+
+    background: #e6f3ee;
+
+}
+
+
+.config-icon svg {
+
+    width: 20px;
+
+    height: 20px;
+
+    color: #063f30;
+
+    stroke: #063f30;
+
+}
+
+
+/* =====================================================
+   TÍTULO DO CARD
+===================================================== */
+
+.config-card-header .card-label {
+
+    display: block;
+
+    margin-bottom: 3px;
+
+    font-size: 11px;
+
+    color: #65716d;
+
+}
+
+
+.config-card-header strong {
+
+    display: block;
+
+    color: #063f30;
+
+    font-size: 17px;
+
+    font-weight: 600;
+
+}
+
+
+/* =====================================================
+   GRID DO FORMULÁRIO
+===================================================== */
+
+.form-grid {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 16px;
+
+}
+
+
+/* =====================================================
+   CAMPO
+===================================================== */
+
+.campo {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+
+}
+
+
+.campo label {
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    color: #65716d;
+
+}
+
+
+/* =====================================================
+   INPUT
+===================================================== */
+
+.campo input {
+
+    width: 100%;
+
+    height: 38px;
+
+    padding: 0 11px;
+
+    border: 1px solid #d9dfdc;
+
+    border-radius: 7px;
+
+    background: #f8faf9;
+
+    color: #303a36;
+
+    font-size: 13px;
+
+    outline: none;
+
+    transition:
+            border-color 0.2s ease,
+            box-shadow 0.2s ease,
+            background-color 0.2s ease;
+
+}
+
+
+.campo input:disabled {
+
+    cursor: not-allowed;
+
+    color: #596762;
+
+    background: #f5f7f6;
+
+}
+
+
+/* =====================================================
+   FOOTER DO CARD
+===================================================== */
+
+.card-footer {
+
+    margin-top: 18px;
+
+    padding-top: 14px;
+
+    border-top: 1px solid #edf1ef;
+
+}
+
+
+.card-footer span {
+
+    font-size: 11px;
+
+    color: #8a9691;
+
+}
+
+
+/* =====================================================
+   GRID DE CONFIGURAÇÕES
+===================================================== */
+
+.config-grid {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 18px;
+
+    margin-bottom: 18px;
+
+}
+
+
+/* =====================================================
+   OPÇÕES
+===================================================== */
+
+.config-options {
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+/* =====================================================
+   OPÇÃO
+===================================================== */
+
+.config-option {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 14px 0;
+
+    border-bottom: 1px solid #edf1ef;
+
+}
+
+
+.config-option:first-child {
+
+    padding-top: 0;
+
+}
+
+
+.config-option:last-child {
+
+    padding-bottom: 0;
+
+    border-bottom: none;
+
+}
+
+
+/* =====================================================
+   INFORMAÇÕES DA OPÇÃO
+===================================================== */
+
+.option-info {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+
+}
+
+
+.option-info span {
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    color: #303a36;
+
+}
+
+
+.option-info small {
+
+    font-size: 10px;
+
+    color: #8a9691;
+
+    line-height: 1.4;
+
+}
+
+
+/* =====================================================
+   SELECT
+===================================================== */
+
+.config-option select {
+
+    height: 35px;
+
+    min-width: 110px;
+
+    padding: 0 10px;
+
+    border: 1px solid #d9dfdc;
+
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    color: #303a36;
+
+    font-size: 12px;
+
+    outline: none;
+
+    cursor: pointer;
+
+    transition:
+            border-color 0.2s ease,
+            box-shadow 0.2s ease;
+
+}
+
+
+.config-option select:hover {
+
+    border-color: #9eb5ac;
+
+}
+
+
+.config-option select:focus {
+
+    border-color: var(--primary-light);
+
+    box-shadow:
+            0 0 0 3px rgba(11, 90, 67, 0.10);
+
+}
+
+
+/* =====================================================
+   SWITCH
+===================================================== */
+
+.switch {
+
+    position: relative;
+
+    width: 40px;
+
+    height: 22px;
+
+    flex-shrink: 0;
+
+}
+
+
+/* =====================================================
+   INPUT DO SWITCH
+===================================================== */
+
+.switch input {
+
+    width: 0;
+
+    height: 0;
+
+    opacity: 0;
+
+}
+
+
+/* =====================================================
+   SLIDER
+===================================================== */
+
+.slider {
+
+    position: absolute;
+
+    inset: 0;
+
+    cursor: pointer;
+
+    background: #cbd5d1;
+
+    border-radius: 20px;
+
+    transition: 0.2s ease;
+
+}
+
+
+.slider::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 16px;
+
+    height: 16px;
+
+    left: 3px;
+
+    top: 3px;
+
+    background: #ffffff;
+
+    border-radius: 50%;
+
+    box-shadow:
+            0 1px 3px rgba(0, 0, 0, 0.20);
+
+    transition: 0.2s ease;
+
+}
+
+
+/* =====================================================
+   SWITCH ATIVO
+===================================================== */
+
+.switch input:checked + .slider {
+
+    background: #063f30;
+
+}
+
+
+.switch input:checked + .slider::before {
+
+    transform: translateX(18px);
+
+}
+
+
+/* =====================================================
+   SEGURANÇA
+===================================================== */
+
+.seguranca-card {
+
+    margin-bottom: 20px;
+
+}
+
+
+.seguranca-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+/* =====================================================
+   ITEM DE SEGURANÇA
+===================================================== */
+
+.seguranca-item {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 15px 0;
+
+    border-bottom: 1px solid #edf1ef;
+
+}
+
+
+.seguranca-item:first-child {
+
+    padding-top: 0;
+
+}
+
+
+.seguranca-item:last-child {
+
+    padding-bottom: 0;
+
+    border-bottom: none;
+
+}
+
+
+/* =====================================================
+   INFORMAÇÕES DE SEGURANÇA
+===================================================== */
+
+.seguranca-info {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+}
+
+
+.item-icon {
+
+    width: 34px;
+
+    height: 34px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 7px;
+
+    background: #f1f5f3;
+
+}
+
+
+.item-icon svg {
+
+    width: 17px;
+
+    height: 17px;
+
+    color: #58756b;
+
+    stroke: #58756b;
+
+}
+
+
+.seguranca-info strong {
+
+    display: block;
+
+    margin-bottom: 3px;
+
+    font-size: 13px;
+
+    color: #303a36;
+
+}
+
+
+.seguranca-info span {
+
+    display: block;
+
+    font-size: 10px;
+
+    color: #8a9691;
+
+}
+
+
+/* =====================================================
+   BOTÃO SECUNDÁRIO
+===================================================== */
+
+.btn-secondary {
+
+    height: 34px;
+
+    padding: 0 14px;
+
+    border: 1px solid #d1dbd6;
+
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    color: #063f30;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+            background-color 0.2s ease,
+            border-color 0.2s ease,
+            transform 0.15s ease;
+
+}
+
+
+.btn-secondary:hover {
+
+    background: #f3f7f5;
+
+    border-color: #9eb5ac;
+
+    transform: translateY(-1px);
+
+}
+
+
+.btn-secondary:active {
+
+    transform: translateY(0);
+
+}
+
+
+/* =====================================================
+   BOTÃO PERIGOSO
+===================================================== */
+
+.btn-danger {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    height: 34px;
+
+    padding: 0 15px;
+
+    border-radius: 7px;
+
+    background: #fff4f4;
+
+    border: 1px solid #f0d1d1;
+
+    color: #c74444;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+            background-color 0.2s ease,
+            border-color 0.2s ease,
+            transform 0.15s ease;
+
+}
+
+
+.btn-danger:hover {
+
+    background: #fde9e9;
+
+    border-color: #e6baba;
+
+    transform: translateY(-1px);
+
+}
+
+
+/* =====================================================
+   STATUS DA CONTA
+===================================================== */
+
+.status-conta {
+
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 0 11px;
+
+    border: 1px solid #d9dfdc;
+
+    border-radius: 7px;
+
+    background: #f8faf9;
+
+    color: #49645a;
+
+    font-size: 12px;
+
+}
+
+
+/* =====================================================
+   PONTO DE STATUS
+===================================================== */
+
+.status-dot {
+
+    width: 8px;
+
+    height: 8px;
+
+    display: inline-block;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: #31805d;
+
+}
+
+
+/* =====================================================
+   SESSÃO ATIVA
+===================================================== */
+
+.sessao-ativa {
+
+    display: flex !important;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 6px 10px;
+
+    border-radius: 20px;
+
+    background: #eaf5ef;
+
+    color: #31805d !important;
+
+    font-size: 10px !important;
+
+    font-weight: 600;
+
+}
+
+
+/* =====================================================
+   MODO ESCURO
+===================================================== */
+
+body.tema-escuro .pagina-descricao {
+
+    color: var(--text-secondary);
+
+}
+
+
+/* =====================================================
+   CARDS
+===================================================== */
+
+body.tema-escuro .config-card {
+
+    background: var(--surface);
+
+    border-color: var(--border);
+
+    box-shadow:
+            0 3px 12px rgba(0, 0, 0, 0.20);
+
+}
+
+
+/* =====================================================
+   CABEÇALHO DOS CARDS
+===================================================== */
+
+body.tema-escuro .config-card-header .card-label {
+
+    color: var(--text-secondary);
+
+}
+
+
+body.tema-escuro .config-card-header strong {
+
+    color: var(--text-primary);
+
+}
+
+
+/* =====================================================
+   ÍCONE DOS CARDS
+===================================================== */
+
+body.tema-escuro .config-icon {
+
+    background: rgba(25, 135, 84, 0.18);
+
+}
+
+
+body.tema-escuro .config-icon svg {
+
+    color: #52c997;
+
+    stroke: #52c997;
+
+}
+
+
+/* =====================================================
+   CAMPOS
+===================================================== */
+
+body.tema-escuro .campo label {
+
+    color: var(--text-secondary);
+
+}
+
+
+body.tema-escuro .campo input {
+
+    background: var(--surface-soft);
+
+    border-color: var(--border);
+
+    color: var(--text-primary);
+
+}
+
+
+body.tema-escuro .campo input:disabled {
+
+    background: #1c2823;
+
+    color: var(--text-secondary);
+
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+body.tema-escuro .card-footer {
+
+    border-color: var(--border-light);
+
+}
+
+
+body.tema-escuro .card-footer span {
+
+    color: var(--text-light);
+
+}
+
+
+/* =====================================================
+   OPÇÕES
+===================================================== */
+
+body.tema-escuro .config-option {
+
+    border-color: var(--border-light);
+
+}
+
+
+body.tema-escuro .option-info span {
+
+    color: var(--text-primary);
+
+}
+
+
+body.tema-escuro .option-info small {
+
+    color: var(--text-light);
+
+}
+
+
+/* =====================================================
+   SELECT
+===================================================== */
+
+body.tema-escuro .config-option select {
+
+    background: var(--surface-soft);
+
+    border-color: var(--border);
+
+    color: var(--text-primary);
+
+}
+
+
+body.tema-escuro .config-option select:hover {
+
+    border-color: var(--primary-light);
+
+}
+
+
+body.tema-escuro .config-option select:focus {
+
+    border-color: var(--primary-light);
+
+    box-shadow:
+            0 0 0 3px rgba(11, 90, 67, 0.18);
+
+}
+
+
+/* =====================================================
+   SWITCH
+===================================================== */
+
+body.tema-escuro .slider {
+
+    background: #46574f;
+
+}
+
+
+body.tema-escuro .slider::before {
+
+    background: #dce8e2;
+
+}
+
+
+body.tema-escuro .switch input:checked + .slider {
+
+    background: var(--primary-light);
+
+}
+
+
+/* =====================================================
+   SEGURANÇA
+===================================================== */
+
+body.tema-escuro .seguranca-item {
+
+    border-color: var(--border-light);
+
+}
+
+
+body.tema-escuro .seguranca-info strong {
+
+    color: var(--text-primary);
+
+}
+
+
+body.tema-escuro .seguranca-info span {
+
+    color: var(--text-light);
+
+}
+
+
+/* =====================================================
+   ÍCONES DE SEGURANÇA
+===================================================== */
+
+body.tema-escuro .item-icon {
+
+    background: #24342d;
+
+}
+
+
+body.tema-escuro .item-icon svg {
+
+    color: #8bb5a5;
+
+    stroke: #8bb5a5;
+
+}
+
+
+/* =====================================================
+   BOTÃO SECUNDÁRIO
+===================================================== */
+
+body.tema-escuro .btn-secondary {
+
+    background: var(--surface-soft);
+
+    border-color: var(--border);
+
+    color: #b9d4c8;
+
+}
+
+
+body.tema-escuro .btn-secondary:hover {
+
+    background: #293932;
+
+    border-color: #50645a;
+
+}
+
+
+/* =====================================================
+   BOTÃO PERIGOSO
+===================================================== */
+
+body.tema-escuro .btn-danger {
+
+    background: rgba(199, 68, 68, 0.12);
+
+    border-color: rgba(199, 68, 68, 0.35);
+
+    color: #f07883;
+
+}
+
+
+body.tema-escuro .btn-danger:hover {
+
+    background: rgba(199, 68, 68, 0.20);
+
+    border-color: rgba(199, 68, 68, 0.50);
+
+}
+
+
+/* =====================================================
+   STATUS DA CONTA
+===================================================== */
+
+body.tema-escuro .status-conta {
+
+    background: var(--surface-soft);
+
+    border-color: var(--border);
+
+    color: #8fd1b0;
+
+}
+
+
+body.tema-escuro .status-dot {
+
+    background: #62cf91;
+
+}
+
+
+/* =====================================================
+   SESSÃO ATIVA
+===================================================== */
+
+body.tema-escuro .sessao-ativa {
+
+    background: rgba(49, 128, 93, 0.20);
+
+    color: #62cf91 !important;
+
+}
+
+
+/* =====================================================
+   RESPONSIVO
+===================================================== */
+
+@media (max-width: 1000px) {
+
+    .config-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+
+@media (max-width: 750px) {
+
+    .form-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .config-card {
+
+        padding: 16px;
+
+    }
+
+
+    .config-option {
+
+        align-items: flex-start;
+
+    }
+
+
+    .seguranca-item {
+
+        align-items: flex-start;
+
+    }
+
+}
+
+
+@media (max-width: 550px) {
+
+    .config-option {
+
+        flex-direction: column;
+
+        gap: 10px;
+
+    }
+
+
+    .config-option select {
+
+        width: 100%;
+
+    }
+
+
+    .seguranca-item {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+    }
+
+
+    .btn-secondary,
+
+    .btn-danger {
+
+        width: 100%;
+
+    }
+
+
+    .seguranca-info {
+
+        width: 100%;
+
+    }
+
+}
+
+/* =====================================================
+   MODAL - ALTERAR SENHA
+===================================================== */
+
+.modal-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(0, 0, 0, 0.55);
+
+    z-index: 9999;
+
+}
+
+
+/* =====================================================
+   MODAL ATIVO
+===================================================== */
+
+.modal-overlay.ativo {
+
+    display: flex;
+
+}
+
+
+/* =====================================================
+   CAIXA DO MODAL
+===================================================== */
+
+.modal-cadastro {
+
+    width: 100%;
+
+    max-width: 560px;
+
+    background: #ffffff;
+
+    border-radius: 12px;
+
+    padding: 28px;
+
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.25);
+
+}
+
+
+/* =====================================================
+   CABEÇALHO
+===================================================== */
+
+.modal-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 25px;
+
+}
+
+
+.modal-label {
+
+    display: block;
+
+    margin-bottom: 5px;
+
+    font-size: 12px;
+
+    color: #68746f;
+
+}
+
+
+.modal-header h2 {
+
+    margin: 0;
+
+    font-size: 22px;
+
+    color: #091c15;
+
+}
+
+
+/* =====================================================
+   BOTÃO FECHAR
+===================================================== */
+
+.modal-fechar {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 36px;
+
+    height: 36px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: transparent;
+
+    color: #68746f;
+
+    cursor: pointer;
+
+}
+
+
+.modal-fechar:hover {
+
+    background: #eef2f0;
+
+    color: #091c15;
+
+}
+
+
+/* =====================================================
+   CAMPOS
+===================================================== */
+
+.form-campo {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+
+}
+
+
+.form-campo label {
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    color: #303a36;
+
+}
+
+
+.form-campo input {
+
+    width: 100%;
+
+    height: 44px;
+
+    padding: 0 45px 0 13px;
+
+    border: 1px solid #d9dfdc;
+
+    border-radius: 7px;
+
+    outline: none;
+
+    font-size: 14px;
+
+    color: #303a36;
+
+}
+
+
+.form-campo input:focus {
+
+    border-color: #063f30;
+
+    box-shadow: 0 0 0 2px rgba(6, 63, 48, 0.10);
+
+}
+
+
+/* =====================================================
+   CAMPO DE SENHA
+===================================================== */
+
+.campo-senha {
+
+    position: relative;
+
+}
+
+
+.campo-senha input {
+
+    padding-right: 45px;
+
+}
+
+
+.btn-mostrar-senha {
+
+    position: absolute;
+
+    top: 50%;
+
+    right: 8px;
+
+    transform: translateY(-50%);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 34px;
+
+    height: 34px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #68746f;
+
+    cursor: pointer;
+
+}
+
+
+.btn-mostrar-senha:hover {
+
+    color: #063f30;
+
+}
+
+
+/* =====================================================
+   RODAPÉ
+===================================================== */
+
+.modal-footer {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-top: 28px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid #e8ecea;
+
+}
+
+
+.btn-cancelar {
+
+    padding: 10px 18px;
+
+    border: 1px solid #d9dfdc;
+
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    color: #53645c;
+
+    cursor: pointer;
+
+}
+
+
+.btn-cancelar:hover {
+
+    background: #f4f6f5;
+
+}
+
+
+.btn-cadastrar {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 10px 18px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: #063f30;
+
+    color: #ffffff;
+
+    cursor: pointer;
+
+}
+
+
+.btn-cadastrar:hover {
+
+    background: #0b5a43;
+
+}

@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Armazém - Charllotte</title>
+
+    <!-- CSS GLOBAL -->
+    <link rel="stylesheet"
+          th:href="@{/css/all.css}">
+
+    <!-- CSS ESPECÍFICO DO ARMAZÉM -->
+    <link rel="stylesheet"
+          th:href="@{/css/adm/armazen.css}">
+
+</head>
+
+
+<body class="armazen-page">
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar">
+
+    <div class="logo-area">
+
+        <div class="logo-icon">
+
+            <i data-lucide="landmark"></i>
+
+        </div>
+
+        <div class="logo-text">
+            <span>Charllotte</span>
+            <small>GESTÃO</small>
+        </div>
+
+    </div>
+
+
+    <nav class="menu">
+
+        <a href="/home"
+           class="menu-item">
+
+            <i data-lucide="layout-dashboard"
+               class="icon-dashboard"></i>
+
+            <span>Dashboard</span>
+
+        </a>
+
+
+        <a href="/funcionario"
+           class="menu-item">
+
+            <i data-lucide="users"
+               class="icon-funcionarios"></i>
+
+            <span>Funcionários</span>
+
+        </a>
+
+
+        <a href="/vendas"
+           class="menu-item">
+
+            <i data-lucide="dollar-sign"
+               class="icon-comissoes"></i>
+
+            <span>Comissões</span>
+
+        </a>
+
+
+        <a href="/fraudes"
+           class="menu-item">
+
+            <i data-lucide="shield-alert"
+               class="icon-fraudes"></i>
+
+            <span>Fraudes</span>
+
+        </a>
+
+
+        <a href="/armazen"
+           class="menu-item active">
+
+            <i data-lucide="package"
+               class="icon-armazem"></i>
+
+            <span>Armazém</span>
+
+        </a>
+
+
+        <a href="/relatorios"
+           class="menu-item">
+
+            <i data-lucide="file-text"
+               class="icon-relatorios"></i>
+
+            <span>Relatórios</span>
+
+        </a>
+
+
+        <a href="/config"
+           class="menu-item">
+
+            <i data-lucide="settings"
+               class="icon-config"></i>
+
+            <span>Configurações</span>
+
+        </a>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <a href="/logout"
+           class="menu-item logout">
+
+            <i data-lucide="log-out"></i>
+
+            <span>Sair</span>
+
+        </a>
+
+    </div>
+
+</aside>
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="main">
+
+
+    <!-- =================================================
+         TOPBAR
+    ================================================= -->
+
+    <header class="topbar">
+
+        <div>
+
+            <h1>
+                Armazém
+            </h1>
+
+            <p class="usuario-logado">
+                Controle de Estoque
+            </p>
+
+        </div>
+
+
+        <div class="usuario-logado">
+
+            <i data-lucide="user"
+               class="user-icon"></i>
+
+            <span th:text="${usuarioLogado.nome}"
+                  class="user-icon">
+                Usuário
+            </span>
+
+        </div>
+
+    </header>
+
+
+    <!-- =================================================
+         CONTEÚDO
+    ================================================= -->
+
+    <section class="content">
+
+
+        <span class="pagina-label">
+
+            Controle de Estoque
+
+        </span>
+
+
+        <div class="titulo-pagina">
+
+
+            <div>
+
+                <h2>
+                    Estoque
+                </h2>
+
+                <p>
+                    Consulte e gerencie os produtos armazenados.
+                </p>
+
+            </div>
+
+
+            <button type="button"
+                    class="btn btn-principal"
+                    id="btnNovoProduto">
+
+                <i data-lucide="plus"></i>
+
+                Novo Produto
+
+            </button>
+
+
+        </div>
+
+
+        <!-- =================================================
+             CARDS
+        ================================================= -->
+
+        <div class="estoque-cards">
+
+
+            <!-- TOTAL PRODUTOS -->
+
+            <div class="estoque-card">
+
+
+                <div class="estoque-card-top">
+
+
+                    <div>
+
+                        <span class="estoque-card-label">
+                            Total de Produtos
+                        </span>
+
+
+                        <strong id="totalProdutos"
+                                th:text="${totalProdutos}">
+                            0
+                        </strong>
+
+
+                        <small>
+                            itens cadastrados
+                        </small>
+
+                    </div>
+
+
+                    <div class="estoque-card-icon">
+
+                        <i data-lucide="package"></i>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+            <!-- ESTOQUE BAIXO -->
+
+            <div class="estoque-card">
+
+
+                <div class="estoque-card-top">
+
+
+                    <div>
+
+                        <span class="estoque-card-label">
+                            Estoque Baixo
+                        </span>
+
+
+                        <strong class="valor-alerta"
+                                id="produtosBaixo"
+                                th:text="${produtosBaixo}">
+                            0
+                        </strong>
+
+
+                        <small>
+                            produtos abaixo do mínimo
+                        </small>
+
+                    </div>
+
+
+                    <div class="estoque-card-icon alerta">
+
+                        <i data-lucide="triangle-alert"></i>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+            <!-- VALOR EM ESTOQUE -->
+
+            <div class="estoque-card">
+
+
+                <div class="estoque-card-top">
+
+
+                    <div>
+
+                        <span class="estoque-card-label">
+                            Valor em Estoque
+                        </span>
+
+
+                        <strong id="valorEstoque"
+                                th:text="${'R$ ' + #numbers.formatDecimal(valorEstoque, 1, 2, 'COMMA')}">
+                            R$ 0,00
+                        </strong>
+
+
+                        <small>
+                            valor total estimado
+                        </small>
+
+                    </div>
+
+
+                    <div class="estoque-card-icon ouro">
+
+                        <i data-lucide="circle-dollar-sign"></i>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =================================================
+             FILTRO
+        ================================================= -->
+
+        <div class="card filtro filtro-estoque">
+
+
+            <div class="filtro-header">
+
+
+                <div>
+
+                    <h3>
+                        Pesquisar produtos
+                    </h3>
+
+                    <p>
+                        Filtre os produtos cadastrados no estoque.
+                    </p>
+
+                </div>
+
+
+                <button type="button"
+                        class="btn-limpar"
+                        id="btnLimparFiltro">
+
+                    Limpar filtros
+
+                </button>
+
+
+            </div>
+
+
+            <div class="filtro-grid">
+
+
+                <!-- PRODUTO -->
+
+                <div class="campo">
+
+                    <label for="filtroNome">
+                        Produto
+                    </label>
+
+
+                    <div class="input-com-icone">
+
+                        <i data-lucide="search"></i>
+
+
+                        <input type="text"
+                               id="filtroNome"
+                               placeholder="Digite o nome do produto">
+
+                    </div>
+
+                </div>
+
+
+                <!-- UNIDADE -->
+
+                <div class="campo">
+
+                    <label for="filtroUnidade">
+                        Unidade
+                    </label>
+
+
+                    <select id="filtroUnidade">
+
+                        <option value="">
+                            Todas
+                        </option>
+
+                        <option value="L">
+                            Litros
+                        </option>
+
+                        <option value="UN">
+                            Unidades
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- STATUS -->
+
+                <div class="campo">
+
+                    <label for="filtroStatus">
+                        Status
+                    </label>
+
+
+                    <select id="filtroStatus">
+
+                        <option value="">
+                            Todos
+                        </option>
+
+                        <option value="OK">
+                            Normal
+                        </option>
+
+                        <option value="BAIXO">
+                            Estoque baixo
+                        </option>
+
+                        <option value="ZERADO">
+                            Sem estoque
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =================================================
+             TABELA
+        ================================================= -->
+
+        <div class="card tabela-estoque">
+
+
+            <div class="table-container">
+
+
+                <table>
+
+
+                    <thead>
+
+                    <tr>
+
+                        <th>
+                            Produto
+                        </th>
+
+
+                        <th>
+                            Unidade
+                        </th>
+
+
+                        <th class="tr">
+                            Estoque
+                        </th>
+
+
+                        <th class="tr">
+                            Mínimo
+                        </th>
+
+
+                        <th class="tr">
+                            Preço Unit.
+                        </th>
+
+
+                        <th class="tr">
+                            Valor Estoque
+                        </th>
+
+
+                        <th class="tc">
+                            Status
+                        </th>
+
+
+                        <th class="tc">
+                            Ações
+                        </th>
+
+                    </tr>
+
+                    </thead>
+
+
+                    <tbody id="tabelaProdutos">
+
+
+                    <!-- =================================================
+                         PRODUTOS
+                    ================================================= -->
+
+                    <tr th:each="produto : ${produtos}"
+                        class="produto-linha"
+
+                        th:attr="
+                            data-id=${produto.id},
+                            data-nome=${produto.nome},
+                            data-unidade=${produto.unidade},
+                            data-quantidade=${produto.quantidadeEstoque},
+                            data-minimo=${produto.estoqueMinimo},
+                            data-preco=${produto.preco},
+                            data-comissao=${produto.percentualComissao}">
+
+
+                        <!-- PRODUTO -->
+
+                        <td>
+
+                            <div class="produto-info">
+
+
+                                <div class="produto-icon">
+
+                                    <i data-lucide="package"></i>
+
+                                </div>
+
+
+                                <div>
+
+                                    <strong th:text="${produto.nome}">
+                                        Produto
+                                    </strong>
+
+
+                                    <small th:text="${'Código #' + produto.id}">
+                                        Código #0
+                                    </small>
+
+                                </div>
+
+
+                            </div>
+
+                        </td>
+
+
+                        <!-- UNIDADE -->
+
+                        <td>
+
+                            <span th:text="${produto.unidade}">
+                                L
+                            </span>
+
+                        </td>
+
+
+                        <!-- ESTOQUE -->
+
+                        <td class="tr">
+
+                            <strong th:text="${#numbers.formatDecimal(produto.quantidadeEstoque, 1, 2, 'COMMA')}">
+                                0,00
+                            </strong>
+
+                        </td>
+
+
+                        <!-- MÍNIMO -->
+
+                        <td class="tr">
+
+                            <span th:text="${#numbers.formatDecimal(produto.estoqueMinimo, 1, 2, 'COMMA')}">
+                                0,00
+                            </span>
+
+                        </td>
+
+
+                        <!-- PREÇO -->
+
+                        <td class="tr">
+
+                            <span th:text="${'R$ ' + #numbers.formatDecimal(produto.preco, 1, 2, 'COMMA')}">
+                                R$ 0,00
+                            </span>
+
+                        </td>
+
+
+                        <!-- VALOR ESTOQUE -->
+
+                        <td class="tr">
+
+                            <strong th:text="${'R$ ' + #numbers.formatDecimal(produto.quantidadeEstoque.multiply(produto.preco), 1, 2, 'COMMA')}">
+                                R$ 0,00
+                            </strong>
+
+                        </td>
+
+
+                        <!-- STATUS -->
+
+                        <td class="tc">
+
+
+                            <span class="estoque-status"
+
+                                  th:classappend="
+                                      ${produto.quantidadeEstoque.compareTo(T(java.math.BigDecimal).ZERO) == 0}
+                                      ? ' status-zerado'
+                                      : (${produto.quantidadeEstoque.compareTo(produto.estoqueMinimo) <= 0}
+                                      ? ' status-baixo'
+                                      : ' status-ok')
+                                  "
+
+
+                                  th:text="
+                                      ${produto.quantidadeEstoque.compareTo(T(java.math.BigDecimal).ZERO) == 0}
+                                      ? 'Sem estoque'
+                                      : (${produto.quantidadeEstoque.compareTo(produto.estoqueMinimo) <= 0}
+                                      ? 'Baixo'
+                                      : 'OK')
+                                  ">
+
+                                OK
+
+                            </span>
+
+
+                        </td>
+
+
+                        <!-- AÇÕES -->
+
+                        <td class="tc">
+
+
+                            <div class="acoes-produto">
+
+
+                                <button type="button"
+                                        class="acao-btn btn-entrada"
+                                        title="Entrada de estoque"
+                                        data-acao="entrada">
+
+                                    <i data-lucide="arrow-down-to-line"></i>
+
+                                </button>
+
+
+                                <button type="button"
+                                        class="acao-btn btn-saida"
+                                        title="Saída de estoque"
+                                        data-acao="saida">
+
+                                    <i data-lucide="arrow-up-from-line"></i>
+
+                                </button>
+
+
+                                <button type="button"
+                                        class="acao-btn btn-editar"
+                                        title="Editar produto"
+                                        data-acao="editar">
+
+                                    <i data-lucide="pencil"></i>
+
+                                </button>
+
+
+                                <button type="button"
+                                        class="acao-btn btn-excluir"
+                                        title="Excluir produto"
+                                        data-acao="excluir">
+
+                                    <i data-lucide="trash-2"></i>
+
+                                </button>
+
+
+                            </div>
+
+
+                        </td>
+
+
+                    </tr>
+
+
+                    <!-- =================================================
+                         SEM PRODUTOS
+                    ================================================= -->
+
+                    <tr th:if="${produtos == null or #lists.isEmpty(produtos)}"
+                        id="semProdutos">
+
+
+                        <td colspan="8"
+                            class="sem-produtos">
+
+
+                            <i data-lucide="package-open"></i>
+
+
+                            <strong>
+                                Nenhum produto cadastrado
+                            </strong>
+
+
+                            <span>
+                                Cadastre um produto para começar a controlar o estoque.
+                            </span>
+
+
+                        </td>
+
+
+                    </tr>
+
+
+                    <!-- =================================================
+                         FILTRO SEM RESULTADO
+                    ================================================= -->
+
+                    <tr id="semResultadoFiltro"
+                        class="oculto">
+
+
+                        <td colspan="8"
+                            class="sem-produtos">
+
+
+                            <i data-lucide="search-x"></i>
+
+
+                            <strong>
+                                Nenhum produto encontrado
+                            </strong>
+
+
+                            <span>
+                                Tente alterar os filtros utilizados.
+                            </span>
+
+
+                        </td>
+
+
+                    </tr>
+
+
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+<!-- =====================================================
+     MODAL PRODUTO
+===================================================== -->
+
+<div class="modal-overlay"
+     id="modalProduto">
+
+
+    <div class="modal">
+
+
+        <div class="modal-header">
+
+
+            <div>
+
+                <h3 id="modalTitulo">
+                    Novo Produto
+                </h3>
+
+
+                <p>
+                    Cadastre as informações do produto.
+                </p>
+
+            </div>
+
+
+            <button type="button"
+                    class="modal-fechar"
+                    id="fecharModal">
+
+                <i data-lucide="x"></i>
+
+            </button>
+
+
+        </div>
+
+
+        <form method="post"
+              th:action="@{/armazen/produtos/salvar}"
+              id="formProduto">
+
+
+            <input type="hidden"
+                   id="produtoId"
+                   name="id">
+
+
+            <div class="form-grid">
+
+
+                <div class="campo campo-completo">
+
+                    <label for="nome">
+                        Nome do Produto
+                    </label>
+
+
+                    <input type="text"
+                           id="nome"
+                           name="nome"
+                           placeholder="Ex.: Gasolina Comum"
+                           required>
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="unidade">
+                        Unidade
+                    </label>
+
+
+                    <select id="unidade"
+                            name="unidade"
+                            required>
+
+                        <option value="">
+                            Selecione
+                        </option>
+
+                        <option value="L">
+                            Litros (L)
+                        </option>
+
+                        <option value="UN">
+                            Unidade (UN)
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="percentualComissao">
+                        Percentual de Comissão
+                    </label>
+
+
+                    <input type="number"
+                           id="percentualComissao"
+                           name="percentualComissao"
+                           min="0"
+                           max="100"
+                           step="0.01"
+                           required>
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="quantidadeEstoque">
+                        Quantidade Inicial
+                    </label>
+
+
+                    <input type="number"
+                           id="quantidadeEstoque"
+                           name="quantidadeEstoque"
+                           min="0"
+                           step="0.01"
+                           placeholder="0,00"
+                           required>
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="estoqueMinimo">
+                        Estoque Mínimo
+                    </label>
+
+
+                    <input type="number"
+                           id="estoqueMinimo"
+                           name="estoqueMinimo"
+                           min="0"
+                           step="0.01"
+                           placeholder="0,00"
+                           required>
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="preco">
+                        Preço Unitário
+                    </label>
+
+
+                    <input type="number"
+                           id="preco"
+                           name="preco"
+                           min="0"
+                           step="0.01"
+                           placeholder="0,00"
+                           required>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="modal-footer">
+
+
+                <button type="button"
+                        class="btn btn-secundario"
+                        id="cancelarModal">
+
+                    Cancelar
+
+                </button>
+
+
+                <button type="submit"
+                        class="btn btn-principal">
+
+                    <i data-lucide="save"></i>
+
+                    Salvar Produto
+
+                </button>
+
+
+            </div>
+
+
+        </form>
+
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     MODAL MOVIMENTAÇÃO
+===================================================== -->
+
+<div class="modal-overlay"
+     id="modalMovimentacao">
+
+
+    <div class="modal modal-menor">
+
+
+        <div class="modal-header">
+
+
+            <div>
+
+                <h3 id="movimentacaoTitulo">
+                    Entrada de Estoque
+                </h3>
+
+
+                <p id="movimentacaoProduto">
+                    Produto
+                </p>
+
+            </div>
+
+
+            <button type="button"
+                    class="modal-fechar"
+                    id="fecharMovimentacao">
+
+                <i data-lucide="x"></i>
+
+            </button>
+
+
+        </div>
+
+
+        <form method="post"
+              id="formMovimentacao">
+
+
+            <input type="hidden"
+                   id="movimentacaoId"
+                   name="idProduto">
+
+
+            <div class="campo">
+
+                <label for="quantidadeMovimentacao">
+                    Quantidade
+                </label>
+
+
+                <input type="number"
+                       id="quantidadeMovimentacao"
+                       name="quantidade"
+                       min="0.01"
+                       step="0.01"
+                       placeholder="0,00"
+                       required>
+
+            </div>
+
+
+            <div class="campo">
+
+                <label for="observacaoMovimentacao">
+                    Observação
+                </label>
+
+
+                <textarea id="observacaoMovimentacao"
+                          name="observacao"
+                          rows="3"
+                          placeholder="Opcional"></textarea>
+
+            </div>
+
+
+            <div class="modal-footer">
+
+
+                <button type="button"
+                        class="btn btn-secundario"
+                        id="cancelarMovimentacao">
+
+                    Cancelar
+
+                </button>
+
+
+                <button type="submit"
+                        class="btn btn-principal">
+
+                    Confirmar
+
+                </button>
+
+
+            </div>
+
+
+        </form>
+
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<script th:src="@{/js/all.js}"></script>
+
+<script th:src="@{/js/adm/armazen.js}"></script>
+
+
+</body>
+
+</html>
