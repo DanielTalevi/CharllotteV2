@@ -17,9 +17,7 @@
 
 </head>
 
-
 <body>
-
 
 <!-- =====================================================
      SIDEBAR
@@ -40,78 +38,51 @@
 
     </div>
 
-
     <nav class="menu">
 
-
         <a th:href="@{/home}">
-
             <i data-lucide="layout-dashboard"
                class="icon-dashboard"></i>
-
             <span>Dashboard</span>
-
         </a>
-
 
         <a th:href="@{/funcionario}">
-
             <i data-lucide="users-round"
                class="icon-funcionarios"></i>
-
             <span>Funcionários</span>
-
         </a>
-
 
         <a th:href="@{/vendas}"
            class="active">
-
             <i data-lucide="dollar-sign"
                class="icon-comissoes"></i>
-
             <span>Comissões</span>
-
         </a>
-
 
         <a th:href="@{/fraudes}">
-
             <i data-lucide="shield-alert"
                class="icon-fraudes"></i>
-
             <span>Fraudes</span>
-
         </a>
-
 
         <a th:href="@{/armazen}">
-
             <i data-lucide="package"
                class="icon-armazem"></i>
-
             <span>Armazém</span>
-
         </a>
 
-
         <a th:href="@{/relatorios}">
-
             <i data-lucide="file-text"
                class="icon-relatorios"></i>
-
             <span>Relatórios</span>
-
         </a>
 
         <a th:href="@{/config}">
-
             <i data-lucide="settings"
                class="icon-config"></i>
-
             <span>Configurações</span>
-
         </a>
+
     </nav>
 
     <div class="sidebar-bottom">
@@ -123,14 +94,11 @@
 
 </aside>
 
-
-
 <!-- =====================================================
      MAIN
 ===================================================== -->
 
 <main class="main">
-
 
     <!-- =================================================
          TOPBAR
@@ -150,21 +118,18 @@
 
         </div>
 
-
         <div class="usuario-logado">
 
             <i data-lucide="user" class="user-icon"></i>
 
-            <span
-                    th:text="${usuarioLogado.nome}" class="user-icon">
+            <span th:text="${usuarioLogado.nome}"
+                  class="user-icon">
                 Usuário
             </span>
 
         </div>
 
     </header>
-
-
 
     <!-- =================================================
          CONTEÚDO
@@ -180,8 +145,6 @@
             Pesquisa de Vendas
         </h2>
 
-
-
         <!-- =================================================
              FILTRO
         ================================================= -->
@@ -191,7 +154,6 @@
                 method="get"
                 class="filtro">
 
-
             <!-- FUNCIONÁRIO -->
 
             <div class="campo">
@@ -200,37 +162,28 @@
                     Funcionário
                 </label>
 
-
                 <select
                         id="idFuncionario"
                         name="idFuncionario">
 
-
                     <option
                             value=""
                             th:selected="${idFuncionario == null}">
-
                         Todas as Vendas
-
                     </option>
-
 
                     <option
                             th:each="usuario : ${usuarios}"
                             th:value="${usuario.id}"
                             th:text="${usuario.nome}"
                             th:selected="${usuario.id == idFuncionario}">
-
                     </option>
-
 
                 </select>
 
             </div>
 
-            <!-- =========================================
-                    DATA INICIAL
-               ========================================== -->
+            <!-- DATA INICIAL -->
 
             <div class="campo campo-data">
 
@@ -238,11 +191,9 @@
                     De
                 </label>
 
-
                 <div class="data-input">
 
                     <i data-lucide="calendar"></i>
-
 
                     <!-- CAMPO VISUAL -->
 
@@ -253,7 +204,6 @@
                             autocomplete="off"
                             readonly
                     >
-
 
                     <!-- VALOR QUE VAI PARA O SPRING -->
 
@@ -268,11 +218,7 @@
 
             </div>
 
-
-
-            <!-- =========================================
-                 DATA FINAL
-            ========================================== -->
+            <!-- DATA FINAL -->
 
             <div class="campo campo-data">
 
@@ -280,11 +226,9 @@
                     Até
                 </label>
 
-
                 <div class="data-input">
 
                     <i data-lucide="calendar"></i>
-
 
                     <!-- CAMPO VISUAL -->
 
@@ -295,7 +239,6 @@
                             autocomplete="off"
                             readonly
                     >
-
 
                     <!-- VALOR QUE VAI PARA O SPRING -->
 
@@ -310,26 +253,17 @@
 
             </div>
 
-
-
             <!-- BOTÃO -->
 
             <button
                     type="submit"
                     class="btn">
-
                 Pesquisar
-
             </button>
 
-
-
-            <!-- =================================================
-                 RESUMO DO FILTRO
-            ================================================= -->
+            <!-- RESUMO DO FILTRO -->
 
             <div class="filtro-resumo">
-
 
                 <!-- REALIZADAS -->
 
@@ -339,20 +273,15 @@
                         Vendas realizadas
                     </span>
 
-
                     <strong id="vendasRealizadas">
                         0
                     </strong>
 
                 </div>
 
-
-
                 <!-- DIVISOR -->
 
                 <div class="filtro-divisor"></div>
-
-
 
                 <!-- CANCELADAS -->
 
@@ -362,24 +291,17 @@
                         Canceladas
                     </span>
 
-
                     <strong
                             id="vendasCanceladas"
                             class="canceladas-numero">
-
                         0
-
                     </strong>
 
                 </div>
 
-
-
                 <!-- DIVISOR -->
 
                 <div class="filtro-divisor"></div>
-
-
 
                 <!-- PERÍODO -->
 
@@ -389,20 +311,15 @@
                         Período
                     </span>
 
-
                     <strong id="periodoVendas">
                         —
                     </strong>
 
                 </div>
 
-
             </div>
 
-
         </form>
-
-
 
         <!-- =================================================
              RESUMO DOS VALORES
@@ -410,16 +327,11 @@
 
         <div class="resumo-vendas">
 
-
-            <!-- =================================================
-                 TOTAL VENDIDO
-            ================================================= -->
+            <!-- TOTAL VENDIDO -->
 
             <div class="card-resumo card-total">
 
-
                 <div class="card-topo">
-
 
                     <div>
 
@@ -427,47 +339,36 @@
                             Total vendido
                         </span>
 
-
                         <strong
-                                th:text="${'R$ ' + #numbers.formatDecimal(totalVendido, 1, 'POINT', 2, 'COMMA')}">
-
+                                th:text="${'R$ ' + #numbers.formatDecimal(
+                                    totalVendido != null ? totalVendido : 0,
+                                    1,
+                                    'POINT',
+                                    2,
+                                    'COMMA'
+                                )}">
                             R$ 0,00
-
                         </strong>
 
                     </div>
 
-
                     <div class="card-icone">
-
                         <i data-lucide="trending-up"></i>
-
                     </div>
-
 
                 </div>
 
-
                 <span class="card-descricao">
-
                     Valor total das vendas realizadas
-
                 </span>
-
 
             </div>
 
-
-
-            <!-- =================================================
-                 GRÁFICO
-            ================================================= -->
+            <!-- GRÁFICO -->
 
             <div class="card-desempenho">
 
-
                 <div class="desempenho-header">
-
 
                     <div>
 
@@ -475,42 +376,30 @@
                             Desempenho das vendas
                         </span>
 
-
                         <strong>
                             Vendas por mês
                         </strong>
 
                     </div>
 
-
                     <div class="desempenho-icone">
-
                         <i data-lucide="bar-chart-3"></i>
-
                     </div>
 
-
                 </div>
-
-
 
                 <div class="grafico-container">
 
                     <div
                             id="graficoVendas"
                             class="grafico-vendas">
-
                     </div>
 
                 </div>
 
-
             </div>
 
-
         </div>
-
-
 
         <!-- =================================================
              TABELA
@@ -518,9 +407,7 @@
 
         <div class="table-container">
 
-
             <table>
-
 
                 <!-- CABEÇALHO -->
 
@@ -528,170 +415,124 @@
 
                 <tr>
 
-                    <th>
-                        Data
-                    </th>
-
-
-                    <th>
-                        Funcionário
-                    </th>
-
-
-                    <th>
-                        Valor
-                    </th>
-
-
-                    <th>
-                        Comissão
-                    </th>
-
-
-                    <th>
-                        Status
-                    </th>
+                    <th>Data</th>
+                    <th>Funcionário</th>
+                    <th>Valor</th>
+                    <th>Comissão</th>
+                    <th>Status</th>
 
                 </tr>
 
                 </thead>
 
-
-
                 <!-- CORPO -->
 
                 <tbody>
 
-
-                <!-- =================================================
-                     VENDA
-                ================================================= -->
+                <!-- VENDA -->
 
                 <tr
                         th:each="venda : ${vendas}"
-
                         th:attr="
                             data-data=${venda.dataVenda},
                             data-valor=${venda.valorTotal},
                             data-status=${venda.status}
                         ">
 
-
                     <!-- DATA -->
 
-                    <td th:text="${#temporals.format(venda.dataVenda, 'dd/MM/yyyy')}">
+                    <td
+                            th:text="${venda.dataVenda != null
+                                ? #temporals.format(venda.dataVenda, 'dd/MM/yyyy')
+                                : '-'}">
                         Data
                     </td>
-
-
 
                     <!-- FUNCIONÁRIO -->
 
                     <td
-                            th:text="${venda.funcionario.nome}">
-
+                            th:text="${venda.funcionario != null
+                                ? venda.funcionario.nome
+                                : 'Funcionário não informado'}">
                         Funcionário
-
                     </td>
-
-
 
                     <!-- VALOR -->
 
                     <td
-                            th:text="${'R$ ' + #numbers.formatDecimal(venda.valorTotal, 1, 2, 'COMMA')}">
-
+                            th:text="${'R$ ' + #numbers.formatDecimal(
+                                venda.valorTotal != null ? venda.valorTotal : 0,
+                                1,
+                                'POINT',
+                                2,
+                                'COMMA'
+                            )}">
                         R$ 0,00
-
                     </td>
-
-
 
                     <!-- COMISSÃO -->
 
                     <td
-                            th:text="${'R$ ' + #numbers.formatDecimal(comissoesPorVenda[venda.id], 1, 2, 'COMMA')}">
-
+                            th:text="${'R$ ' + #numbers.formatDecimal(
+                                comissoesPorVenda[venda.id] != null
+                                    ? comissoesPorVenda[venda.id]
+                                    : 0,
+                                1,
+                                'POINT',
+                                2,
+                                'COMMA'
+                            )}">
                         R$ 0,00
-
                     </td>
-
-
 
                     <!-- STATUS -->
 
                     <td>
 
-
                         <span
                                 th:if="${venda.status != null and venda.status.name() == 'REALIZADA'}"
                                 class="status realizada">
-
                             Realizada
-
                         </span>
-
 
                         <span
                                 th:if="${venda.status != null and venda.status.name() == 'CANCELADA'}"
                                 class="status cancelada">
-
                             Cancelada
-
                         </span>
-
 
                         <span
                                 th:if="${venda.status != null and venda.status.name() == 'EM_ANDAMENTO'}"
                                 class="status andamento">
-
                             Em andamento
-
                         </span>
-
 
                     </td>
 
-
                 </tr>
 
-
-
-                <!-- =================================================
-                     SEM RESULTADOS
-                ================================================= -->
+                <!-- SEM RESULTADOS -->
 
                 <tr
                         th:if="${vendas != null and #lists.isEmpty(vendas)}">
 
-
                     <td
                             colspan="5"
                             class="sem-vendas">
-
                         Nenhuma venda encontrada.
-
                     </td>
-
 
                 </tr>
 
-
                 </tbody>
-
 
             </table>
 
-
         </div>
-
 
     </section>
 
-
 </main>
-
-
 
 <!-- =====================================================
      SCRIPTS

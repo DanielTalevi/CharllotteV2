@@ -1,30 +1,37 @@
+
 package comissiones.Charllotte.service;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import comissiones.Charllotte.model.Estoque;
 import comissiones.Charllotte.model.Produto;
+import comissiones.Charllotte.repository.EstoqueRepository;
 import comissiones.Charllotte.repository.ProdutoRepository;
 
 @Service
 public class ProdutoService {
 
     private final ProdutoRepository produtoRepository;
+    private final EstoqueRepository estoqueRepository;
 
     public ProdutoService(
-            ProdutoRepository produtoRepository) {
+            ProdutoRepository produtoRepository,
+            EstoqueRepository estoqueRepository) {
 
         this.produtoRepository = produtoRepository;
+        this.estoqueRepository = estoqueRepository;
     }
-
 
     // =====================================================
     // PRODUTO
     // =====================================================
 
+    @Transactional
     public Produto salvar(Produto produto) {
 
         if (produto.getStatus() == null) {
@@ -32,18 +39,30 @@ public class ProdutoService {
         }
 
         if (produto.getQuantidadeEstoque() == null) {
-            produto.setQuantidadeEstoque(
-                    BigDecimal.ZERO);
+            produto.setQuantidadeEstoque(BigDecimal.ZERO);
         }
 
         if (produto.getEstoqueMinimo() == null) {
-            produto.setEstoqueMinimo(
-                    BigDecimal.ZERO);
+            produto.setEstoqueMinimo(BigDecimal.ZERO);
         }
 
-        return produtoRepository.save(produto);
-    }
+        Produto produtoSalvo = produtoRepository.save(produto);
 
+        Estoque estoque = estoqueRepository
+                .findByProdutoId(produtoSalvo.getId())
+                .orElseGet(Estoque::new);
+
+        estoque.setProduto(produtoSalvo);
+        estoque.setQuantidade(
+                produtoSalvo.getQuantidadeEstoque());
+        estoque.setEstoqueMinimo(
+                produtoSalvo.getEstoqueMinimo());
+        estoque.setDataAtualizacao(LocalDateTime.now());
+
+        estoqueRepository.save(estoque);
+
+        return produtoSalvo;
+    }
 
     public Produto buscarPorId(Integer id) {
 
@@ -53,25 +72,21 @@ public class ProdutoService {
                                 "Produto não encontrado"));
     }
 
-
     public List<Produto> listarTodos() {
 
         return produtoRepository.findAll();
     }
-
 
     public List<Produto> listarAtivos() {
 
         return produtoRepository.findByStatusTrue();
     }
 
-
     public List<Produto> pesquisar(String nome) {
 
         return produtoRepository
                 .findByNomeContainingIgnoreCase(nome);
     }
-
 
     public void desativar(Integer id) {
 
@@ -82,7 +97,6 @@ public class ProdutoService {
         produtoRepository.save(produto);
     }
 
-
     public void ativar(Integer id) {
 
         Produto produto = buscarPorId(id);
@@ -91,7 +105,6 @@ public class ProdutoService {
 
         produtoRepository.save(produto);
     }
-
 
     // =====================================================
     // ESTOQUE
@@ -107,18 +120,19 @@ public class ProdutoService {
         Produto produto = buscarPorId(id);
 
         BigDecimal estoqueAtual =
-                produto.getQuantidadeEstoque();
+                produto.getQuantidadeEstoque() != null
+                        ? produto.getQuantidadeEstoque()
+                        : BigDecimal.ZERO;
 
-        if (estoqueAtual == null) {
-            estoqueAtual = BigDecimal.ZERO;
-        }
+        BigDecimal novaQuantidade =
+                estoqueAtual.add(quantidade);
 
-        produto.setQuantidadeEstoque(
-                estoqueAtual.add(quantidade));
+        produto.setQuantidadeEstoque(novaQuantidade);
 
         produtoRepository.save(produto);
-    }
 
+        sincronizarEstoque(produto, novaQuantidade);
+    }
 
     @Transactional
     public void saida(
@@ -130,24 +144,47 @@ public class ProdutoService {
         Produto produto = buscarPorId(id);
 
         BigDecimal estoqueAtual =
-                produto.getQuantidadeEstoque();
-
-        if (estoqueAtual == null) {
-            estoqueAtual = BigDecimal.ZERO;
-        }
+                produto.getQuantidadeEstoque() != null
+                        ? produto.getQuantidadeEstoque()
+                        : BigDecimal.ZERO;
 
         if (estoqueAtual.compareTo(quantidade) < 0) {
-
             throw new RuntimeException(
                     "Estoque insuficiente");
         }
 
-        produto.setQuantidadeEstoque(
-                estoqueAtual.subtract(quantidade));
+        BigDecimal novaQuantidade =
+                estoqueAtual.subtract(quantidade);
+
+        produto.setQuantidadeEstoque(novaQuantidade);
 
         produtoRepository.save(produto);
+
+        sincronizarEstoque(produto, novaQuantidade);
     }
 
+    private void sincronizarEstoque(
+            Produto produto,
+            BigDecimal quantidade) {
+
+        Estoque estoque = estoqueRepository
+                .findByProdutoId(produto.getId())
+                .orElseGet(Estoque::new);
+
+        estoque.setProduto(produto);
+        estoque.setQuantidade(quantidade);
+
+        if (estoque.getEstoqueMinimo() == null) {
+            estoque.setEstoqueMinimo(
+                    produto.getEstoqueMinimo() != null
+                            ? produto.getEstoqueMinimo()
+                            : BigDecimal.ZERO);
+        }
+
+        estoque.setDataAtualizacao(LocalDateTime.now());
+
+        estoqueRepository.save(estoque);
+    }
 
     // =====================================================
     // INDICADORES DO ESTOQUE
@@ -160,34 +197,36 @@ public class ProdutoService {
                 .size();
     }
 
-
     public long produtosBaixo() {
 
         return produtoRepository
                 .findByStatusTrue()
                 .stream()
-                .filter(produto ->
-                        produto.getQuantidadeEstoque()
-                                .compareTo(
-                                        produto.getEstoqueMinimo()
-                                ) <= 0)
+                .filter(produto -> {
+                    BigDecimal quantidade =
+                            produto.getQuantidadeEstoque() != null
+                                    ? produto.getQuantidadeEstoque()
+                                    : BigDecimal.ZERO;
+
+                    BigDecimal minimo =
+                            produto.getEstoqueMinimo() != null
+                                    ? produto.getEstoqueMinimo()
+                                    : BigDecimal.ZERO;
+
+                    return quantidade.compareTo(minimo) <= 0;
+                })
                 .count();
     }
-
 
     public BigDecimal valorEstoque() {
 
         BigDecimal valor =
-                produtoRepository
-                        .calcularValorTotalEstoque();
+                produtoRepository.calcularValorTotalEstoque();
 
-        if (valor == null) {
-            return BigDecimal.ZERO;
-        }
-
-        return valor;
+        return valor != null
+                ? valor
+                : BigDecimal.ZERO;
     }
-
 
     // =====================================================
     // VALIDAÇÃO
@@ -196,9 +235,8 @@ public class ProdutoService {
     private void validarQuantidade(
             BigDecimal quantidade) {
 
-        if (quantidade == null ||
-                quantidade.compareTo(
-                        BigDecimal.ZERO) <= 0) {
+        if (quantidade == null
+                || quantidade.compareTo(BigDecimal.ZERO) <= 0) {
 
             throw new RuntimeException(
                     "A quantidade deve ser maior que zero");

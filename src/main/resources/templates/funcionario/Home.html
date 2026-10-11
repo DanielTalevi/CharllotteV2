@@ -19,9 +19,7 @@
 
 </head>
 
-
 <body>
-
 
 <!-- =====================================================
      SIDEBAR
@@ -32,25 +30,17 @@
     <div class="logo-area">
 
         <div class="logo-icon">
-
             <i data-lucide="landmark"></i>
-
         </div>
 
-
         <div class="logo-text">
-
             <span>Charllotte</span>
-
             <small>GESTÃO</small>
-
         </div>
 
     </div>
 
-
     <nav class="menu">
-
 
         <!-- DASHBOARD -->
 
@@ -63,7 +53,6 @@
             <span>Dashboard</span>
 
         </a>
-
 
         <!-- REGISTRAR VENDA -->
 
@@ -87,7 +76,6 @@
 
     </nav>
 
-
     <div class="sidebar-bottom">
 
         <a th:href="@{/logout}"
@@ -103,13 +91,11 @@
 
 </aside>
 
-
 <!-- =====================================================
      MAIN
 ===================================================== -->
 
 <main class="main">
-
 
     <!-- =================================================
          TOPBAR
@@ -129,7 +115,6 @@
 
         </div>
 
-
         <div class="usuario-logado">
 
             <i data-lucide="user"
@@ -137,15 +122,12 @@
 
             <span th:text="${usuarioLogado.nome}"
                   class="user-icon">
-
                 Funcionário
-
             </span>
 
         </div>
 
     </header>
-
 
     <!-- =================================================
          CONTEÚDO
@@ -153,13 +135,11 @@
 
     <div class="funcionario-home-content">
 
-
         <!-- =================================================
              SAUDAÇÃO
         ================================================= -->
 
         <section class="funcionario-home-header">
-
 
             <div>
 
@@ -167,24 +147,19 @@
                     Suas vendas de hoje
                 </span>
 
-
                 <h2>
-
                     Olá,
                     <span th:text="${usuarioLogado.nome}">
                         João
                     </span>
                     👋
-
                 </h2>
-
 
                 <p>
                     Acompanhe seu desempenho e suas vendas.
                 </p>
 
             </div>
-
 
             <a th:href="@{/funcionario/venda}"
                class="btn btn-principal botaoarrumado">
@@ -195,9 +170,7 @@
 
             </a>
 
-
         </section>
-
 
         <!-- =================================================
              CARDS
@@ -205,21 +178,17 @@
 
         <section class="funcionario-dashboard-cards">
 
-
             <!-- VENDAS HOJE -->
 
             <div class="funcionario-dashboard-card">
 
-
                 <div class="funcionario-card-top">
-
 
                     <div>
 
                         <span class="funcionario-card-title">
                             Vendas Hoje
                         </span>
-
 
                         <strong
                                 class="funcionario-card-value"
@@ -229,41 +198,36 @@
 
                     </div>
 
-
                     <div class="funcionario-card-icon compras">
-
                         <i data-lucide="shopping-cart"></i>
-
                     </div>
 
                 </div>
 
-
                 <small
-                        th:text="${'R$ ' + #numbers.formatDecimal(valorVendasHoje, 1, 2, 'COMMA')}">
-
+                        th:text="${'R$ ' + #numbers.formatDecimal(
+                            valorVendasHoje != null ? valorVendasHoje : 0,
+                            1,
+                            'POINT',
+                            2,
+                            'COMMA'
+                        )}">
                     R$ 0,00
-
                 </small>
 
-
             </div>
-
 
             <!-- VENDAS NO MÊS -->
 
             <div class="funcionario-dashboard-card">
 
-
                 <div class="funcionario-card-top">
-
 
                     <div>
 
                         <span class="funcionario-card-title">
                             Vendas no Mês
                         </span>
-
 
                         <strong
                                 class="funcionario-card-value"
@@ -273,34 +237,30 @@
 
                     </div>
 
-
                     <div class="funcionario-card-icon dinheiro">
-
                         <i data-lucide="dollar-sign"></i>
-
                     </div>
 
                 </div>
 
-
                 <small
-                        th:text="${'R$ ' + #numbers.formatDecimal(valorVendasMes, 1, 2, 'COMMA')}">
-
+                        th:text="${'R$ ' + #numbers.formatDecimal(
+                            valorVendasMes != null ? valorVendasMes : 0,
+                            1,
+                            'POINT',
+                            2,
+                            'COMMA'
+                        )}">
                     R$ 0,00
-
                 </small>
 
-
             </div>
-
 
             <!-- COMISSÃO -->
 
             <div class="funcionario-dashboard-card">
 
-
                 <div class="funcionario-card-top">
-
 
                     <div>
 
@@ -308,39 +268,33 @@
                             Comissão do Mês
                         </span>
 
-
                         <strong
                                 class="funcionario-card-value money"
-                                th:text="${'R$ ' + #numbers.formatDecimal(comissaoMes, 1, 2, 'COMMA')}">
-
+                                th:text="${'R$ ' + #numbers.formatDecimal(
+                                    comissaoMes != null ? comissaoMes : 0,
+                                    1,
+                                    'POINT',
+                                    2,
+                                    'COMMA'
+                                )}">
                             R$ 0,00
-
                         </strong>
 
                     </div>
 
-
                     <div class="funcionario-card-icon comissao">
-
                         <i data-lucide="trending-up"></i>
-
                     </div>
 
                 </div>
 
-
                 <small>
-
                     Comissão acumulada
-
                 </small>
-
 
             </div>
 
-
         </section>
-
 
         <!-- =================================================
              ÚLTIMAS VENDAS
@@ -364,7 +318,6 @@
 
             </div>
 
-
             <div class="funcionario-table-container">
 
                 <table>
@@ -373,26 +326,14 @@
 
                     <tr>
 
-                        <th>
-                            Venda
-                        </th>
-
-                        <th>
-                            Total
-                        </th>
-
-                        <th>
-                            Comissão
-                        </th>
-
-                        <th>
-                            Data/Hora
-                        </th>
+                        <th>Venda</th>
+                        <th>Total</th>
+                        <th>Comissão</th>
+                        <th>Data/Hora</th>
 
                     </tr>
 
                     </thead>
-
 
                     <tbody>
 
@@ -402,47 +343,50 @@
 
                         <td>
 
-                            <strong
-                                    th:text="${'#' + venda.id}">
+                            <strong th:text="${'#' + venda.id}">
                                 #1
                             </strong>
 
                         </td>
 
-
                         <!-- TOTAL -->
 
                         <td
-                                th:text="${'R$ ' + #numbers.formatDecimal(venda.valorTotal, 1, 2, 'COMMA')}">
-
+                                th:text="${'R$ ' + #numbers.formatDecimal(
+                                    venda.valorTotal != null ? venda.valorTotal : 0,
+                                    1,
+                                    'POINT',
+                                    2,
+                                    'COMMA'
+                                )}">
                             R$ 0,00
-
                         </td>
-
 
                         <!-- COMISSÃO -->
 
                         <td
-                                th:text="${'R$ ' + #numbers.formatDecimal(comissoesPorVenda[venda.id], 1, 2, 'COMMA')}">
-
+                                th:text="${'R$ ' + #numbers.formatDecimal(
+                                    comissoesPorVenda[venda.id] != null
+                                        ? comissoesPorVenda[venda.id]
+                                        : 0,
+                                    1,
+                                    'POINT',
+                                    2,
+                                    'COMMA'
+                                )}">
                             R$ 0,00
-
                         </td>
-
 
                         <!-- DATA -->
 
                         <td
                                 th:text="${venda.dataVenda != null
-                            ? #temporals.format(venda.dataVenda, 'dd/MM, HH:mm')
-                            : '-'}">
-
+                                    ? #temporals.format(venda.dataVenda, 'dd/MM, HH:mm')
+                                    : '-'}">
                             25/09, 15:30
-
                         </td>
 
                     </tr>
-
 
                     <tr th:if="${#lists.isEmpty(vendasRecentes)}">
 
@@ -456,8 +400,8 @@
                             </strong>
 
                             <span>
-                        Suas vendas aparecerão aqui.
-                    </span>
+                                Suas vendas aparecerão aqui.
+                            </span>
 
                         </td>
 
@@ -471,18 +415,19 @@
 
         </section>
 
-
     </div>
 
 </main>
 
+<!-- =====================================================
+     SCRIPTS
+===================================================== -->
 
 <script src="https://unpkg.com/lucide@latest"></script>
 
 <script th:src="@{/js/all.js}"></script>
 
 <script th:src="@{/js/funcionario/home.js}"></script>
-
 
 </body>
 

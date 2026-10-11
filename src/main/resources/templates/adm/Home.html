@@ -22,11 +22,7 @@
 
 <body>
 
-
-<!-- =====================================================
-     SIDEBAR
-===================================================== -->
-
+<!-- SIDEBAR -->
 <aside class="sidebar">
 
     <div class="logo-area">
@@ -44,119 +40,81 @@
 
     <nav class="menu">
 
-        <a th:href="@{/home}"
-           class="active">
-
+        <a th:href="@{/home}" class="active">
             <i data-lucide="layout-dashboard"
                class="icon-dashboard"></i>
-
             <span>Dashboard</span>
-
         </a>
-
 
         <a th:href="@{/funcionario}">
-
             <i data-lucide="users-round"
                class="icon-funcionarios"></i>
-
             <span>Funcionários</span>
-
         </a>
-
 
         <a th:href="@{/vendas}">
-
             <i data-lucide="dollar-sign"
                class="icon-comissoes"></i>
-
             <span>Comissões</span>
-
         </a>
-
 
         <a th:href="@{/fraudes}">
-
             <i data-lucide="shield-alert"
                class="icon-fraudes"></i>
-
             <span>Fraudes</span>
-
         </a>
-
 
         <a th:href="@{/armazen}">
-
             <i data-lucide="package"
                class="icon-armazem"></i>
-
             <span>Armazém</span>
-
         </a>
 
-
         <a th:href="@{/relatorios}">
-
             <i data-lucide="file-text"
                class="icon-relatorios"></i>
-
             <span>Relatórios</span>
-
         </a>
 
         <a th:href="@{/config}">
-
             <i data-lucide="settings"
                class="icon-config"></i>
-
             <span>Configurações</span>
-
         </a>
 
     </nav>
 
     <div class="sidebar-bottom">
+
         <a th:href="@{/logout}" class="logout">
             <i data-lucide="log-out"></i>
             <span>Sair</span>
         </a>
+
     </div>
 
 </aside>
 
-
-<!-- =====================================================
-     CONTEÚDO PRINCIPAL
-===================================================== -->
-
+<!-- CONTEÚDO PRINCIPAL -->
 <main class="main">
 
-
-    <!-- =================================================
-         TOPBAR
-    ================================================== -->
-
+    <!-- TOPBAR -->
     <header class="topbar">
 
         <div>
-
-            <h1>
-                Dashboard
-            </h1>
+            <h1>Dashboard</h1>
 
             <p class="usuario-logado">
                 Visão geral do sistema
             </p>
-
         </div>
-
 
         <div class="usuario-logado">
 
             <i data-lucide="user" class="user-icon"></i>
 
-            <span
-                    th:text="${usuarioLogado.nome}" class="user-icon">
+            <span th:text="${usuarioLogado.nome}"
+                  class="user-icon">
                 Usuário
             </span>
 
@@ -164,40 +122,27 @@
 
     </header>
 
-
-    <!-- =================================================
-         DASHBOARD
-    ================================================== -->
-
+    <!-- DASHBOARD -->
     <div class="content">
 
-
-        <!-- =================================================
-             CABEÇALHO
-        ================================================== -->
-
+        <!-- CABEÇALHO -->
         <section class="home-header">
 
             <div>
                 <br>
+
                 <span class="pagina-label">
                     Acompanhe o desempenho da Charllotte.
                 </span>
 
-                <h2>
-                    Visão geral
-                </h2>
-
-
+                <h2>Visão geral</h2>
             </div>
-
 
             <div class="home-date">
 
                 <i data-lucide="calendar"></i>
 
-                <span
-                        th:text="${#temporals.format(dataAtual, 'dd/MM/yyyy')}">
+                <span th:text="${#temporals.format(dataAtual, 'dd/MM/yyyy')}">
                     22/09/2026
                 </span>
 
@@ -205,38 +150,27 @@
 
         </section>
 
-
-        <!-- =================================================
-             CARDS
-        ================================================== -->
-
+        <!-- CARDS -->
         <section class="dashboard-cards">
 
-
             <!-- FUNCIONÁRIOS -->
-
             <div class="dashboard-card">
 
                 <div class="card-top">
 
                     <div>
-
                         <span class="card-title">
                             Funcionários
                         </span>
 
-                        <strong
-                                class="card-value"
+                        <strong class="card-value"
                                 th:text="${totalFuncionarios}">
                             0
                         </strong>
-
                     </div>
 
                     <div class="card-icon green">
-
                         <i data-lucide="users-round"></i>
-
                     </div>
 
                 </div>
@@ -247,31 +181,24 @@
 
             </div>
 
-
             <!-- VENDAS -->
-
             <div class="dashboard-card">
 
                 <div class="card-top">
 
                     <div>
-
                         <span class="card-title">
                             Vendas
                         </span>
 
-                        <strong
-                                class="card-value"
+                        <strong class="card-value"
                                 th:text="${totalVendas}">
                             0
                         </strong>
-
                     </div>
 
                     <div class="card-icon yellow">
-
                         <i data-lucide="shopping-cart"></i>
-
                     </div>
 
                 </div>
@@ -282,31 +209,31 @@
 
             </div>
 
-
             <!-- TOTAL VENDIDO -->
-
             <div class="dashboard-card">
 
                 <div class="card-top">
 
                     <div>
-
                         <span class="card-title">
                             Total vendido
                         </span>
 
                         <strong
-                                class="card-value money"
-                                th:text="${'R$ ' + #numbers.formatDecimal(totalVendido, 1, 2, 'COMMA')}">
+                            class="card-value money"
+                            th:text="${'R$ ' + #numbers.formatDecimal(
+                                totalVendido != null ? totalVendido : 0,
+                                1,
+                                'POINT',
+                                2,
+                                'COMMA'
+                            )}">
                             R$ 0,00
                         </strong>
-
                     </div>
 
                     <div class="card-icon green">
-
                         <i data-lucide="trending-up"></i>
-
                     </div>
 
                 </div>
@@ -317,31 +244,31 @@
 
             </div>
 
-
             <!-- COMISSÕES -->
-
             <div class="dashboard-card">
 
                 <div class="card-top">
 
                     <div>
-
                         <span class="card-title">
                             Comissões
                         </span>
 
                         <strong
-                                class="card-value money"
-                                th:text="${'R$ ' + #numbers.formatDecimal(totalComissao, 1, 2, 'COMMA')}">
+                            class="card-value money"
+                            th:text="${'R$ ' + #numbers.formatDecimal(
+                                totalComissao != null ? totalComissao : 0,
+                                1,
+                                'POINT',
+                                2,
+                                'COMMA'
+                            )}">
                             R$ 0,00
                         </strong>
-
                     </div>
 
                     <div class="card-icon yellow">
-
                         <i data-lucide="circle-dollar-sign"></i>
-
                     </div>
 
                 </div>
@@ -354,24 +281,15 @@
 
         </section>
 
-
-        <!-- =================================================
-             GRID PRINCIPAL
-        ================================================== -->
-
+        <!-- GRID PRINCIPAL -->
         <section class="dashboard-grid">
 
-
-            <!-- =================================================
-                 GRÁFICO
-            ================================================== -->
-
+            <!-- GRÁFICO -->
             <div class="dashboard-panel chart-panel">
 
                 <div class="panel-header">
 
                     <div>
-
                         <h3 class="panel-title">
                             Vendas por mês
                         </h3>
@@ -382,43 +300,46 @@
                                 2026
                             </span>
                         </p>
-
                     </div>
 
                     <div class="panel-icon">
-
                         <i data-lucide="chart-column"></i>
-
                     </div>
 
                 </div>
-
 
                 <div class="chart-container">
 
                     <div class="chart-bars">
 
-                        <div
-                                class="chart-column"
-                                th:each="mes, stat : ${nomesMeses}">
+                        <div class="chart-column"
+                             th:each="mes, stat : ${nomesMeses}">
 
-                            <div class="chart-value"
-                                 th:text="${'R$ ' + #numbers.formatDecimal(vendasPorMes[stat.index], 1, 2, 'COMMA')}">
+                            <div
+                                class="chart-value"
+                                th:text="${'R$ ' + #numbers.formatDecimal(
+                                    vendasPorMes[stat.index] != null
+                                        ? vendasPorMes[stat.index]
+                                        : 0,
+                                    1,
+                                    'POINT',
+                                    2,
+                                    'COMMA'
+                                )}">
                                 R$ 0,00
                             </div>
 
                             <div class="chart-bar-wrapper">
 
                                 <div
-                                        class="chart-bar"
-                                        th:style="'height: ' + ${alturasGrafico[stat.index]} + '%'">
+                                    class="chart-bar"
+                                    th:style="'height: ' + ${alturasGrafico[stat.index]} + '%'">
                                 </div>
 
                             </div>
 
-                            <span
-                                    class="chart-label"
-                                    th:text="${mes}">
+                            <span class="chart-label"
+                                  th:text="${mes}">
                                 JAN
                             </span>
 
@@ -430,17 +351,12 @@
 
             </div>
 
-
-            <!-- =================================================
-                 RESUMO
-            ================================================== -->
-
+            <!-- RESUMO -->
             <div class="dashboard-panel summary-panel">
 
                 <div class="panel-header">
 
                     <div>
-
                         <h3 class="panel-title">
                             Resumo
                         </h3>
@@ -448,88 +364,60 @@
                         <p class="panel-subtitle">
                             Situação atual
                         </p>
-
                     </div>
 
                     <div class="panel-icon">
-
                         <i data-lucide="clipboard-list"></i>
-
                     </div>
 
                 </div>
 
-
                 <div class="summary-list">
-
 
                     <div class="summary-item">
 
                         <div class="summary-item-icon green">
-
                             <i data-lucide="check-circle-2"></i>
-
                         </div>
 
                         <div>
+                            <span>Vendas realizadas</span>
 
-                            <span>
-                                Vendas realizadas
-                            </span>
-
-                            <strong
-                                    th:text="${totalVendas}">
+                            <strong th:text="${totalVendas}">
                                 0
                             </strong>
-
                         </div>
 
                     </div>
-
 
                     <div class="summary-item">
 
                         <div class="summary-item-icon red">
-
                             <i data-lucide="x-circle"></i>
-
                         </div>
 
                         <div>
+                            <span>Vendas canceladas</span>
 
-                            <span>
-                                Vendas canceladas
-                            </span>
-
-                            <strong
-                                    th:text="${totalCanceladas}">
+                            <strong th:text="${totalCanceladas}">
                                 0
                             </strong>
-
                         </div>
 
                     </div>
 
-
                     <div class="summary-item">
 
                         <div class="summary-item-icon yellow">
-
                             <i data-lucide="users"></i>
-
                         </div>
 
                         <div>
+                            <span>Usuários cadastrados</span>
 
-                            <span>
-                                Usuários cadastrados
-                            </span>
-
-                            <strong
-                                    th:text="${totalFuncionarios}">
+                            <strong th:text="${totalFuncionarios}">
                                 0
                             </strong>
-
                         </div>
 
                     </div>
@@ -540,17 +428,12 @@
 
         </section>
 
-
-        <!-- =================================================
-             ATIVIDADE RECENTE
-        ================================================== -->
-
+        <!-- ATIVIDADE RECENTE -->
         <section class="dashboard-panel activity-panel">
 
             <div class="panel-header">
 
                 <div>
-
                     <h3 class="panel-title">
                         Atividade recente
                     </h3>
@@ -558,53 +441,51 @@
                     <p class="panel-subtitle">
                         Últimas movimentações registradas
                     </p>
-
                 </div>
 
                 <div class="panel-icon">
-
                     <i data-lucide="activity"></i>
-
                 </div>
 
             </div>
 
-
             <div class="activity-list">
 
-
-                <!-- QUANDO EXISTEM VENDAS -->
-
-                <div
-                        class="activity-item"
-                        th:each="venda : ${vendasRecentes}">
+                <!-- VENDAS RECENTES -->
+                <div class="activity-item"
+                     th:each="venda : ${vendasRecentes}">
 
                     <div class="activity-icon">
-
                         <i data-lucide="shopping-cart"></i>
-
                     </div>
-
 
                     <div class="activity-info">
 
                         <strong class="activity-title">
-
                             Venda registrada
-
                         </strong>
 
                         <span class="activity-description">
 
                             <span
-                                    th:text="${venda.funcionario != null ? venda.funcionario.nome : 'Funcionário não informado'}">
+                                th:text="${venda.funcionario != null
+                                    ? venda.funcionario.nome
+                                    : 'Funcionário não informado'}">
                                 Funcionário
                             </span>
 
                             realizou uma venda de
 
                             <strong
-                                    th:text="${'R$ ' + #numbers.formatDecimal(venda.valorTotal, 1, 2, 'COMMA')}">
+                                th:text="${'R$ ' + #numbers.formatDecimal(
+                                    venda.valorTotal != null
+                                        ? venda.valorTotal
+                                        : 0,
+                                    1,
+                                    'POINT',
+                                    2,
+                                    'COMMA'
+                                )}">
                                 R$ 0,00
                             </strong>
 
@@ -612,21 +493,19 @@
 
                     </div>
 
-
                     <span
-                            class="activity-time"
-                            th:text="${venda.dataVenda != null ? #temporals.format(venda.dataVenda, 'dd/MM HH:mm') : '-'}">
+                        class="activity-time"
+                        th:text="${venda.dataVenda != null
+                            ? #temporals.format(venda.dataVenda, 'dd/MM HH:mm')
+                            : '-'}">
                         Hoje
                     </span>
 
                 </div>
 
-
-                <!-- QUANDO NÃO EXISTEM VENDAS -->
-
-                <div
-                        class="empty-state"
-                        th:if="${#lists.isEmpty(vendasRecentes)}">
+                <!-- SEM VENDAS -->
+                <div class="empty-state"
+                     th:if="${#lists.isEmpty(vendasRecentes)}">
 
                     <i data-lucide="inbox"></i>
 
@@ -640,16 +519,11 @@
 
         </section>
 
-
     </div>
 
 </main>
 
-
-<!-- =====================================================
-     SCRIPTS
-===================================================== -->
-
+<!-- SCRIPTS -->
 <script src="https://unpkg.com/lucide@latest"></script>
 
 <script th:src="@{/js/all.js}"></script>
