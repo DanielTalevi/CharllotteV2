@@ -30,3 +30,5 @@ desktop.ini
 .idea/
 .vscode/launch.json
 .vscode/tasks.json
+
+application.properties

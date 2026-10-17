@@ -909,6 +909,14 @@ tbody tr:hover {
 
     }
 
+    .sidebar .logo-text {
+        display: none;
+    }
+
+     .sidebar-bottom .logout span {
+        display: none;
+    }
+
 
     .logo {
 

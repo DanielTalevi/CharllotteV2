@@ -632,6 +632,97 @@
    DARK MODE - DASHBOARD
 ========================================================= */
 
+/* CORREÇÃO DO VAZAMENTO HORIZONTAL NO CELULAR */
+@media (max-width: 700px) {
+
+    .main {
+        width: auto;
+        min-width: 0;
+        max-width: 100%;
+        margin-left: 65px;
+        box-sizing: border-box;
+    }
+
+    .content {
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+        padding: 16px 12px;
+        box-sizing: border-box;
+    }
+
+    .home-content,
+    .home-header,
+    .dashboard-cards,
+    .dashboard-grid,
+    .dashboard-panel,
+    .dashboard-card,
+    .activity-panel {
+        min-width: 0;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .dashboard-cards {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .dashboard-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .dashboard-card,
+    .dashboard-panel {
+        width: 100%;
+    }
+
+    .panel-header,
+    .summary-list,
+    .summary-item,
+    .activity-list,
+    .activity-item {
+        min-width: 0;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .summary-item > div:last-child {
+        min-width: 0;
+        overflow-wrap: anywhere;
+    }
+
+    .chart-container {
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+        padding: 20px 10px;
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+
+    .chart-bars {
+        width: 100%;
+        min-width: 0;
+        gap: 3px;
+    }
+
+    .chart-column {
+        min-width: 0;
+        flex: 1 1 0;
+    }
+
+    .chart-value {
+        font-size: 7px;
+        overflow: hidden;
+        text-overflow: clip;
+    }
+
+    .chart-label {
+        font-size: 8px;
+        overflow: hidden;
+    }
+}
+
 
 /* =========================================================
    CABEÇALHO

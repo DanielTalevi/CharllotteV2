@@ -1414,126 +1414,99 @@ body.tema-escuro .modal-footer {
 }
 
 
-@media (max-width: 700px) {
-
-    .content {
-
-        padding: 20px 15px;
-
-    }
-
-
-    .topbar {
-
-        padding: 0 18px;
-
-    }
-
-
-    .resumo-fraudes {
-
-        grid-template-columns: 1fr;
-
-    }
-
-
-    .filtro {
-
-        align-items: stretch;
-
-        flex-direction: column;
-
-    }
-
-
-    .campo select {
-
-        width: 100%;
-
-    }
-
-
-    .btn,
-    .btn-limpar {
-
-        width: 100%;
-
-    }
-
-
-    .filtro-resumo {
-
-        justify-content: space-between;
-
-    }
-
-
-    .filtro-divisor {
-
-        margin: 0 8px;
-
-    }
-
-
-    .modal-conteudo {
-
-        grid-template-columns: 1fr;
-
-    }
-
-
-    .modal-descricao,
-    .modal-status {
-
-        grid-column: auto;
-
-    }
-
-}
-
-
 
 /* =====================================================
-   FONTE GRANDE
+   CORREÇÃO DE VAZAMENTO HORIZONTAL - FRAUDES
 ===================================================== */
 
-body.fonte-grande {
+@media (max-width: 700px) {
 
-    font-size: 17px;
+    .main {
+        width: auto;
+        min-width: 0;
+        max-width: 100%;
+        margin-left: 65px;
+        box-sizing: border-box;
+    }
 
-}
+    .content {
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+        padding: 20px 12px;
+        box-sizing: border-box;
+        overflow-x: clip;
+    }
 
+    .filtro,
+    .filtro-resumo,
+    .resumo-fraudes,
+    .card-resumo,
+    .table-container {
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
 
-body.fonte-grande .campo label {
+    .resumo-fraudes {
+        grid-template-columns: minmax(0, 1fr);
+    }
 
-    font-size: 13px;
+    .filtro {
+        align-items: stretch;
+    }
 
-}
+    .campo {
+        width: 100%;
+        min-width: 0;
+    }
 
+    .campo select {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+    }
 
-body.fonte-grande .campo select {
+    .filtro-resumo {
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-left: 0;
+        padding-left: 0;
+    }
 
-    font-size: 14px;
+    /* A tabela pode rolar sem alargar a página */
+    .table-container {
+        display: block;
+        overflow-x: auto;
+        overscroll-behavior-x: contain;
+        -webkit-overflow-scrolling: touch;
+    }
 
-}
+    .table-container table {
+        width: 900px;
+        min-width: 900px;
+        max-width: none;
+    }
 
+    /* Evita que o modal ultrapasse a tela */
+    .modal-overlay {
+        padding: 12px;
+        box-sizing: border-box;
+    }
 
-body.fonte-grande .btn {
+    .modal-fraude {
+        width: 100%;
+        min-width: 0;
+        max-width: 560px;
+        max-height: calc(100dvh - 24px);
+        overflow-y: auto;
+        box-sizing: border-box;
+    }
 
-    font-size: 14px;
-
-}
-
-
-body.fonte-grande th {
-
-    font-size: 12px;
-
-}
-
-
-body.fonte-grande td {
-
-    font-size: 13px;
-
+    .modal-conteudo {
+        min-width: 0;
+        padding: 14px;
+    }
 }
